@@ -1,0 +1,46 @@
+/* * {
+box-sizing: border-box;
+} */
+
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header header header"
+    "sidebar main main ."
+    "footer footer footer footer";
+
+  border: solid red;
+
+  }
+}
+.header{
+  grid-area: header;
+  grid-template-columns: auto;
+  border: solid blue;
+  grid-gap: 20px;
+}
+
+/* .nav{
+  grid-area: navigation;
+} */
+
+.aside {
+  grid-area: sidebar;
+  border: solid orange;
+  grid-gap: 20px;
+}
+
+.main{
+  grid-area: main;
+  border: solid red;
+  padding: 200px;
+  background-image: url("../images/beach-walk.jpg");
+  background-size: cover;
+}
+
+.footer{
+  grid-area: footer;
+  border: solid purple;
+}
