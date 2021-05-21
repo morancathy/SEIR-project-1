@@ -75,17 +75,26 @@ GLOBAL VARS
 FUNCTIONS
 ============================= */
 displayWhatToDoToday = () => {
-  //display option what to do whatToDoToday  with text and 3 buttons
-  console.log("What should Spensor do today?");
-  const foodButton = document.createElement('button');
-  foodButton.setAttribute('id', 'food');
+  document.querySelector('.aside > p').textContent = "What should Spensor do today?";
+
+  const foodButton = document.createElement('button'); //do i have to do these 5 lines for each button?
+  foodButton.setAttribute('id', 'food-button');
   foodButton.innerHTML = 'Search for food';
-  const menuEl = document.querySelector('.aside');
+  const menuEl = document.querySelector('.what-to-do-menu');
   menuEl.appendChild(foodButton);
 
-}
+  const waterButton = document.createElement('button');
+  waterButton.setAttribute('id', 'water-button');
+  waterButton.innerHTML = 'Search for water';
+  menuEl.appendChild(waterButton);
 
-// displayWhatToDoToday()
+  const suppliesButton = document.createElement('button');
+  suppliesButton.setAttribute('id', 'supplies-button');
+  suppliesButton.innerHTML = 'Search for supplies';
+  menuEl.appendChild(suppliesButton);
+
+}
+displayWhatToDoToday()    //this gets called at begingin of each day
 
 // selectingWhatToDoToday(){
 //
