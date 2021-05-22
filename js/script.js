@@ -6,11 +6,19 @@ Tamagotchi
 /* ======================
 CACHED DOM NODES
 =========================*/
-const menuEl = document.querySelector('.asideL.what-to-do-menu');
-const asidePEl = document.querySelector('.aside > p');
+const menuEl = document.querySelector('.asideL > aside.instructions > div.what-to-do-menu');
+const asidePEl = document.querySelector('.asideL > aside.instructions > p');
 const modalButton = document.querySelector('div.modal > button.start-button');
 const modal = document.querySelector('div.modal');
+const mainEl = document.querySelector('.main');
+const imgEl = document.createElement('img');
+console.log(mainEl)
 console.log(menuEl);
+console.log(asidePEl);
+const modal2El = document.querySelector('div.modal2');
+console.log(modal2El)
+const span = document.querySelector('.close');
+console.log(span)
 
 /* ======================
 CREATE Spensor and Master Troll
@@ -66,10 +74,7 @@ class Hero {
 
   }
 }
-
 const Spensor = new Hero("Spensor");
-
-
 /* ======================
 GLOBAL VARS
 =========================*/
@@ -77,26 +82,43 @@ let coconuts = (Math.floor(Math.random() * (3-1) + 1));
 let bamboo = (Math.floor(Math.random() * (6-3) + 3));
 let rope = (Math.floor(Math.random() * (3-1) + 1));
 
-
 /* =============================
 FUNCTIONS
 ============================= */
 
 //When start button is clicked
 modalButton.addEventListener('click', (e) =>{  //if i push this in event listeners, it doesnt work. why?
+
+      //gets ride of modal
+  const toggleClass = (node, className) => {
+    node.classList.toggle(className)
+  }
   toggleClass(modal, 'open');
+
+  // imgEl.src = '../images/beach-walk.jpg';
+  // document.querySelector('main').appendChild(imgEl);
+    // mainEl.style.backgroundImage = img;
   //display the background and instructions of the story
+
+  // mainEl.setAttribute('src', '../images/beach-walk.jpg')
+  // modal2El.style.display = 'block';
+
+  toggleClass(modal2El, 'open');
+  // modal2El.innerHTML = "hello"
+  span.onclick = function(){
+    modal2El.style.display = 'none';
+  }
+
+
+
 })
-const toggleClass = (node, className) => {
-  node.classList.toggle(className)
-}
 
 
 
 //display what to do today
 displayWhatToDoToday = () => {
-  document.querySelector('.aside > p').textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
-
+  asidePEl.textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
+  console.log(asidePEl)
   let toDoButtons = [
     {text: 'Seach for water', id: 'water-button'},
     {text: 'Seach for food', id: 'food-button'},
@@ -118,7 +140,7 @@ searchForWater = () => {
   alert(`You found ${coconuts} cocounts!`);
 
   //New question on screen "What would you like to do with it?"
-  document.querySelector('.aside > p').textContent = "What would you like to do with the coconut?";
+  asidePEl = "What would you like to do with the coconut?";
   //Buttons pop up with text "Drink"  "Save for later"
   const buttonEl = document.createElement('button');
   buttonEl.setAttribute('id', 'drink-button');
@@ -153,8 +175,8 @@ EVENT LISTENERS
 document.querySelector('#water-button').addEventListener('click', searchForWater);
 document.querySelector('#food-button').addEventListener('click', searchForFood);
 document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
-document.querySelector('#drink-button').addEventListener('click', Spensor.drink); //why doesnt this work?
-document.querySelector('#save-for-later-button'). addEventListener('click',       )
+// document.querySelector('#drink-button').addEventListener('click', Spensor.drink); //why doesnt this work?
+// document.querySelector('#save-for-later-button'). addEventListener('click',       )
 
 
 
