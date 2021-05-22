@@ -20,6 +20,7 @@ console.log(modal2El)
 const span = document.querySelector('.close');
 console.log(span)
 
+
 /* ======================
 CREATE Spensor and Master Troll
 =========================*/
@@ -85,38 +86,34 @@ let rope = (Math.floor(Math.random() * (3-1) + 1));
 /* =============================
 FUNCTIONS
 ============================= */
-
+//toggle function
+const toggleClass = (node, className) => {
+  node.classList.toggle(className)
+}
 //When start button is clicked
 modalButton.addEventListener('click', (e) =>{  //if i push this in event listeners, it doesnt work. why?
-
-      //gets ride of modal
-  const toggleClass = (node, className) => {
-    node.classList.toggle(className)
-  }
   toggleClass(modal, 'open');
-
-  // imgEl.src = '../images/beach-walk.jpg';
-  // document.querySelector('main').appendChild(imgEl);
-    // mainEl.style.backgroundImage = img;
-  //display the background and instructions of the story
-
-  // mainEl.setAttribute('src', '../images/beach-walk.jpg')
-  // modal2El.style.display = 'block';
-
+  instructionsModal();
+})
+// opens instructions modal
+const instructionsModal = () =>{
   toggleClass(modal2El, 'open');
-  // modal2El.innerHTML = "hello"
   span.onclick = function(){
     modal2El.style.display = 'none';
-  }
+  displayAsideL();
+}}
 
+//Displays asideL ("what should spensor do today")
+const displayAsideL= () => {
+  mainEl.style.gridArea = '2 / 2 / 3 / 5';
+}
+//Hides asideL ("what should spensor do today")
+const hideAsideL= () => {
+  mainEl.style.gridArea = '2 / 1 / 3 / 5';
+}
 
-
-})
-
-
-
-//display what to do today
-displayWhatToDoToday = () => {
+//creates content of "What should spensor do today"
+contentWhatToDoToday = () => {
   asidePEl.textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
   console.log(asidePEl)
   let toDoButtons = [
@@ -131,7 +128,7 @@ displayWhatToDoToday = () => {
     menuEl.appendChild(buttonEl);
   }
 }
-displayWhatToDoToday();    //this gets called at begingin of each day
+contentWhatToDoToday();    //this gets called at begingin of each day
 
 searchForWater = () => {
   //remove the "what do you want to do today questions and buttons"
