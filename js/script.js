@@ -8,6 +8,8 @@ CACHED DOM NODES
 =========================*/
 const menuEl = document.querySelector('.what-to-do-menu');
 const asidePEl = document.querySelector('.aside > p');
+const modalButton = document.querySelector('div.modal > button.start-button');
+const modal = document.querySelector('div.modal');
 
 /* ======================
 CREATE Spensor and Master Troll
@@ -78,6 +80,14 @@ let rope = (Math.floor(Math.random() * (3-1) + 1));
 /* =============================
 FUNCTIONS
 ============================= */
+const removeModal = () => {
+  toggleClass(modal, 'open')
+};
+modalButton.addEventListener('click', removeModal);
+const toggleClass = (node, className) => {
+  node.classList.toggle(className)
+}
+
 
 displayWhatToDoToday = () => {
   document.querySelector('.aside > p').textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
@@ -138,7 +148,7 @@ document.querySelector('#water-button').addEventListener('click', searchForWater
 document.querySelector('#food-button').addEventListener('click', searchForFood);
 document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
 document.querySelector('#drink-button').addEventListener('click', Spensor.drink); //why doesnt this work?
-// document.querySelector('#save-for-later-button'). addEventListener('click',       )
+document.querySelector('#save-for-later-button'). addEventListener('click',       )
 
 
 
