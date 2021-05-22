@@ -6,10 +6,11 @@ Tamagotchi
 /* ======================
 CACHED DOM NODES
 =========================*/
-const menuEl = document.querySelector('.what-to-do-menu');
+const menuEl = document.querySelector('.asideL.what-to-do-menu');
 const asidePEl = document.querySelector('.aside > p');
 const modalButton = document.querySelector('div.modal > button.start-button');
 const modal = document.querySelector('div.modal');
+console.log(menuEl);
 
 /* ======================
 CREATE Spensor and Master Troll
@@ -80,15 +81,19 @@ let rope = (Math.floor(Math.random() * (3-1) + 1));
 /* =============================
 FUNCTIONS
 ============================= */
-const removeModal = () => {
-  toggleClass(modal, 'open')
-};
-modalButton.addEventListener('click', removeModal);
+
+//When start button is clicked
+modalButton.addEventListener('click', (e) =>{  //if i push this in event listeners, it doesnt work. why?
+  toggleClass(modal, 'open');
+  //display the background and instructions of the story
+})
 const toggleClass = (node, className) => {
   node.classList.toggle(className)
 }
 
 
+
+//display what to do today
 displayWhatToDoToday = () => {
   document.querySelector('.aside > p').textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
 
@@ -144,6 +149,7 @@ searchForSupplies = () => {
 /* =============================
 EVENT LISTENERS
 ============================= */
+
 document.querySelector('#water-button').addEventListener('click', searchForWater);
 document.querySelector('#food-button').addEventListener('click', searchForFood);
 document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
