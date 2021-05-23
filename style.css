@@ -179,19 +179,3 @@ div.modal{
 #drink-button{
   /* visibility: hidden; */
 }
-
-.bugs-button{
-  visibility: visible;
-  padding: 10px;
-  margin: 20px 0 0 0;
-}
-.fish-button{
-  visibility: visible;
-  padding: 10px;
-  margin: 20px 0 0 0;
-}
-.trap-button{
-  visibility: visible;
-  padding: 10px;
-  margin: 20px 0 0 0;
-}
