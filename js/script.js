@@ -1,5 +1,5 @@
 /* ======================
-Tamagotchi
+Man on an Island
 =========================*/
 //directions and notes
 
@@ -12,14 +12,11 @@ const modalButton = document.querySelector('div.modal > button.start-button');
 const modal = document.querySelector('div.modal');
 const mainEl = document.querySelector('.main');
 const imgEl = document.createElement('img');
-console.log(mainEl)
-console.log(menuEl);
-console.log(asidePEl);
 const modal2El = document.querySelector('div.modal2');
-console.log(modal2El)
 const span = document.querySelector('.close');
-console.log(span)
-
+const asideL = document.querySelector('.asideL');
+const asideR = document.querySelector('.asideR');
+const asideRPEl = document.querySelector('.asideR > p');
 
 /* ======================
 CREATE Spensor and Master Troll
@@ -47,8 +44,8 @@ class Hero {
 
   }
 
-  coconutInventory(){
-
+  coconutInventory(num){
+    this.coconuts += num;
   }
 
   coconutAction(){  //or attackTroll
@@ -82,6 +79,9 @@ GLOBAL VARS
 let coconuts = (Math.floor(Math.random() * (3-1) + 1));
 let bamboo = (Math.floor(Math.random() * (6-3) + 3));
 let rope = (Math.floor(Math.random() * (3-1) + 1));
+// let dig = (Math.floor(Math.random() * (3-1) + 1));
+// let fish = (Math.floor(Math.random() * (3-1) + 1));
+// let trap = (Math.floor(Math.random() * (3-1) + 1));
 
 /* =============================
 FUNCTIONS
@@ -90,6 +90,13 @@ FUNCTIONS
 const toggleClass = (node, className) => {
   node.classList.toggle(className)
 }
+//hides buttons
+hideWhatToDoButtons = () => {
+  document.querySelector('#water-button').style.visibility = 'hidden';
+  document.querySelector('#food-button').style.visibility = 'hidden';
+  document.querySelector('#supplies-button').style.visibility = 'hidden';
+}
+
 //When start button is clicked
 modalButton.addEventListener('click', (e) =>{  //if i push this in event listeners, it doesnt work. why?
   toggleClass(modal, 'open');
@@ -99,27 +106,30 @@ modalButton.addEventListener('click', (e) =>{  //if i push this in event listene
 const instructionsModal = () =>{
   toggleClass(modal2El, 'open');
   span.onclick = function(){
-    modal2El.style.display = 'none';
+  modal2El.style.display = 'none';
   displayAsideL();
 }}
 
 //Displays asideL ("what should spensor do today")
 const displayAsideL= () => {
-  mainEl.style.gridArea = '2 / 2 / 3 / 5';
+  asideL.style.zIndex = '2';
 }
 //Hides asideL ("what should spensor do today")
 const hideAsideL= () => {
-  mainEl.style.gridArea = '2 / 1 / 3 / 5';
+  asideL.style.zIndex = '0';
+}
+//Displays asideR
+const displayAsideR= () => {
+  asideR.style.zIndex = '2';
 }
 
-//creates content of "What should spensor do today"
+//creates content of asideL ("What should spensor do today")
 contentWhatToDoToday = () => {
-  asidePEl.textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
-  console.log(asidePEl)
+  // asidePEl.textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
   let toDoButtons = [
-    {text: 'Seach for water', id: 'water-button'},
-    {text: 'Seach for food', id: 'food-button'},
-    {text: 'Seach for supplies', id: 'supplies-button'},
+    {text: 'Search for water', id: 'water-button'},
+    {text: 'Search for food', id: 'food-button'},
+    {text: 'Search for supplies', id: 'supplies-button'},
     ];
   for(let bananas of toDoButtons){
     const buttonEl = document.createElement('button');
@@ -131,39 +141,89 @@ contentWhatToDoToday = () => {
 contentWhatToDoToday();    //this gets called at begingin of each day
 
 searchForWater = () => {
-  //remove the "what do you want to do today questions and buttons"
-  //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
-  //text on screen "you found x coconuts" while page shows spensor next to the item celebrating
+          //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+          //text on screen "you found x coconuts" while page shows spensor next to the item celebrating
+  hideWhatToDoButtons();
+
   alert(`You found ${coconuts} cocounts!`);
 
-  //New question on screen "What would you like to do with it?"
-  asidePEl = "What would you like to do with the coconut?";
-  //Buttons pop up with text "Drink"  "Save for later"
+  asidePEl.innerHTML = "What would you like to do with the coconut?";
+
   const buttonEl = document.createElement('button');
   buttonEl.setAttribute('id', 'drink-button');
   buttonEl.innerHTML = "Drink";
   asidePEl.appendChild(buttonEl);
-  console.log(document.querySelector('#drink-button')) //checker
+  buttonEl.addEventListener('click', clickedDrink);
 
   const buttonEl2 = document.createElement('button');
   buttonEl2.setAttribute('id', 'save-for-later-button');
   buttonEl2.innerHTML = "Save for later";
   asidePEl.appendChild(buttonEl2);
+  buttonEl2.addEventListener('click', clickedSaveForLater);
 
   //side bar notation says "Coconuts can be used to defend yourself against nasty trolls" (But only the first time he comes across coconuts)
-
-  //if he clicks drink then his water levels go up one.
-
-  //if he saves, his coconut invintory goes up one.
 }
-
+//Search for Food
 searchForFood = () => {
+        
+  hideWhatToDoButtons();
+  hideAsideL();
+  displayAsideR();
+
+  asideRPEl.innerHTML = "Great choice! Happy hunting!
+          //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+
+
+  // const buttonEl = document.createElement('button');
+  // buttonEl.classList.add('bugs-button')
+  // buttonEl.innerHTML = "Dig for bugs";
+  // buttonEl.addEventListener('click', clickedDig);
+  // asideR.appendChild(buttonEl);
+  //
+  // const buttonEl2 = document.createElement('button');
+  // buttonEl2.classList.add('fish-button')
+  // buttonEl2.innerHTML = "Fish";
+  // buttonEl2.addEventListener('click', clickedFish);
+  // asideR.appendChild(buttonEl2);
+  //
+  // const buttonEl3 = document.createElement('button');
+  // buttonEl3.classList.add('trap-button')
+  // buttonEl3.innerHTML = "Set a trap";
+  // buttonEl3.addEventListener('click', clickedTrap);
+  // asideR.appendChild(buttonEl3);
+
+
 
 }
 
-searchForSupplies = () => {
+// searchForSupplies = () => {
+//
+// }
+
+clickedDrink= () => {
+  hideAsideL();
+  Spensor.drink();
+}
+
+clickedSaveForLater= () => {
+  hideAsideL();
+  Spensor.coconutInventory(coconuts);
+}
+
+clickedDig = () => {
 
 }
+
+clickedFish = () => {
+
+}
+
+clickedTrap = () => {
+
+}
+
+
+
 
 /* =============================
 EVENT LISTENERS
@@ -171,11 +231,7 @@ EVENT LISTENERS
 
 document.querySelector('#water-button').addEventListener('click', searchForWater);
 document.querySelector('#food-button').addEventListener('click', searchForFood);
-document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
-// document.querySelector('#drink-button').addEventListener('click', Spensor.drink); //why doesnt this work?
-// document.querySelector('#save-for-later-button'). addEventListener('click',       )
-
-
+// document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
 
 
 
