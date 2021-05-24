@@ -35,8 +35,8 @@ class Hero {
     this.water += 1;
   }
 
-  eat(){
-
+  eat(num){
+    this.food += num;
   }
 
   saneness(){
@@ -78,6 +78,10 @@ GLOBAL VARS
 let coconuts = (Math.floor(Math.random() * (3-1) + 1));
 let bamboo = (Math.floor(Math.random() * (6-3) + 3));
 let rope = (Math.floor(Math.random() * (3-1) + 1));
+let foodArray = ["Spensor found a nice rock. Let's see what we have under here...", "Ooou, a watering hole. Let's try to fish!",
+"Spensor heard a couple mongrolls last night. He think's it's best he set a trap.", "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
+"OH NO! Nasty Trolls!"];
+let foodArrayChoice = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
 
 /* =============================
 FUNCTIONS
@@ -162,24 +166,82 @@ searchForWater = () => {
 
   //side bar notation says "Coconuts can be used to defend yourself against nasty trolls" (But only the first time he comes across coconuts)
 }
-//Search for Food
+//Search for Food#####################################################
 searchForFood = () => {
   hideWhatToDoButtons();
   hideAsideL();
   displayAsideR();
+  asideRPEl.innerHTML = "Great choice! Happy hunting!";   //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+  setTimeout(foodSeachActivity, 3 * 1000);
+};
 
-  asideRPEl.innerHTML = "Great choice! Happy hunting!";
-          //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+foodSeachActivity = () => {
+  asideRPEl.textContent = foodArrayChoice;
+  setTimeout(foodSearchResult, 4 * 1000);
+  }
 
-  let foodArray = ["Spensor found a nice rock. Let's see what we have under here...", "Ooou, a watering hole. Let's try to fish!",
-  "Spensor heard a couple mongrolls last night. He think's it's best he set a trap.", "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
-"OH NO! Nasty Trolls!"];
-
-  const func = () => {
-    document.querySelector('.asideR > p.result').textContent = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
-  };
-  setTimeout(func, 4 * 1000);
+foodSearchResult = () =>{
+  if(foodArrayChoice === `"${foodArray[0]}"`){
+    bugProbability(Math.random());
+  }else if (foodArrayChoice === `"${foodArray[1]}"`) {
+    fishProbability(Math.random());
+  } else if (foodArrayChoice === `"${foodArray[2]}"`) {
+    trapProbability(Math.random());
+  } else if (foodArrayChoice === `"${foodArray[3]}"`) {
+      asideRPEl.textContent = "nada\n Darn it!";
+      whatToDo2();
+  } else if (foodArrayChoice === `"${foodArray[4]}"`) {
+      asideRPEl.textContent = "Time to battle a troll\n or do I run away?";
+      whatToDo2();
+  } else {
+    console.log("something is wrong with code")
+  }
 }
+
+bugProbability = (num) => {
+  if(num <= .75){
+    asideRPEl.textContent = "worms\nThis provides half a serving of food.";
+    Spensor.eat(.5);
+  } else {
+    asideRPEl.textContent = "Shucks. Didn't find anything.";
+  }
+  whatToDo2();
+  //what would spensor like to do now?
+  //buttons  keep searching    head back to camp
+  //pop up  Each day Spensor is able to go on max 4 searches.
+  //However, the farther he gets from camp, the darker it gets and Spensor risks losing his way back.
+  //If Spensor has has to sleep on the road, he loses a level of sanity!
+}
+
+fishProbability = (num) => {
+  if(num <= .50){
+    asideRPEl.textContent = "Big fish\nThis provides a full serving of food!";
+    Spensor.eat(1);
+  } else {
+    asideRPEl.textContent = "Shucks. Didn't find anything.";
+  }
+  whatToDo2();
+}
+
+trapProbability = (num) => {
+  if(num <= .25){
+    asideRPEl.textContent = "Squirl..get it marley. This provides 2 full servings of food!";
+    Spensor.eat(2);
+  } else {
+    asideRPEl.textContent = "Shucks. Didn't find anything.";
+  }
+  whatToDo2();
+}
+
+whatToDo2 = () =>{
+  console.log("did this work")
+  displayAsideL();
+}
+
+//####################################################
+
+
+
 
 // searchForSupplies = () => {
 //
