@@ -18,11 +18,24 @@ const asideR = document.querySelector('.asideR');
 const asideRPEl = document.querySelector('.asideR > p.food-intro');
 const skyEl = document.querySelector('.sky');
 const keepSearchingButton = document.querySelector('div.asideL > aside.instructions > button')
-// const warningEl = document.querySelector('button.keep-searching-button > a')
 const warningEl = document.querySelector('div.popup > p.content')
 const popupEl = document.querySelector('div.sky > div.popup-trigger')
 
-console.log(keepSearchingButton)
+//variables for rotating modal2
+const rotatingModal = document.querySelector("div.sky > div.rotating-modal");
+const closeButton = document.querySelector("#close-button");
+const openButton = document.querySelector("#open-button");
+const rotatingModalGuts = document.querySelector('div.sky > div.rotating-modal > div.rotating-modal-guts > p');
+
+closeButton.addEventListener("click", function() {
+  rotatingModal.classList.toggle("closed");
+});
+
+openButton.addEventListener("click", function() {
+  rotatingModal.classList.toggle("closed");
+});
+
+
 
 /* ======================
 CREATE Spensor and Master Troll
@@ -107,6 +120,10 @@ FUNCTIONS
 const toggleClass = (node, className) => {
   node.classList.toggle(className)
 }
+
+// toggleRotatingModal = () => {
+//   rotatingModal.classList.toggle("closed");
+// };
 //hides buttons
 hideWhatToDoButtons = () => {
   document.querySelector('#water-button').style.visibility = 'hidden';
@@ -330,24 +347,38 @@ clickedKeepSearchingForFood = () => {
 }
 
 
-
+// Clicking on Return to Camp...set prob of making it back
 clickedReturnToCamp = () => {
-  console.log("going back to camp")
+  console.log("Time to return to camp...I hope I can find my way...")
   if(Spensor.searchCount === 3){
-    console.log("he has 50% chance of getting lost")
+    makeItBackProbability(.50);
   } else if(Spensor.searchCount === 4){
-    makeItBackProbability(Math.random());
+    makeItBackProbability(.25);
+  } else {
+    makeItBackProbability(1);
   }
 }
-
+// calcaulate prob of making it back and showing results
 makeItBackProbability = (num) => {
-    if(num <= .25){
-      console.log("He made it back!")
+    if((Math.random()) <= num){
+      rotatingModalGuts.innerHTML = "He made it back to camp!\n Time to relax.";
+      toggleClass(rotatingModal, 'closed');
+      nightTimeScene();
     } else{
-      console.log ("Spensor has to sleep on the road! Oh no!")
+      rotatingModalGuts.innerHTML = "Spensor has to sleep on the road! Oh no!";
+      toggleClass(rotatingModal, 'closed');
       Spensor.sanity -= 1;
     }
 }
+//Shows night time scence
+nightTimeScene = () => {
+closeButton.addEventListener("click", function() {
+  mainEl.style.zIndex = '6';
+  mainEl.style.backgroundImage = "url('../images/beachNight.jpg')";
+});
+}
+
+
 
 //####################################################
 
@@ -366,18 +397,6 @@ clickedDrink= () => {
 clickedSaveForLater= () => {
   hideAsideL();
   Spensor.coconutInventory(coconuts);
-}
-
-dig = () => {
-
-}
-
-fish = () => {
-
-}
-
-trap = () => {
-
 }
 
 /* =============================
