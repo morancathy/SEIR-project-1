@@ -12,16 +12,23 @@ const modal = document.querySelector('div.modal');
 const mainEl = document.querySelector('.main');
 const imgEl = document.createElement('img');
 const modal2El = document.querySelector('div.modal2');
-const span = document.querySelector('.close');
+const span = document.querySelector('span.close');
 const asideL = document.querySelector('.asideL');
 const asideR = document.querySelector('.asideR');
 const asideRPEl = document.querySelector('.asideR > p.food-intro');
+const skyEl = document.querySelector('.sky');
+const keepSearchingButton = document.querySelector('div.asideL > aside.instructions > button')
+// const warningEl = document.querySelector('button.keep-searching-button > a')
+const warningEl = document.querySelector('div.popup > p.content')
+const popupEl = document.querySelector('div.sky > div.popup-trigger')
+
+console.log(keepSearchingButton)
 
 /* ======================
 CREATE Spensor and Master Troll
 =========================*/
 class Hero {
-  constructor(name, water, food, sanity, coconuts, bamboo, rope){
+  constructor(name, water, food, sanity, coconuts, bamboo, rope, searchCount){
     this.name = name;
     this.water = 5;
     this.food = 5;
@@ -29,6 +36,7 @@ class Hero {
     this.coconuts = 0;
     this.bamboo = 0;
     this.rope = 0;
+    this.searchCount = 0;
   }
 
   drink(){
@@ -48,6 +56,11 @@ class Hero {
   }
 
   coconutAction(){  //or attackTroll
+
+  }
+
+  searchPerDayCount(num){
+    this.searchCount += num;
 
   }
 
@@ -83,6 +96,10 @@ let foodArray = ["Spensor found a nice rock. Let's see what we have under here..
 "OH NO! Nasty Trolls!"];
 let foodArrayChoice = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
 
+const aEl = document.createElement('A');
+aEl.textContent = "hi"
+const returnToCampButton = document.createElement('button');
+const aButtonEl = document.createElement('button');
 /* =============================
 FUNCTIONS
 ============================= */
@@ -116,9 +133,50 @@ const displayAsideL= () => {
 const hideAsideL= () => {
   asideL.style.zIndex = '0';
 }
+//removes Pop Up warning
+const removePopUp = () =>{
+  aEl.removeAttribute('href', "#xme");
+  aButtonEl.removeChild(aEl);
+  aEl.textContent = "";
+  aButtonEl.textContent = "Keep Searching";
+  // keepSearchingButton.removeChild(warningEl);
+  skyEl.removeChild(popupEl);
+  console.log(popupEl)
+  console.log(keepSearchingButton)
+  console.log(warningEl)
+  console.log("lordy")
+}
+//creates warning pop up and keep searching button
+const createWarningPopUp = () => {
+  console.log(warningEl)
+  if(aEl.textContent === ""){
+    aButtonEl.setAttribute('id', 'keep-searching-button');
+    aButtonEl.textContent = "Keep Searching";
+    asidePEl.appendChild(aButtonEl);
+    return;
+  } else {
+    console.log("first time through create WARNING POP UP")
+    aEl.setAttribute('href', "#xme");
+
+    aEl.textContent = "Keep Searching";
+
+    // const warningEl = document.querySelector('div.popup > p.content')
+    console.log(warningEl)
+    warningEl.textContent = ("Spensor is able to go on max 4 searches.");
+
+    aButtonEl.setAttribute('id', 'keep-searching-button');
+    aButtonEl.appendChild(aEl);
+    asidePEl.appendChild(aButtonEl);
+
+    const xEl = document.querySelector("div.popup-trigger > div.popup > a");
+    console.log(xEl)
+    xEl.addEventListener('click', removePopUp);
+  }
+}
 //creates content of asideL ("What should spensor do today")
 contentWhatToDoToday = () => {
-  // asidePEl.textContent = "What should Spensor do today?";  //best practice to do this or create a variable?
+  asidePEl.textContent = "What should Spensor do today?";
+
   let toDoButtons = [
     {text: 'Search for water', id: 'water-button'},
     {text: 'Search for food', id: 'food-button'},
@@ -132,6 +190,28 @@ contentWhatToDoToday = () => {
   }
 }
 contentWhatToDoToday();    //this gets called at begingin of each day
+
+//What should Spensor Do now
+whatToDo2 = () =>{
+
+  if(Spensor.searchCount < 4){
+  asidePEl.textContent = "What should Spensor do now?";
+
+  createWarningPopUp();   //need to create an if statemet for just the first time
+
+  aButtonEl.addEventListener('click', clickedKeepSearchingForFood);
+
+  returnToCampButton.setAttribute('id', 'return-to-camp-button');
+  returnToCampButton.innerHTML = "Return to Camp";
+  asidePEl.appendChild(returnToCampButton);
+  returnToCampButton.addEventListener('click', clickedReturnToCamp);
+
+  displayAsideL();
+  } else{
+    console.log("It's pitch black! I hope Spensor can make it back")
+    clickedReturnToCamp();
+  }
+}
 
 //Displays asideR (hunting options)
 const displayAsideR = () => {
@@ -171,13 +251,18 @@ searchForFood = () => {
   hideWhatToDoButtons();
   hideAsideL();
   displayAsideR();
-  asideRPEl.innerHTML = "Great choice! Happy hunting!";   //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
-  setTimeout(foodSeachActivity, 3 * 1000);
+
+  if(Spensor.searchCount <= 2){
+    asideRPEl.innerHTML = "Great choice! Happy hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+  } else{
+    asideRPEl.innerHTML = "Happy hunting!";
+  }
+  setTimeout(foodSeachActivity, 2 * 1000);
 };
 
 foodSeachActivity = () => {
   asideRPEl.textContent = foodArrayChoice;
-  setTimeout(foodSearchResult, 4 * 1000);
+  setTimeout(foodSearchResult, 3 * 1000);
   }
 
 foodSearchResult = () =>{
@@ -206,11 +291,6 @@ bugProbability = (num) => {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
   }
   whatToDo2();
-  //what would spensor like to do now?
-  //buttons  keep searching    head back to camp
-  //pop up  Each day Spensor is able to go on max 4 searches.
-  //However, the farther he gets from camp, the darker it gets and Spensor risks losing his way back.
-  //If Spensor has has to sleep on the road, he loses a level of sanity!
 }
 
 fishProbability = (num) => {
@@ -233,9 +313,40 @@ trapProbability = (num) => {
   whatToDo2();
 }
 
-whatToDo2 = () =>{
-  console.log("did this work")
-  displayAsideL();
+clickedKeepSearchingForFood = () => {
+  Spensor.searchPerDayCount(1);
+
+  if(Spensor.searchCount === 3){
+    console.log(Spensor.searchCount + " :this is before 3rd time. It's getting darker...")//make it darker
+    searchForFood();
+  } else if (Spensor.searchCount === 4){
+    console.log(Spensor.searchCount + " :this is before 4th time. Yikes! I hope this is worth it!")
+    searchForFood();
+
+  //sleeping on the road
+  } else{
+    searchForFood();
+  }
+}
+
+
+
+clickedReturnToCamp = () => {
+  console.log("going back to camp")
+  if(Spensor.searchCount === 3){
+    console.log("he has 50% chance of getting lost")
+  } else if(Spensor.searchCount === 4){
+    makeItBackProbability(Math.random());
+  }
+}
+
+makeItBackProbability = (num) => {
+    if(num <= .25){
+      console.log("He made it back!")
+    } else{
+      console.log ("Spensor has to sleep on the road! Oh no!")
+      Spensor.sanity -= 1;
+    }
 }
 
 //####################################################
