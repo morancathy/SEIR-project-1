@@ -306,6 +306,7 @@ div.sky > div.rotating-modal > button.close-button {
 }
 
 .open-button {
+  visibility: hidden;
   border: 0;
   position: absolute;
   top: 15%;
@@ -317,6 +318,10 @@ div.sky > div.rotating-modal > button.close-button {
   border-radius: 10px;
   font-size: 21px;
   z-index: 5;
+}
+
+.open-button.closed {
+  visibility: visible;
 }
 
 /* .popup .content {

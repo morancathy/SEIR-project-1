@@ -31,9 +31,11 @@ closeButton.addEventListener("click", function() {
   rotatingModal.classList.toggle("closed");
 });
 
-openButton.addEventListener("click", function() {
-  rotatingModal.classList.toggle("closed");
-});
+
+// openButton.classList.toggle("closed");
+// openButton.addEventListener("click", function() {
+//   newDay();
+// });
 
 
 
@@ -41,7 +43,7 @@ openButton.addEventListener("click", function() {
 CREATE Spensor and Master Troll
 =========================*/
 class Hero {
-  constructor(name, water, food, sanity, coconuts, bamboo, rope, searchCount){
+  constructor(name, water, food, sanity, coconuts, bamboo, rope, searchCount, day){
     this.name = name;
     this.water = 5;
     this.food = 5;
@@ -50,6 +52,7 @@ class Hero {
     this.bamboo = 0;
     this.rope = 0;
     this.searchCount = 0;
+    this.day = 1;
   }
 
   drink(){
@@ -77,9 +80,20 @@ class Hero {
 
   }
 
-  timePasses(){   //??
-
+  timePasses(){
+    this.day += 1;
+    this.updateDayCount();
   }
+
+  updateDayCount(){
+    console.log("made it to time passes");
+    const headerEl = document.querySelector('div.header');
+    const dayEl = document.createElement('h2');
+    dayEl.innerHTML = `Day: ${this.day}`;
+    headerEl.appendChild(dayEl);
+    dayEl.style.
+  }
+
 
   digForBugs(){
 
@@ -121,9 +135,6 @@ const toggleClass = (node, className) => {
   node.classList.toggle(className)
 }
 
-// toggleRotatingModal = () => {
-//   rotatingModal.classList.toggle("closed");
-// };
 //hides buttons
 hideWhatToDoButtons = () => {
   document.querySelector('#water-button').style.visibility = 'hidden';
@@ -375,9 +386,21 @@ nightTimeScene = () => {
 closeButton.addEventListener("click", function() {
   mainEl.style.zIndex = '6';
   mainEl.style.backgroundImage = "url('../images/beachNight.jpg')";
+  newDayButton();
 });
 }
+// new day button displays
+newDayButton  = () => {
+  openButton.classList.toggle("closed");
+  openButton.addEventListener("click", function() {
+    newDay();
+  });
+}
 
+// New day
+newDay = () => {
+  Spensor.timePasses();
+}
 
 
 //####################################################
