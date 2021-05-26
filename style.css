@@ -4,48 +4,106 @@
     box-sizing: border-box;
     font-size: 30px;
  }
-
 .grid-container{
   height: 100vh;
-  border: 10px solid; /*#14a76c;*/
+  border: 5px solid blue; /*#14a76c;*/
+  padding: 5px;
   display: grid;
   grid-template-areas:
-  "header header header nav"
+  "header header header header"
   "asideL sky sky asideR"
   "asideL main main asideR"
   "asideL path path asideR"
   "footer footer footer footer";
   grid-template-rows: .5fr 2fr 2fr 2fr .5fr;
   grid-template-columns: 25% 1fr 1fr 25%;
+
   }
 
 .grid-item{
-  /* background-color: #ccc; */
-  border: 4px solid blue;
+  border: 4px;
   padding: 20px;
   }
 
 .header{
   grid-area: header;
-  /* height: 100px; */
+  grid-area: 1 / 1 / 2 / 4;
   }
-
 .stats-container{
-  display: flex;
-  flex-flow: column wrap;
-  align-items: flex-start;
-  background-color: #2196F3;
-  padding: 10px;
+  display: grid;
+  /* grid-template-columns: 10% 25% 25% 5% auto;*/
+    grid-template-columns: 1fr 1fr 1fr 1fr 50fr;
+  /* grid-template-columns: 1fr 300px; */
+  grid-template-rows: 20% 15% 15% 15% auto;
+  /* margin-top: -15px; */
+  /* margin-bottom: -50px; */
+  grid-template-areas:
+    "day day day day day day"
+    "water  water-level  coconuts coconuts-level . ."
+    "food   food-level   rope     rope-level     . ."
+    "sanity sanity-level bamboo   bamboo-level   . .";
+    /* background: salmon; */
+  grid-gap: 2px 2px;
+      /* grid-template-columns: fit-content(40%) fit-content(40%) 1fr; */
   /* background: deepskyblue; */
 }
+.stats-container > div {
+  padding: 0px 20px 10px 8px;
+  font-size: 20px;
+  z-index: 10;
+  justify-self: start;
+}
 
-.stats-container > p{
-  background-color: rgba(255, 255, 255, 0.8);
-  justify-content: space-around;
-  width: 100px;
-  padding: 3px 0;
-  font-size: 15px;
+.stats-container > div.day {
+grid-area: 1 / 1 / 2 / 2;
+ /* justify-self: end; */
+}
 
+.stats-container > div.water {
+grid-area: 2 / 1 / 3 / 2;
+/* justify-self: end; */
+
+}
+.stats-container > div.food {
+grid-area: 3 / 1 / 4 / 2;
+/* justify-self: end; */
+}
+.stats-container > div.sanity {
+grid-area: 4 / 1 / 5 / 2;
+/* justify-self: end; */
+}
+.stats-container > div.coconuts {
+grid-area: 2 / 3 / 3 / 4;
+/* justify-self: end; */
+}
+.stats-container > div.rope {
+grid-area: 3 / 3 / 4 / 4;
+//* justify-self: end; */
+}
+.stats-container > div.bamboo {
+grid-area: 4 / 3 / 5 / 4;
+/* justify-self: end; */
+}
+.stats-container > div.water-level {
+grid-area: 2 / 1 / 3 / 2;
+margin-left: 60px;
+}
+.stats-container > div.food-level {
+grid-area: 3 / 1 / 4 / 2;
+margin-left: 60px;
+}
+.stats-container > div.sanity-level {
+grid-area: 4 / 1 / 5 / 2;
+margin-left: 60px;
+}
+.stats-container > div.coconuts-level {
+grid-area: 2 / 4 / 3 / 5;
+}
+.stats-container > div.rope-level {
+grid-area: 3 / 4 / 4 / 5;
+}
+.stats-container > div.bamboo-level {
+grid-area: 4 / 4 / 5 / 5;
 }
 
 .sky{
@@ -53,12 +111,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr ;
   grid-gap: 5px;
+  border: solid yellow;
 }
 
 .sky > div {
   grid-column-start: 1;
   grid-column-end: 3;
-  background: lightgreen;
+  border: solid red:
   padding: 8px;
 }
 .path{
@@ -66,33 +125,31 @@
   display: grid;
   grid-template-columns: 1fr 1fr ;
   grid-gap: 5px;
+  background-color: lightgreen;
 }
 
 .path > div {
   grid-column-start: 1;
   grid-column-end: 3;
-  background: lightgreen;
+  border: solid green;
   padding: 8px;
 }
-
-
-.nav{
-  grid-area: nav;
-  }
-
 .asideL{
   grid-area: asideL;
   }
 
 .main{
   grid-area: main;
-  grid-area: 2 / 1 / 5 / 5;
+  grid-area: 1 / 1 / 6 / 5;
   z-index: 1;
-  background-image: url(../images/beach-walk.jpg);  //I want to squish his image!
+  background-image: url(../images/beach-walk.jpg);  /*I want to squish his image!*/
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: fixed;
   background-size: cover;
+  /* background-size: contain; */
+
+
   }
 
 .asideR{
@@ -132,21 +189,23 @@ div.modal{
     visibility: visible;
     /* display: none; /* Hidden by default */ */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 2; /* Sit on top */
     /* left: 0; */
     /* left: 2fr auto; */
     /* top: 45%; */
     /* left: 45%;
     right: 45%; */
-    /* width: 50vw; */
+    width: 50vw;
     max-width: 60%;
     border-radius: 4px;
     padding: 35px;
     margin: 0 auto;
     /* width: 75%; */
     height: auto;
+
+    top: 45%;
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgb(0,0,0); /* Fallback color*/
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
 
@@ -155,10 +214,9 @@ div.modal{
   }
 
   /* Modal Content/Box */
-  .model2-content {
+  div.modal2 > .model2-content{
     background-color: #fefefe;
     border: 1px solid #888;
-
   }
 
   /* .header-flex{

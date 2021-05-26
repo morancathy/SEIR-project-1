@@ -11,17 +11,23 @@
   <body class="grid-container">
       <!-- Header - Spensor Stats -->
     <div class="grid-item header stats-container">
-        <p>Water</p>
-        <p>Food</p>
-        <p>Sanity</p>
-        <p>Coconuts</p>
-        <p>Bamboo</p>
-        <p>Rope</p>
-    </div>
+        <div class="day"></div>
+        <div class="water">Water:</div>
+        <div class="food">Food:</div>
+        <div class="sanity">Sanity:</div>
+        <div class="water-level">5</div>
+        <div class="food-level">5</div>
+        <div class="sanity-level">5</div>
+        <div class="coconuts">Coconuts:</div>
+        <div class="bamboo">Bamboo:</div>
+        <div class="rope">Rope:</div>
+        <div class="coconuts-level">0</div>
+        <div class="rope-level">0</div>
+        <div class="bamboo-level">0</div>
+      </div>
       <!-- Nav section -->                        <!-- where will I/will I need this -->
-      <nav class="grid-item nav">This is the Nav
-          <button id="open-button" class="open-button">New Day</button>
-      </nav>
+      <button id="open-button" class="open-button">New Day</button>
+
       <!-- AsideL - Instructions Section-->
       <div class="grid-item asideL">
         <aside class="instructions">
@@ -33,7 +39,7 @@
       </div>
       <!-- Sky -->
       <div class="grid-item sky">
-
+        <!-- 1st warning popup -->
         <div id="xme" class="popup-trigger">
           <div class="popup">
             <h2>Warning</h2>
@@ -41,6 +47,7 @@
             <p class="content"></p>
           </div>
         </div>
+        <!-- Rotating Modal -->
         <div class="rotating-modal">
           <button class="close-button" id="close-button">x
           </button>
@@ -69,10 +76,6 @@
               <p>  Spensor is trapped on an island for the next 27 days.</p>
               <p>  Spensor is trapped on an island for the next 27 days.</p>
               <p>Spensor is trapped on an island for the next 27 days.</p>
-              <p>   Spensor is trapped on an island for the next 27 days.</p>
-              <p>   Spensor is trapped on an island for the next 27 days.</p>
-              <p>Spensor is trapped on an island for the next 27 days.</p>
-              <p>   Spensor is trapped on an island for the next 27 days.</p>
               <p>   Spensor is trapped on an island for the next 27 days.</p>
             </div>
           </div>

@@ -30,8 +30,13 @@ const rotatingModalGuts = document.querySelector('div.sky > div.rotating-modal >
 closeButton.addEventListener("click", function() {
   rotatingModal.classList.toggle("closed");
 });
-
-
+const dayEl = document.querySelector('div.header > div.day');
+const waterEl = document.querySelector('div.header > div.water-level');
+const foodEl = document.querySelector('div.header > div.food-level');
+const sanityEl = document.querySelector('div.header > div.sanity-level');
+const coconutsEl = document.querySelector('div.header > div.coconuts-level');
+const ropeEl = document.querySelector('div.header > div.rope-level');
+const bambooEl = document.querySelector('div.header > div.bamboo-level');
 // openButton.classList.toggle("closed");
 // openButton.addEventListener("click", function() {
 //   newDay();
@@ -57,6 +62,7 @@ class Hero {
 
   drink(){
     this.water += 1;
+    waterEl.innerHTML = this.water;
   }
 
   eat(num){
@@ -67,8 +73,9 @@ class Hero {
 
   }
 
-  coconutInventory(num){
-    this.coconuts += num;
+  coconutInventory(){
+    this.coconuts += 1;
+    coconutsEl.innerHTML = this.coconuts;
   }
 
   coconutAction(){  //or attackTroll
@@ -83,15 +90,13 @@ class Hero {
   timePasses(){
     this.day += 1;
     this.updateDayCount();
+    this.searchCount = 0;
   }
 
   updateDayCount(){
     console.log("made it to time passes");
-    const headerEl = document.querySelector('div.header');
-    const dayEl = document.createElement('h2');
     dayEl.innerHTML = `Day: ${this.day}`;
-    headerEl.appendChild(dayEl);
-    dayEl.style.
+
   }
 
 
@@ -122,11 +127,17 @@ let foodArray = ["Spensor found a nice rock. Let's see what we have under here..
 "Spensor heard a couple mongrolls last night. He think's it's best he set a trap.", "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
 "OH NO! Nasty Trolls!"];
 let foodArrayChoice = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
+let waterArray = [`Sweet!\nFound ${coconuts} delicious, refreshing coconuts!`, "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
+"OH NO! Nasty Trolls!"];
+let waterArrayChoice = `"${waterArray[Math.floor(Math.random() * waterArray.length)]}"`;
+console.log(waterArrayChoice);
 
 const aEl = document.createElement('A');
 aEl.textContent = "hi"
 const returnToCampButton = document.createElement('button');
+const returnToCampButton2 = document.createElement('button');
 const aButtonEl = document.createElement('button');
+const keepSearchingForDrink = document.createElement('button');
 /* =============================
 FUNCTIONS
 ============================= */
@@ -152,6 +163,7 @@ const instructionsModal = () =>{
   span.onclick = function(){
   modal2El.style.display = 'none';
   displayAsideL();
+  dayEl.innerHTML = `Day: ${Spensor.day}`;
 }}
 //Displays asideL ("what should spensor do today")
 const displayAsideL= () => {
@@ -199,6 +211,7 @@ const createWarningPopUp = () => {
     const xEl = document.querySelector("div.popup-trigger > div.popup > a");
     console.log(xEl)
     xEl.addEventListener('click', removePopUp);
+    console.log("should wait till i click the X on popup")
   }
 }
 //creates content of asideL ("What should spensor do today")
@@ -228,11 +241,13 @@ whatToDo2 = () =>{
   createWarningPopUp();   //need to create an if statemet for just the first time
 
   aButtonEl.addEventListener('click', clickedKeepSearchingForFood);
+  console.log("should wait till click keepsearching")
 
   returnToCampButton.setAttribute('id', 'return-to-camp-button');
   returnToCampButton.innerHTML = "Return to Camp";
   asidePEl.appendChild(returnToCampButton);
   returnToCampButton.addEventListener('click', clickedReturnToCamp);
+  console.log("should wait till click return to camp")
 
   displayAsideL();
   } else{
@@ -240,6 +255,34 @@ whatToDo2 = () =>{
     clickedReturnToCamp();
   }
 }
+
+// what should SPensor do now ---after drinking
+whatToDo3 = () =>{
+
+  if(Spensor.searchCount < 4){
+  asidePEl.textContent = "What should Spensor do now?";
+
+  keepSearchingForDrink.setAttribute('id', 'keep-searching-for-drink-button');
+  keepSearchingForDrink.innerHTML = "Keep searching for coconuts";
+  asidePEl.appendChild(keepSearchingForDrink);
+  keepSearchingForDrink.addEventListener('click', clickedKeepSearchingForWater);
+  console.log("wait to click search again for drink")
+
+  returnToCampButton2.setAttribute('id', 'return-to-camp-button2');
+  returnToCampButton2.innerHTML = "Return to Camp";
+  asidePEl.appendChild(returnToCampButton2);
+  returnToCampButton2.addEventListener('click', clickedReturnToCamp);
+console.log("wait to click return to camp(drink)")
+  displayAsideL();
+  } else{
+    console.log("It's pitch black! I hope Spensor can make it back")
+    clickedReturnToCamp();
+  }
+}
+
+
+
+
 
 //Displays asideR (hunting options)
 const displayAsideR = () => {
@@ -255,38 +298,69 @@ searchForWater = () => {
           //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
           //text on screen "you found x coconuts" while page shows spensor next to the item celebrating
   hideWhatToDoButtons();
-
-  alert(`You found ${coconuts} cocounts!`);
-
-  asidePEl.innerHTML = "What would you like to do with the coconut?";
-
-  const buttonEl = document.createElement('button');
-  buttonEl.setAttribute('id', 'drink-button');
-  buttonEl.innerHTML = "Drink";
-  asidePEl.appendChild(buttonEl);
-  buttonEl.addEventListener('click', clickedDrink);
-
-  const buttonEl2 = document.createElement('button');
-  buttonEl2.setAttribute('id', 'save-for-later-button');
-  buttonEl2.innerHTML = "Save for later";
-  asidePEl.appendChild(buttonEl2);
-  buttonEl2.addEventListener('click', clickedSaveForLater);
-
-  //side bar notation says "Coconuts can be used to defend yourself against nasty trolls" (But only the first time he comes across coconuts)
-}
-//Search for Food#####################################################
-searchForFood = () => {
-  hideWhatToDoButtons();
   hideAsideL();
   displayAsideR();
 
   if(Spensor.searchCount <= 2){
-    asideRPEl.innerHTML = "Great choice! Happy hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+    asideRPEl.innerHTML = "Great choice! Happy Coconuts!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
   } else{
-    asideRPEl.innerHTML = "Happy hunting!";
+    asideRPEl.innerHTML = "There's gotta be coconuts somewhere";
   }
-  setTimeout(foodSeachActivity, 2 * 1000);
+  setTimeout(waterSeachActivity, 2 * 1000);
 };
+
+waterSeachActivity = () => {
+  let waterArrayChoice = `"${waterArray[Math.floor(Math.random() * waterArray.length)]}"`;
+  console.log(waterArrayChoice);
+  asideRPEl.textContent = waterArrayChoice;
+  setTimeout(waterSearchResult, 3 * 1000);
+  }
+
+waterSearchResult = () =>{
+    if(waterArrayChoice === `"${waterArray[0]}"`){
+
+      foundCoconuts();
+    } else if (waterArrayChoice === `"${waterArray[1]}"`) {
+        asideRPEl.textContent = "nada\n Darn it!";
+        whatToDo3();
+    } else if (waterArrayChoice === `"${waterArray[2]}"`) {
+        asideRPEl.textContent = "Time to battle a troll\n or do I run away?";
+        whatToDo3();
+    } else {
+      console.log("something is wrong with code")
+    }
+  }
+
+  foundCoconuts = () =>{
+    asidePEl.innerHTML = "What would you like to do with the coconut?";
+
+    const buttonEl = document.createElement('button');
+    buttonEl.setAttribute('id', 'drink-button');
+    buttonEl.innerHTML = "Drink";
+    asidePEl.appendChild(buttonEl);
+    buttonEl.addEventListener('click', clickedDrink);
+      console.log("um")
+    const buttonEl2 = document.createElement('button');
+    buttonEl2.setAttribute('id', 'save-for-later-button');
+    buttonEl2.innerHTML = "Save for later";
+    asidePEl.appendChild(buttonEl2);
+    buttonEl2.addEventListener('click', clickedSaveForLater());
+  }
+  //side bar notation says "Coconuts can be used to defend yourself against nasty trolls" (But only the first time he comes across coconuts)
+
+//Search for Food#####################################################
+// searchForFood = () => {
+//   hideWhatToDoButtons();
+//   hideAsideL();
+//   displayAsideR();
+//
+//   if(Spensor.searchCount <= 2){
+//     asideRPEl.innerHTML = "Great choice! Happy hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+//   } else{
+//     asideRPEl.innerHTML = "Happy hunting!";
+//   }
+//   setTimeout(foodSeachActivity, 2 * 1000);
+// };
 
 foodSeachActivity = () => {
   asideRPEl.textContent = foodArrayChoice;
@@ -313,7 +387,7 @@ foodSearchResult = () =>{
 
 bugProbability = (num) => {
   if(num <= .75){
-    asideRPEl.textContent = "worms\nThis provides half a serving of food.";
+    asideRPEl.textContent = "Score!\nThis handfull of bugs and worms provides half a serving of food!";
     Spensor.eat(.5);
   } else {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
@@ -340,22 +414,40 @@ trapProbability = (num) => {
   }
   whatToDo2();
 }
-
+// Clicked Keep Searching For Food
 clickedKeepSearchingForFood = () => {
   Spensor.searchPerDayCount(1);
 
   if(Spensor.searchCount === 3){
     console.log(Spensor.searchCount + " :this is before 3rd time. It's getting darker...")//make it darker
     searchForFood();
-  } else if (Spensor.searchCount === 4){
+  } else if(Spensor.searchCount === 4){
     console.log(Spensor.searchCount + " :this is before 4th time. Yikes! I hope this is worth it!")
     searchForFood();
-
   //sleeping on the road
   } else{
-    searchForFood();
+      searchForFood();
   }
 }
+// Clicked Keep Searching For Water
+clickedKeepSearchingForWater = () => {
+  Spensor.searchPerDayCount(1);
+
+  if(Spensor.searchCount === 3){
+    console.log(Spensor.searchCount + " :this is before 3rd time. It's getting darker...")//make it darker
+    searchForWater();
+  } else if(Spensor.searchCount === 4){
+    console.log(Spensor.searchCount + " :this is before 4th time. Yikes! I hope this is worth it!")
+    searchForWater();
+  //sleeping on the road
+  } else{
+      searchForWater();
+  }
+}
+
+
+
+
 
 
 // Clicking on Return to Camp...set prob of making it back
@@ -392,7 +484,9 @@ closeButton.addEventListener("click", function() {
 // new day button displays
 newDayButton  = () => {
   openButton.classList.toggle("closed");
+  openButton.style.zIndex = '7';
   openButton.addEventListener("click", function() {
+    openButton.classList.toggle("closed");
     newDay();
   });
 }
@@ -400,7 +494,10 @@ newDayButton  = () => {
 // New day
 newDay = () => {
   Spensor.timePasses();
-}
+  mainEl.style.backgroundImage = "url('../images/beach-walk.jpg')";
+};
+
+
 
 
 //####################################################
@@ -415,19 +512,23 @@ newDay = () => {
 clickedDrink= () => {
   hideAsideL();
   Spensor.drink();
+  whatToDo3();
 }
 
 clickedSaveForLater= () => {
   hideAsideL();
-  Spensor.coconutInventory(coconuts);
+  Spensor.coconutInventory();
+  whatToDo3();
 }
+
+
 
 /* =============================
 EVENT LISTENERS
 ============================= */
 
 document.querySelector('#water-button').addEventListener('click', searchForWater);
-document.querySelector('#food-button').addEventListener('click', searchForFood);
+// document.querySelector('#food-button').addEventListener('click', searchForFood);
 // document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
 
 
