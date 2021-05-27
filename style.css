@@ -50,7 +50,7 @@
 .stats-container > div {
   padding: 0px 20px 10px 8px;
   font-size: 20px;
-  z-index: 10;
+  z-index: 20;
   justify-self: start;
 }
 
@@ -329,7 +329,7 @@ div.sky > div.rotating-modal {
   max-height: 100%;
   background: pink;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
-  z-index: 5;
+  z-index: 8;
 }
 
 div.sky > div.rotating-modal.closed {
@@ -381,6 +381,57 @@ div.sky > div.rotating-modal > button.close-button {
 .open-button.closed {
   visibility: visible;
 }
+
+
+div.sky > div.troll-modal {
+  visibility: hidden;
+  display: flex;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  /*this is for centering if unkonw wisth/height*/
+  transform: translate(-50%, -50%);
+  /* Probably need media queries here */
+  width: 400px;
+  max-width: 100%;
+  height: 200px;
+  max-height: 100%;
+  background: pink;
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+  z-index: 8;
+}
+
+/* div.sky > div.rotating-modal.closed {
+  visibility: visible;
+} */
+
+div.sky > div.troll-modal > div.troll-modal-guts {
+  /* cover the modal */
+  position: absolute;
+  text-align: center;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* spacing as needed */
+  padding: 20px 50px 20px 20px;
+  /* let it scroll */
+  overflow: auto;
+}
+div.sky > div.troll-modal > button.troll-modal-button{
+  position: absolute;
+  z-index: 4;
+  top: 5%;
+  /* needs to look OK with or without scrollbar */
+  right: 15px;
+  border: 0;
+  background: none;
+  color: purple;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
+
 
 /* .popup .content {
   max-height: 30%;

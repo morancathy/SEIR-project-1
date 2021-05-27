@@ -5,8 +5,8 @@ Man on an Island
 /* ======================
 CACHED DOM NODES
 =========================*/
-const menuEl = document.querySelector('.asideL > aside.instructions > div.what-to-do-menu');
-const asidePEl = document.querySelector('.asideL > aside.instructions > p');
+const menuEl = document.querySelector('div.asideL > aside.instructions > div.what-to-do-menu');
+const asidePEl = document.querySelector('div.asideL > aside.instructions > p');
 const modalButton = document.querySelector('div.modal > button.start-button');
 const modal = document.querySelector('div.modal');
 const mainEl = document.querySelector('.main');
@@ -20,16 +20,21 @@ const skyEl = document.querySelector('.sky');
 const keepSearchingButton = document.querySelector('div.asideL > aside.instructions > button')
 const warningEl = document.querySelector('div.popup > p.content')
 const popupEl = document.querySelector('div.sky > div.popup-trigger')
-
+const drinkButtonEl = document.createElement('button');
+const saveButtonEl = document.createElement('button');
 //variables for rotating modal2
 const rotatingModal = document.querySelector("div.sky > div.rotating-modal");
 const closeButton = document.querySelector("#close-button");
+const trollModal = document.querySelector("div.sky > div.troll-modal");
+console.log(trollModal)
+const trollButton = document.querySelector("div.sky > div.troll-modal > button.troll-modal-button");
+console.log(trollButton);
+const trollModalGuts = document.querySelector("div.sky > div.troll-modal > div.troll-modal-guts");
+console.log(trollModalGuts);
+
 const openButton = document.querySelector("#open-button");
 const rotatingModalGuts = document.querySelector('div.sky > div.rotating-modal > div.rotating-modal-guts > p');
 
-closeButton.addEventListener("click", function() {
-  rotatingModal.classList.toggle("closed");
-});
 const dayEl = document.querySelector('div.header > div.day');
 const waterEl = document.querySelector('div.header > div.water-level');
 const foodEl = document.querySelector('div.header > div.food-level');
@@ -37,12 +42,6 @@ const sanityEl = document.querySelector('div.header > div.sanity-level');
 const coconutsEl = document.querySelector('div.header > div.coconuts-level');
 const ropeEl = document.querySelector('div.header > div.rope-level');
 const bambooEl = document.querySelector('div.header > div.bamboo-level');
-// openButton.classList.toggle("closed");
-// openButton.addEventListener("click", function() {
-//   newDay();
-// });
-
-
 
 /* ======================
 CREATE Spensor and Master Troll
@@ -50,14 +49,14 @@ CREATE Spensor and Master Troll
 class Hero {
   constructor(name, water, food, sanity, coconuts, bamboo, rope, searchCount, day){
     this.name = name;
-    this.water = 5;
-    this.food = 5;
-    this.sanity = 5;
-    this.coconuts = 0;
-    this.bamboo = 0;
-    this.rope = 0;
-    this.searchCount = 0;
-    this.day = 1;
+    this.water = water;
+    this.food = food;
+    this.sanity = sanity;
+    this.coconuts = coconuts;
+    this.bamboo = bamboo;
+    this.rope = rope;
+    this.searchCount = searchCount;
+    this.day = day;
   }
 
   drink(){
@@ -69,13 +68,19 @@ class Hero {
     this.food += num;
   }
 
-  saneness(){
-
+  saneness(num){
+    this.sanity = this.sanity - num;
+    sanityEl.innerHTML = this.sanity;
   }
 
-  coconutInventory(){
-    this.coconuts += 1;
-    coconutsEl.innerHTML = this.coconuts;
+  coconutInventory(num){
+    this.coconuts = this.coconuts + num;
+    if(this.coconuts >= 0){
+      coconutsEl.innerHTML = this.coconuts;
+    } else{
+      this.coconuts = 0;
+      coconutsEl.innerHTML = this.coconuts;
+    }
   }
 
   coconutAction(){  //or attackTroll
@@ -87,10 +92,10 @@ class Hero {
 
   }
 
-  timePasses(){
-    this.day += 1;
+  timePasses(num){
+    this.day = this.day + num;
     this.updateDayCount();
-    this.searchCount = 0;
+    this.searchCount = 1;
   }
 
   updateDayCount(){
@@ -116,22 +121,24 @@ class Hero {
 
   }
 }
-const Spensor = new Hero("Spensor");
+const Spensor = new Hero("Spensor", 5, 5, 5, 0, 0, 0, 1, 1);
+
 /* ======================
 GLOBAL VARS
 =========================*/
-let coconuts = (Math.floor(Math.random() * (3-1) + 1));
+// let coconuts = (Math.floor(Math.random() * (3-1) + 1));
+
+
+let coconuts = 1;
 let bamboo = (Math.floor(Math.random() * (6-3) + 3));
 let rope = (Math.floor(Math.random() * (3-1) + 1));
 let foodArray = ["Spensor found a nice rock. Let's see what we have under here...", "Ooou, a watering hole. Let's try to fish!",
 "Spensor heard a couple mongrolls last night. He think's it's best he set a trap.", "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
 "OH NO! Nasty Trolls!"];
 let foodArrayChoice = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
-let waterArray = [`Sweet!\nFound ${coconuts} delicious, refreshing coconuts!`, "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
+let waterArray = [`Sweet!\nFound a delicious, refreshing coconuts!`, "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
 "OH NO! Nasty Trolls!"];
-let waterArrayChoice = `"${waterArray[Math.floor(Math.random() * waterArray.length)]}"`;
-console.log(waterArrayChoice);
-
+// let waterArrayChoice = `"${waterArray[Math.floor(Math.random() * waterArray.length)]}"`;
 const aEl = document.createElement('A');
 aEl.textContent = "hi"
 const returnToCampButton = document.createElement('button');
@@ -152,6 +159,12 @@ hideWhatToDoButtons = () => {
   document.querySelector('#food-button').style.visibility = 'hidden';
   document.querySelector('#supplies-button').style.visibility = 'hidden';
 }
+//show buttons
+showWhatToDoButtons = () => {
+  document.querySelector('#water-button').style.visibility = 'visible';
+  document.querySelector('#food-button').style.visibility = 'visible';
+  document.querySelector('#supplies-button').style.visibility = 'visible';
+}
 //When start button is clicked
 modalButton.addEventListener('click', (e) =>{  //if i push this in event listeners, it doesnt work. why?
   toggleClass(modal, 'open');
@@ -166,12 +179,21 @@ const instructionsModal = () =>{
   dayEl.innerHTML = `Day: ${Spensor.day}`;
 }}
 //Displays asideL ("what should spensor do today")
-const displayAsideL= () => {
-  asideL.style.zIndex = '2';
+const displayAsideL = () => {
+  asideL.style.zIndex = '15';
 }
 //Hides asideL ("what should spensor do today")
-const hideAsideL= () => {
+const hideAsideL = () => {
+  console.log("does 191 work")
   asideL.style.zIndex = '0';
+}
+//Displays asideR (hunting options)
+const displayAsideR = () => {
+  asideR.style.zIndex = '15';
+}
+//Hides asideR (hunting options)
+const hideAsideR = () => {
+  asideR.style.zIndex = '0';
 }
 //removes Pop Up warning
 const removePopUp = () =>{
@@ -181,9 +203,6 @@ const removePopUp = () =>{
   aButtonEl.textContent = "Keep Searching";
   // keepSearchingButton.removeChild(warningEl);
   skyEl.removeChild(popupEl);
-  console.log(popupEl)
-  console.log(keepSearchingButton)
-  console.log(warningEl)
   console.log("lordy")
 }
 //creates warning pop up and keep searching button
@@ -200,7 +219,6 @@ const createWarningPopUp = () => {
 
     aEl.textContent = "Keep Searching";
 
-    // const warningEl = document.querySelector('div.popup > p.content')
     console.log(warningEl)
     warningEl.textContent = ("Spensor is able to go on max 4 searches.");
 
@@ -216,8 +234,8 @@ const createWarningPopUp = () => {
 }
 //creates content of asideL ("What should spensor do today")
 contentWhatToDoToday = () => {
+  displayAsideL();
   asidePEl.textContent = "What should Spensor do today?";
-
   let toDoButtons = [
     {text: 'Search for water', id: 'water-button'},
     {text: 'Search for food', id: 'food-button'},
@@ -230,15 +248,20 @@ contentWhatToDoToday = () => {
     menuEl.appendChild(buttonEl);
   }
 }
-contentWhatToDoToday();    //this gets called at begingin of each day
+contentWhatToDoToday();    //this gets called at begingin of each day#####################################
 
-//What should Spensor Do now
+whatToDoToday = () => {
+  displayAsideL();
+  asidePEl.textContent = "What should Spensor do today?";
+  showWhatToDoButtons();
+};
+//What should Spensor Do now######################################################3### WHAT TO DO2
 whatToDo2 = () =>{
 
   if(Spensor.searchCount < 4){
   asidePEl.textContent = "What should Spensor do now?";
 
-  createWarningPopUp();   //need to create an if statemet for just the first time
+  createWarningPopUp();                           //need to create an if statemet for just the first time
 
   aButtonEl.addEventListener('click', clickedKeepSearchingForFood);
   console.log("should wait till click keepsearching")
@@ -256,17 +279,17 @@ whatToDo2 = () =>{
   }
 }
 
-// what should SPensor do now ---after drinking
+// what should SPensor do now ---after drinking  ##################################### WHAT TO DO3
 whatToDo3 = () =>{
-
   if(Spensor.searchCount < 4){
+  displayAsideL();
   asidePEl.textContent = "What should Spensor do now?";
 
   keepSearchingForDrink.setAttribute('id', 'keep-searching-for-drink-button');
   keepSearchingForDrink.innerHTML = "Keep searching for coconuts";
   asidePEl.appendChild(keepSearchingForDrink);
   keepSearchingForDrink.addEventListener('click', clickedKeepSearchingForWater);
-  console.log("wait to click search again for drink")
+console.log("wait to click search again for drink")
 
   returnToCampButton2.setAttribute('id', 'return-to-camp-button2');
   returnToCampButton2.innerHTML = "Return to Camp";
@@ -280,92 +303,91 @@ console.log("wait to click return to camp(drink)")
   }
 }
 
-
-
-
-
-//Displays asideR (hunting options)
-const displayAsideR = () => {
-  asideR.style.zIndex = '2';
-}
-//Hides asideR (hunting options)
-const hideAsideR = () => {
-  asideR.style.zIndex = '0';
-}
-
 //Search For Water
 searchForWater = () => {
           //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
           //text on screen "you found x coconuts" while page shows spensor next to the item celebrating
+  // document.querySelector("#water-button").disabled = true;
   hideWhatToDoButtons();
   hideAsideL();
   displayAsideR();
 
   if(Spensor.searchCount <= 2){
-    asideRPEl.innerHTML = "Great choice! Happy Coconuts!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
-  } else{
-    asideRPEl.innerHTML = "There's gotta be coconuts somewhere";
+    asideRPEl.textContent = "Great choice! Happy Coconuts!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+  } else if (Spensor.searchCount === 3){
+    asideRPEl.textContent = "It's getting darker, but there's gotta be coconuts somewhere.";
+  } else if (Spensor.searchCount === 4){
+    asideRPEl.textContent = "This is the last time Spensor can search before it's pitch black.\nI hope this is worth it!"
+  } else {
+    console.log("spensor has searched too many times. i shouldnt see this. 298")
   }
   setTimeout(waterSeachActivity, 2 * 1000);
 };
 
 waterSeachActivity = () => {
   let waterArrayChoice = `"${waterArray[Math.floor(Math.random() * waterArray.length)]}"`;
+  // let waterArrayChoice = waterArray[0];
   console.log(waterArrayChoice);
-  asideRPEl.textContent = waterArrayChoice;
-  setTimeout(waterSearchResult, 3 * 1000);
-  }
 
 waterSearchResult = () =>{
-    if(waterArrayChoice === `"${waterArray[0]}"`){
-
+    if(waterArrayChoice === `"${waterArray[0]}"`) {
+      console.log("found coconuts")
+      asideRPEl.textContent = waterArrayChoice;
+      // asideRPEl.textContent = "Sweet! Found a delicious, refreshing coconut!"
       foundCoconuts();
     } else if (waterArrayChoice === `"${waterArray[1]}"`) {
-        asideRPEl.textContent = "nada\n Darn it!";
+        asideRPEl.textContent = waterArrayChoice;
+        console.log("didnt find antyhing, does asideRPEL work?")
         whatToDo3();
     } else if (waterArrayChoice === `"${waterArray[2]}"`) {
-        asideRPEl.textContent = "Time to battle a troll\n or do I run away?";
+        asideRPEl.textContent = waterArrayChoice;
+        // hideAsideL();
+        // asideRPEl.textContent = "Time to battle a troll\n or do I run away?(water)";
+        battleTroll();
         whatToDo3();
     } else {
       console.log("something is wrong with code")
     }
   }
+setTimeout(waterSearchResult, 2 * 1000);
+}
 
-  foundCoconuts = () =>{
-    asidePEl.innerHTML = "What would you like to do with the coconut?";
+foundCoconuts = () => {
+    displayAsideL();
+    // asideRPEl.textContent = "";
+    asidePEl.textContent = "What would you like to do with the coconut?";
 
-    const buttonEl = document.createElement('button');
-    buttonEl.setAttribute('id', 'drink-button');
-    buttonEl.innerHTML = "Drink";
-    asidePEl.appendChild(buttonEl);
-    buttonEl.addEventListener('click', clickedDrink);
-      console.log("um")
-    const buttonEl2 = document.createElement('button');
-    buttonEl2.setAttribute('id', 'save-for-later-button');
-    buttonEl2.innerHTML = "Save for later";
-    asidePEl.appendChild(buttonEl2);
-    buttonEl2.addEventListener('click', clickedSaveForLater());
-  }
+    drinkButtonEl.setAttribute('id', 'drink-button');
+    drinkButtonEl.innerHTML = "Drink";
+    asidePEl.appendChild(drinkButtonEl);
+    drinkButtonEl.addEventListener('click', clickedDrink);
+  console.log("um")
+    saveButtonEl.setAttribute('id', 'save-for-later-button');
+    saveButtonEl.innerHTML = "Save for later";
+    asidePEl.appendChild(saveButtonEl);
+    saveButtonEl.addEventListener('click', clickedSaveForLater);
+}
+
   //side bar notation says "Coconuts can be used to defend yourself against nasty trolls" (But only the first time he comes across coconuts)
 
 //Search for Food#####################################################
-// searchForFood = () => {
-//   hideWhatToDoButtons();
-//   hideAsideL();
-//   displayAsideR();
-//
-//   if(Spensor.searchCount <= 2){
-//     asideRPEl.innerHTML = "Great choice! Happy hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
-//   } else{
-//     asideRPEl.innerHTML = "Happy hunting!";
-//   }
-//   setTimeout(foodSeachActivity, 2 * 1000);
-// };
+searchForFood = () => {
+  hideWhatToDoButtons();
+  hideAsideL();
+  displayAsideR();
+
+  if(Spensor.searchCount <= 2){
+    asideRPEl.innerHTML = "Great choice! Happy hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+  } else{
+    asideRPEl.innerHTML = "Happy hunting!";
+  }
+  setTimeout(foodSeachActivity, 2 * 1000);
+};
 
 foodSeachActivity = () => {
   asideRPEl.textContent = foodArrayChoice;
   setTimeout(foodSearchResult, 3 * 1000);
-  }
+};
 
 foodSearchResult = () =>{
   if(foodArrayChoice === `"${foodArray[0]}"`){
@@ -383,7 +405,7 @@ foodSearchResult = () =>{
   } else {
     console.log("something is wrong with code")
   }
-}
+};
 
 bugProbability = (num) => {
   if(num <= .75){
@@ -393,7 +415,7 @@ bugProbability = (num) => {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
   }
   whatToDo2();
-}
+};
 
 fishProbability = (num) => {
   if(num <= .50){
@@ -403,7 +425,7 @@ fishProbability = (num) => {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
   }
   whatToDo2();
-}
+};
 
 trapProbability = (num) => {
   if(num <= .25){
@@ -413,7 +435,44 @@ trapProbability = (num) => {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
   }
   whatToDo2();
+};
+
+
+
+// Battle Troll #############################################################  BATTLE TROLL
+battleTroll = () => {
+  if(Spensor.coconuts < 1){
+    hideAsideL();
+    trollModalGuts.innerHTML = "Spensor has no coconuts to defend himself :("
+    // toggleClass(rotatingModal, 'closed');
+    trollModal.style.visibility = 'visible';
+
+
+    trollButton.addEventListener("click", function() {
+      trollModal.style.visibility = 'hidden';
+        // rotatingModal.classList.toggle("closed");
+      // toggleClass(rotatingModal, 'closed');
+      asideRPEl.textContent = "Darn troll kicked him!\nSpensor loses a sanity level.";
+      Spensor.saneness(1);
+      // whatToDo3();
+      });
+  } else if(Spensor.coconuts >= 1){
+      trollModalGuts.innerHTML = "Attack!"
+      // toggleClass(rotatingModal, 'closed');
+      trollModal.style.visibility = 'visible';
+      trollButton.addEventListener("click", function() {
+        console.log("450")
+        // toggleClass(rotatingModal, 'closed');
+        trollModal.style.visibility = 'hidden';
+        asideRPEl.textContent = "Spensor threw a coconut at the troll and scared him off.\nPhew, that was close.";
+        Spensor.coconutInventory(-1);
+      });
+  }else{
+    console.log("coconut function to attack trolls is broken");
+  }
+  console.log("coconuts attack trolls work...now what")
 }
+
 // Clicked Keep Searching For Food
 clickedKeepSearchingForFood = () => {
   Spensor.searchPerDayCount(1);
@@ -428,7 +487,7 @@ clickedKeepSearchingForFood = () => {
   } else{
       searchForFood();
   }
-}
+};
 // Clicked Keep Searching For Water
 clickedKeepSearchingForWater = () => {
   Spensor.searchPerDayCount(1);
@@ -443,67 +502,79 @@ clickedKeepSearchingForWater = () => {
   } else{
       searchForWater();
   }
-}
-
-
-
-
-
-
+};
 // Clicking on Return to Camp...set prob of making it back
 clickedReturnToCamp = () => {
-  console.log("Time to return to camp...I hope I can find my way...")
-  if(Spensor.searchCount === 3){
-    makeItBackProbability(.50);
-  } else if(Spensor.searchCount === 4){
-    makeItBackProbability(.25);
-  } else {
-    makeItBackProbability(1);
+  // asideRPEl.innerHTML = "Time to return to camp...I hope I can find my way..."
+  probFunction = () =>{
+    toggleClass(rotatingModal, 'open');
+    rotatingModalGuts.textContent = "Time to return to camp...I hope I can find my way..."  //this doesnt work
+
+    hideAsideR();
+
+    if(Spensor.searchCount === 3){
+      console.log("searchcount 3")
+      makeItBackProbability(.50);
+    } else if(Spensor.searchCount === 4){
+      console.log("searchcount 4")
+      makeItBackProbability(.25);
+    } else if (Spensor.searchCount < 3){
+      console.log("searchcount 1-2")
+      makeItBackProbability(1);
+    } else {
+      console.log("510 return to camp prob doesnt work")
+    }
   }
-}
+  setTimeout(probFunction, 5 * 1000);
+};
 // calcaulate prob of making it back and showing results
 makeItBackProbability = (num) => {
     if((Math.random()) <= num){
-      rotatingModalGuts.innerHTML = "He made it back to camp!\n Time to relax.";
-      toggleClass(rotatingModal, 'closed');
+      rotatingModalGuts.textContent = "He made it back to camp!\n Time to relax.";
+      rotatingModal.style.visibility = 'visible';
+      // toggleClass(rotatingModal, 'closed');
       nightTimeScene();
     } else{
-      rotatingModalGuts.innerHTML = "Spensor has to sleep on the road! Oh no!";
-      toggleClass(rotatingModal, 'closed');
-      Spensor.sanity -= 1;
+      rotatingModalGuts.textContent = "Spensor tried making his way back but got lost :( \n He has to sleep on the road! Oh no!";
+      rotatingModal.style.visibility = 'visible';
+      // toggleClass(rotatingModal, 'closed');
+      Spensor.saneness(1);
+      nightTimeScene();
     }
-}
+};
 //Shows night time scence
 nightTimeScene = () => {
 closeButton.addEventListener("click", function() {
-  mainEl.style.zIndex = '6';
+  rotatingModal.style.visibility = 'hidden';
+  hideAsideL();
+  hideAsideR();
+  // mainEl.style.zIndex = '6';
   mainEl.style.backgroundImage = "url('../images/beachNight.jpg')";
   newDayButton();
-});
-}
+  });
+};
 // new day button displays
 newDayButton  = () => {
-  openButton.classList.toggle("closed");
+  // openButton.classList.toggle("closed");
+  document.querySelector('#open-button').style.visibility = 'visible';
   openButton.style.zIndex = '7';
   openButton.addEventListener("click", function() {
-    openButton.classList.toggle("closed");
+    // openButton.classList.toggle("closed");
+    document.querySelector('#open-button').style.visibility = 'hidden';
     newDay();
   });
-}
+};
 
 // New day
 newDay = () => {
-  Spensor.timePasses();
+  // openButton.style.zIndex = '5';
+  Spensor.timePasses(1);
+  // document.querySelector("#water-button").disabled = false;
   mainEl.style.backgroundImage = "url('../images/beach-walk.jpg')";
+  whatToDoToday();
+  console.log("should go to conteent whea to do today")
 };
-
-
-
-
 //####################################################
-
-
-
 
 // searchForSupplies = () => {
 //
@@ -512,23 +583,23 @@ newDay = () => {
 clickedDrink= () => {
   hideAsideL();
   Spensor.drink();
+  asideRPEl.textContent = "Mmmmmmm";
   whatToDo3();
 }
 
 clickedSaveForLater= () => {
   hideAsideL();
-  Spensor.coconutInventory();
+  Spensor.coconutInventory(1);
+  console.log("line523")
   whatToDo3();
 }
-
-
 
 /* =============================
 EVENT LISTENERS
 ============================= */
 
 document.querySelector('#water-button').addEventListener('click', searchForWater);
-// document.querySelector('#food-button').addEventListener('click', searchForFood);
+document.querySelector('#food-button').addEventListener('click', searchForFood);
 // document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
 
 
