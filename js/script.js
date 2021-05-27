@@ -16,6 +16,7 @@ const span = document.querySelector('span.close');
 const asideL = document.querySelector('.asideL');
 const asideR = document.querySelector('.asideR');
 const asideRPEl = document.querySelector('.asideR > p.food-intro');
+const asideRElement2 = document.querySelector('div.asideR > p.result');         //can prob delete
 const skyEl = document.querySelector('.sky');
 const keepSearchingButton = document.querySelector('div.asideL > aside.instructions > button')
 const warningEl = document.querySelector('div.popup > p.content')
@@ -138,7 +139,7 @@ let rope = (Math.floor(Math.random() * (3-1) + 1));
 let foodArray = ["Spensor found a nice rock. Let's see what we have under here...", "Ooou, a watering hole. Let's try to fish!",
 "Spensor heard a couple mongrolls last night. He think's it's best he set a trap.", "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
 "OH NO! Nasty Trolls!"];
-let foodArrayChoice = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
+
 let waterArray = [`Sweet!\nFound a delicious, refreshing coconuts!`, "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
 "OH NO! Nasty Trolls!"];
 // let waterArrayChoice = `"${waterArray[Math.floor(Math.random() * waterArray.length)]}"`;
@@ -262,52 +263,58 @@ whatToDoToday = () => {
 //What should Spensor Do now######################################################3### WHAT TO DO2
 whatToDo2 = () =>{
 
-  if(Spensor.searchCount < 4){
-  asidePEl.textContent = "What should Spensor do now?";
+  if(Spensor.searchCount <= 3){
+    displayAsideL();
+    asidePEl.textContent = "What should Spensor do now?";
+    // createWarningPopUp();                           //need to create an if statemet for just the first time
+    aButtonEl.setAttribute('id', 'keep-searching-button');
+    aButtonEl.textContent = "Keep Searching";
+    aButtonEl.style.textDecoration = 'none';
+    asidePEl.appendChild(aButtonEl);
+    aButtonEl.addEventListener('click', clickedKeepSearchingForFood);
+    console.log("should wait till click keepsearching")
 
-  // createWarningPopUp();                           //need to create an if statemet for just the first time
-
-  aButtonEl.setAttribute('id', 'keep-searching-button');
-  aButtonEl.textContent = "Keep Searching";
-  aButtonEl.style.textDecoration = 'none';
-  asidePEl.appendChild(aButtonEl);
-  aButtonEl.addEventListener('click', clickedKeepSearchingForFood);
-  console.log("should wait till click keepsearching")
-
-  returnToCampButton.setAttribute('id', 'return-to-camp-button');
-  returnToCampButton.innerHTML = "Return to Camp";
-  asidePEl.appendChild(returnToCampButton);
-  returnToCampButton.addEventListener('click', clickedReturnToCamp);
-  console.log("should wait till click return to camp")
-
-  displayAsideL();
-  } else{
+    returnToCampButton.setAttribute('id', 'return-to-camp-button');
+    returnToCampButton.innerHTML = "Return to Camp";
+    asidePEl.appendChild(returnToCampButton);
+    returnToCampButton.addEventListener('click', clickedReturnToCamp);
+    console.log("should wait till click return to camp")
+    // displayAsideL();
+  } else if (Spensor.searchCount > 3){
+    displayAsideR();
     console.log("It's pitch black! I hope Spensor can make it back")
+    // .textContent = "It's pitch black! I hope Spensor can make it back";
     clickedReturnToCamp();
+  } else {
+    console.log("broke...what to do 2..288")
   }
 }
 
 // what should SPensor do now ---after drinking  ##################################### WHAT TO DO3
 whatToDo3 = () =>{
-  if(Spensor.searchCount < 4){
-  displayAsideL();
-  asidePEl.textContent = "What should Spensor do now?";
+  if(Spensor.searchCount <= 3){
+    displayAsideL();
+    asidePEl.textContent = "What should Spensor do now?";
 
-  keepSearchingForDrink.setAttribute('id', 'keep-searching-for-drink-button');
-  keepSearchingForDrink.innerHTML = "Keep searching for coconuts";
-  asidePEl.appendChild(keepSearchingForDrink);
-  keepSearchingForDrink.addEventListener('click', clickedKeepSearchingForWater);
-console.log("wait to click search again for drink")
+    keepSearchingForDrink.setAttribute('id', 'keep-searching-for-drink-button');
+    keepSearchingForDrink.innerHTML = "Keep searching for coconuts";
+    asidePEl.appendChild(keepSearchingForDrink);
+    keepSearchingForDrink.addEventListener('click', clickedKeepSearchingForWater);
+    console.log("wait to click search again for drink")
 
-  returnToCampButton2.setAttribute('id', 'return-to-camp-button2');
-  returnToCampButton2.innerHTML = "Return to Camp";
-  asidePEl.appendChild(returnToCampButton2);
-  returnToCampButton2.addEventListener('click', clickedReturnToCamp);
-console.log("wait to click return to camp(drink)")
-  displayAsideL();
-  } else{
-    console.log("It's pitch black! I hope Spensor can make it back")
+    returnToCampButton2.setAttribute('id', 'return-to-camp-button2');
+    returnToCampButton2.innerHTML = "Return to Camp";
+    asidePEl.appendChild(returnToCampButton2);
+    returnToCampButton2.addEventListener('click', clickedReturnToCamp);
+    console.log("wait to click return to camp(drink)")
+    // displayAsideL();
+  } else if (Spensor.searchCount > 3){
+    displayAsideR();
+    console.log("It's pitch black! I hope Spensor can make it back")          //maybe dont do this right away
+    // asideRElement2.textContent = "It's pitch black! I hope Spensor can make it back";
     clickedReturnToCamp();
+  } else {
+    console.log("broke...what to do 3..314")
   }
 }
 
@@ -337,7 +344,7 @@ waterSeachActivity = () => {
   // let waterArrayChoice = waterArray[0];
   console.log(waterArrayChoice);
 
-waterSearchResult = () =>{
+  waterSearchResult = () =>{
     if(waterArrayChoice === `"${waterArray[0]}"`) {
       console.log("found coconuts")
       asideRPEl.textContent = waterArrayChoice;
@@ -357,7 +364,7 @@ waterSearchResult = () =>{
       console.log("something is wrong with code")
     }
   }
-setTimeout(waterSearchResult, 2 * 1000);
+  setTimeout(waterSearchResult, 2 * 1000);
 }
 
 foundCoconuts = () => {
@@ -385,39 +392,45 @@ searchForFood = () => {
   displayAsideR();
 
   if(Spensor.searchCount <= 2){
-    asideRPEl.innerHTML = "Great choice! Happy hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
-  } else{
-    asideRPEl.innerHTML = "Happy hunting!";
+    asideRPEl.textContent = "Great choice! Happy Hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
+  } else if (Spensor.searchCount === 3){
+    asideRPEl.textContent = "It's getting darker, but Spensor is hungry.";
+  } else if (Spensor.searchCount > 3){
+    asideRPEl.textContent = "This is the last time Spensor can search before it's pitch black.\nI hope this is worth it!"
+  } else {
+    console.log("spensor has searched too many times. i shouldnt see this. 298")
   }
   setTimeout(foodSeachActivity, 2 * 1000);
-};
+  };
 
 foodSeachActivity = () => {
+  let foodArrayChoice = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
   asideRPEl.textContent = foodArrayChoice;
-  setTimeout(foodSearchResult, 3 * 1000);
-};
 
-foodSearchResult = () =>{
-  if(foodArrayChoice === `"${foodArray[0]}"`){
-    bugProbability(Math.random());
-  }else if (foodArrayChoice === `"${foodArray[1]}"`) {
-    fishProbability(Math.random());
-  } else if (foodArrayChoice === `"${foodArray[2]}"`) {
-    trapProbability(Math.random());
-  } else if (foodArrayChoice === `"${foodArray[3]}"`) {
-      asideRPEl.textContent = "nada\n Darn it!";
-      whatToDo2();
-  } else if (foodArrayChoice === `"${foodArray[4]}"`) {
-      asideRPEl.textContent = "Time to battle a troll\n or do I run away?";
-      whatToDo2();
-  } else {
-    console.log("something is wrong with code")
+  foodSearchResult = () =>{
+    if(foodArrayChoice === `"${foodArray[0]}"`){
+      bugProbability(Math.random());
+    }else if (foodArrayChoice === `"${foodArray[1]}"`) {
+      fishProbability(Math.random());
+    } else if (foodArrayChoice === `"${foodArray[2]}"`) {
+      trapProbability(Math.random());
+    } else if (foodArrayChoice === `"${foodArray[3]}"`) {
+        asideRPEl.textContent = foodArrayChoice;
+        whatToDo2();
+    } else if (foodArrayChoice === `"${foodArray[4]}"`) {
+        asideRPEl.textContent = foodArrayChoice;
+        battleTroll();
+        whatToDo2();
+    } else {
+      console.log("something is wrong with code")
+    }
   }
+  setTimeout(foodSearchResult, 3 * 1000);
 };
 
 bugProbability = (num) => {
   if(num <= .75){
-    asideRPEl.textContent = "Score!\nThis handfull of bugs and worms provides half a serving of food!";
+    asideRPEl.textContent = "Score!\nThis handfull of bugs and worms provides a half serving of food!";
     Spensor.eat(.5);
   } else {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
@@ -427,7 +440,7 @@ bugProbability = (num) => {
 
 fishProbability = (num) => {
   if(num <= .50){
-    asideRPEl.textContent = "Big fish\nThis provides a full serving of food!";
+    asideRPEl.textContent = "Spensor caught a fish!\nThis provides a full serving of food!";
     Spensor.eat(1);
   } else {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
@@ -437,7 +450,7 @@ fishProbability = (num) => {
 
 trapProbability = (num) => {
   if(num <= .25){
-    asideRPEl.textContent = "Squirl..get it marley. This provides 2 full servings of food!";
+    asideRPEl.textContent = "Hard work pays off.\nHe caught an island crittert!\nThis provides 2 servings of food!";
     Spensor.eat(2);
   } else {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
@@ -488,7 +501,7 @@ clickedKeepSearchingForFood = () => {
   if(Spensor.searchCount === 3){
     console.log(Spensor.searchCount + " :this is before 3rd time. It's getting darker...")//make it darker
     searchForFood();
-  } else if(Spensor.searchCount === 4){
+  } else if(Spensor.searchCount > 3){
     console.log(Spensor.searchCount + " :this is before 4th time. Yikes! I hope this is worth it!")
     searchForFood();
   //sleeping on the road
@@ -503,7 +516,7 @@ clickedKeepSearchingForWater = () => {
   if(Spensor.searchCount === 3){
     console.log(Spensor.searchCount + " :this is before 3rd time. It's getting darker...")//make it darker
     searchForWater();
-  } else if(Spensor.searchCount === 4){
+  } else if(Spensor.searchCount > 3){
     console.log(Spensor.searchCount + " :this is before 4th time. Yikes! I hope this is worth it!")
     searchForWater();
   //sleeping on the road
@@ -516,19 +529,22 @@ clickedReturnToCamp = () => {
   // asideRPEl.innerHTML = "Time to return to camp...I hope I can find my way..."
   probFunction = () =>{
     toggleClass(rotatingModal, 'open');
+    asideRPEl.textContent = "";
+    displayAsideR();
+    asideRElement2.textContent = "Time to return to camp...I hope I can find my way..."
     rotatingModalGuts.textContent = "Time to return to camp...I hope I can find my way..."  //this doesnt work
 
-    hideAsideR();
+    // hideAsideR();
 
     if(Spensor.searchCount === 3){
       console.log("searchcount 3")
-      makeItBackProbability(.50);
+      setTimeout(makeItBackProbability, 5*1000, .50);
     } else if(Spensor.searchCount === 4){
       console.log("searchcount 4")
-      makeItBackProbability(.25);
+      setTimeout(makeItBackProbability, 5*1000, .25);
     } else if (Spensor.searchCount < 3){
       console.log("searchcount 1-2")
-      makeItBackProbability(1);
+      setTimeout(makeItBackProbability, 5*1000, 1);
     } else {
       console.log("510 return to camp prob doesnt work")
     }
@@ -537,13 +553,14 @@ clickedReturnToCamp = () => {
 };
 // calcaulate prob of making it back and showing results
 makeItBackProbability = (num) => {
+    hideAsideR();
     if((Math.random()) <= num){
       rotatingModalGuts.textContent = "He made it back to camp!\n Time to relax.";
       rotatingModal.style.visibility = 'visible';
       // toggleClass(rotatingModal, 'closed');
       nightTimeScene();
     } else{
-      rotatingModalGuts.textContent = "Spensor tried making his way back but got lost :( \n He has to sleep on the road! Oh no!";
+      rotatingModalGuts.textContent = "It's pitch black!\nSpensor tried making his way back but got lost :( \n He has to sleep on the road! Oh no!";
       rotatingModal.style.visibility = 'visible';
       // toggleClass(rotatingModal, 'closed');
       Spensor.saneness(1);
@@ -556,6 +573,7 @@ closeButton.addEventListener("click", function() {
   rotatingModal.style.visibility = 'hidden';
   hideAsideL();
   hideAsideR();
+  asideRElement2.textContent = "";
   // mainEl.style.zIndex = '6';
   mainEl.style.backgroundImage = "url('../images/beachNight.jpg')";
   newDayButton();
@@ -589,9 +607,10 @@ newDay = () => {
 // }
 
 clickedDrink= () => {
+  displayAsideR();                            //this command doesnt work on the 4th search
+  asideRPEl.textContent = "Mmmmmmm";          //this command doesnt work on the 4th search
   hideAsideL();
   Spensor.drink(1);
-  asideRPEl.textContent = "Mmmmmmm";
   whatToDo3();
 }
 
