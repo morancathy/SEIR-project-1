@@ -59,13 +59,15 @@ class Hero {
     this.day = day;
   }
 
-  drink(){
-    this.water += 1;
+  drink(num){
+    this.water += num;
     waterEl.innerHTML = this.water;
   }
 
   eat(num){
-    this.food += num;
+    this.food = this.food + num;
+    foodEl.textContent = this.food;
+
   }
 
   saneness(num){
@@ -101,7 +103,8 @@ class Hero {
   updateDayCount(){
     console.log("made it to time passes");
     dayEl.innerHTML = `Day: ${this.day}`;
-
+    this.eat(-1);
+    this.drink(-1);
   }
 
 
@@ -211,6 +214,7 @@ const createWarningPopUp = () => {
   if(aEl.textContent === ""){
     aButtonEl.setAttribute('id', 'keep-searching-button');
     aButtonEl.textContent = "Keep Searching";
+    aButtonEl.style.textDecoration = 'none';
     asidePEl.appendChild(aButtonEl);
     return;
   } else {
@@ -261,8 +265,12 @@ whatToDo2 = () =>{
   if(Spensor.searchCount < 4){
   asidePEl.textContent = "What should Spensor do now?";
 
-  createWarningPopUp();                           //need to create an if statemet for just the first time
+  // createWarningPopUp();                           //need to create an if statemet for just the first time
 
+  aButtonEl.setAttribute('id', 'keep-searching-button');
+  aButtonEl.textContent = "Keep Searching";
+  aButtonEl.style.textDecoration = 'none';
+  asidePEl.appendChild(aButtonEl);
   aButtonEl.addEventListener('click', clickedKeepSearchingForFood);
   console.log("should wait till click keepsearching")
 
@@ -582,7 +590,7 @@ newDay = () => {
 
 clickedDrink= () => {
   hideAsideL();
-  Spensor.drink();
+  Spensor.drink(1);
   asideRPEl.textContent = "Mmmmmmm";
   whatToDo3();
 }

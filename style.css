@@ -277,6 +277,7 @@ div.modal{
   /* border: 2px solid red; */
   transition: opacity 500ms;
    visibility: hidden;
+   text-decoration: none;
    opacity: 0;
    z-index: 3;
 }
@@ -293,6 +294,7 @@ div.popup {
   /* border: 2px solid blue; */
   /* width: 30%; */
   position: relative;
+  text-decoration: none;
   /* transition: all 5s ease-in-out;*/
 
 }
@@ -311,6 +313,9 @@ div.popup > a.close {
   font-weight: bold;
   text-decoration: none;
   color: #333;
+}
+div.sky > div.popup-trigger > div.popup > p {
+  text-decoration: none;
 }
 
 
