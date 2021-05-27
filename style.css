@@ -4,6 +4,8 @@
     box-sizing: border-box;
     font-size: 30px;
  }
+
+
 .grid-container{
   height: 100vh;
   border: 5px solid blue; /*#14a76c;*/
@@ -17,7 +19,6 @@
   "footer footer footer footer";
   grid-template-rows: .5fr 2fr 2fr 2fr .5fr;
   grid-template-columns: 25% 1fr 1fr 25%;
-
   }
 
 .grid-item{
@@ -32,14 +33,14 @@
 .stats-container{
   display: grid;
   /* grid-template-columns: 10% 25% 25% 5% auto;*/
-    grid-template-columns: 1fr 1fr 1fr 1fr 50fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 30fr;
   /* grid-template-columns: 1fr 300px; */
   grid-template-rows: 20% 15% 15% 15% auto;
   /* margin-top: -15px; */
   /* margin-bottom: -50px; */
   grid-template-areas:
     "day day day day day day"
-    "water  water-level  coconuts coconuts-level . ."
+    "water  water-level  coconuts coconuts-level trolls trolls-level"
     "food   food-level   rope     rope-level     . ."
     "sanity sanity-level bamboo   bamboo-level   . .";
     /* background: salmon; */
@@ -47,6 +48,7 @@
       /* grid-template-columns: fit-content(40%) fit-content(40%) 1fr; */
   /* background: deepskyblue; */
 }
+
 .stats-container > div {
   padding: 0px 20px 10px 8px;
   font-size: 20px;
@@ -98,12 +100,23 @@ margin-left: 60px;
 }
 .stats-container > div.coconuts-level {
 grid-area: 2 / 4 / 3 / 5;
+margin-left: -27px;
 }
 .stats-container > div.rope-level {
 grid-area: 3 / 4 / 4 / 5;
+margin-left: -27px;
 }
 .stats-container > div.bamboo-level {
 grid-area: 4 / 4 / 5 / 5;
+margin-left: -27px;
+}
+.stats-container > div.trolls {
+grid-area: 2 / 5 / 3 / 6;
+}
+.stats-container > div.trolls-level {
+grid-area: 3 / 6 / 4 / 7;
+margin-left: -20px;
+/* margin-bottom: -5px; */
 }
 
 .sky{
@@ -125,33 +138,102 @@ grid-area: 4 / 4 / 5 / 5;
   display: grid;
   grid-template-columns: 1fr 1fr ;
   grid-gap: 5px;
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
 }
 
 .path > div {
   grid-column-start: 1;
   grid-column-end: 3;
-  border: solid green;
+  /* border: solid green; */
   padding: 8px;
 }
 .asideL{
   grid-area: asideL;
   }
 
+  html {
+    /* background:  url(../images/beach-day.png) no-repeat center center fixed; */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
 .main{
   grid-area: main;
   grid-area: 1 / 1 / 6 / 5;
   z-index: 1;
-  background-image: url(../images/beach-walk.jpg);  /*I want to squish his image!*/
-  background-size: 100%;
+  /* background-image: url(../images/beach-day.png) repeat-x top left;;  /*I want to squish his image! */
+  background:  url(../images/beach-day.png) no-repeat center center fixed;
+  /* background-size: 60%; */
   background-repeat: no-repeat;
   background-position: fixed;
   background-size: cover;
+  margin-top: -15%;
+  /* margin-bottom: 15%; */
+  margin-left: -10%;
+  /* margin-right: auto; */
+  /* margin-bottom:20px; */
   /* background-size: contain; */
-
-
+  padding-bottom: 40%;
   }
 
+
+  *{ margin: 0px; padding: 0px;}
+  html, body{
+    width: 100%
+    height: 100%
+    position:absolute;
+    overflow: hidden;;
+  }
+
+div.path{
+  margin: -100px;
+  /* overflow-y: hidden; */
+  padding-bottom: 100px;
+  /* margin-left: 50px; */
+  z-index: 40;
+
+
+}
+
+   div.path > div.walking{
+     background: url("https://phpcoder.tech/wp-content/uploads/2021/04/Cartoon.png")
+     no-repeat;
+     width: 185px;
+     height: 290px;
+
+     animation: walk 1.2s steps(8) infinite,
+     forward 5s linear infinite;
+     animation-play-state: paused;
+     visibility: hidden;
+
+     }
+     /* div.path > div.walking {
+       animation-play-state: paused;
+       visibility: hidden;
+     } */
+
+     @keyframes walk{
+     0%{
+     background-position: 0px;
+     }
+     100%{
+     /* background-position: -20px; */
+      background-position: -1472px;
+     }
+     }
+     @keyframes forward{
+     0%{
+     transform: translateX(-100px);
+     }
+     100%{
+     transform: translateX(1200px);
+
+     }
+     }
+
+/* #################################### */
 .asideR{
   grid-area: asideR;
   }
@@ -187,23 +269,17 @@ div.modal{
   /* The Modal (background) */
   .modal2 {
     visibility: visible;
-    /* display: none; /* Hidden by default */ */
+    /* display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 2; /* Sit on top */
-    /* left: 0; */
+    z-index: 2;
     /* left: 2fr auto; */
-    /* top: 45%; */
-    /* left: 45%;
-    right: 45%; */
     width: 50vw;
     max-width: 60%;
     border-radius: 4px;
     padding: 35px;
-    margin: 0 auto;
+    margin: 9% 29% auto;
     /* width: 75%; */
     height: auto;
-
-    top: 45%;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color*/
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -217,18 +293,10 @@ div.modal{
   div.modal2 > .model2-content{
     background-color: #fefefe;
     border: 1px solid #888;
+    font-size: 10px;
+    font-style: oblique;
   }
 
-  /* .header-flex{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    padding: 25px;
-    /* list-style: none; */
-    /* margin: 0; */
-    /* background: deepskyblue; */
-  }
 
    /* @media all and (max-width: 800px) {
     .stats {
@@ -249,7 +317,7 @@ div.modal{
 
 #water-button{
   visibility: visible;
-  padding: 100px;
+  padding: 10px;
   margin: 20px 0 0 0;
 }
 #food-button{
@@ -334,7 +402,7 @@ div.sky > div.rotating-modal {
   max-height: 100%;
   background: pink;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
-  z-index: 8;
+  z-index: 21;
 }
 
 div.sky > div.rotating-modal.closed {
@@ -403,7 +471,7 @@ div.sky > div.troll-modal {
   max-height: 100%;
   background: pink;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
-  z-index: 8;
+  z-index: 21;
 }
 
 /* div.sky > div.rotating-modal.closed {
