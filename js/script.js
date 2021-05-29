@@ -6,20 +6,20 @@ Man on an Island
 /* ======================
 CACHED DOM NODES
 =========================*/
-const menuEl = document.querySelector('div.asideL > aside.instructions > div.what-to-do-menu');
-const asidePEl = document.querySelector('div.asideL > aside.instructions > p');
+const menuEl = document.querySelector('div.right-corner > aside.instructions > div.what-to-do-menu');
+const asidePEl = document.querySelector('div.right-corner > aside.instructions > p');
 const modalButton = document.querySelector('div.modal > button.start-button');
 const modal = document.querySelector('div.modal');
 const mainEl = document.querySelector('.main');
 const imgEl = document.createElement('img');
 const modal2El = document.querySelector('div.modal2');
 const span = document.querySelector('span.close');
-const asideL = document.querySelector('.asideL');
+const rightCorner = document.querySelector('.right-corner');
 const asideR = document.querySelector('.asideR');
 const asideRPEl = document.querySelector('.asideR > p.food-intro');
 const asideRElement2 = document.querySelector('div.asideR > p.result');         //can prob delete
 const skyEl = document.querySelector('.sky');
-const keepSearchingButton = document.querySelector('div.asideL > aside.instructions > button')
+const keepSearchingButton = document.querySelector('div.right-corner > aside.instructions > button')
 const warningEl = document.querySelector('div.popup > p.content')
 const popupEl = document.querySelector('div.sky > div.popup-trigger')
 const drinkButtonEl = document.createElement('button');
@@ -46,6 +46,9 @@ const ropeEl = document.querySelector('div.header > div.rope-level');
 const bambooEl = document.querySelector('div.header > div.bamboo-level');
 const trollsEl = document.querySelector('div.header > div.trolls-level');
 const walking = document.querySelector('div.path > div.walking');
+// const fishEl = document.querySelector('div.asideR > div.fish');
+const background = document.querySelector('.grid-container > div.back')
+const bubble = document.querySelector('.bubble');
 
 /* ======================
 CREATE Spensor and Master Troll
@@ -212,14 +215,17 @@ const instructionsModal = () =>{
   walking.style.visibility = 'visible';
   dayEl.innerHTML = `Day: ${Spensor.day}`;
 }}
-//Displays asideL ("what should spensor do today")
-const displayAsideL = () => {
-  asideL.style.zIndex = '15';
+//Displays right-corner ("what should spensor do today")
+const displayRightCorner = () => {
+  rightCorner.style.zIndex = '15';
+  rightCorner.style.visibility = 'visible';
 }
-//Hides asideL ("what should spensor do today")
-const hideAsideL = () => {
+//Hides right-corner ("what should spensor do today")
+const hideRightCorner = () => {
   console.log("does 191 work")
-  asideL.style.zIndex = '0';
+  // rightCorner.style.zIndex = '0';
+  // asidePEl.style.zIndex = '0';
+  rightCorner.style.visibility = 'hidden';
 }
 //Displays asideR (hunting options)
 const displayAsideR = () => {
@@ -267,7 +273,7 @@ const hideAsideR = () => {
 //     console.log("should wait till i click the X on popup")
 //   }
 // }
-//creates main button contents of asideL ("What should spensor do today")
+//creates main button contents of right-corner ("What should spensor do today")
 contentWhatToDoToday = () => {
   let toDoButtons = [
     {text: 'Search for water', id: 'water-button'},
@@ -284,14 +290,14 @@ contentWhatToDoToday = () => {
 contentWhatToDoToday();
 // displays content What Should Spensor Do Today -gets called each day
 whatToDoToday = () => {
-  displayAsideL();
+  displayRightCorner();
   asidePEl.textContent = "What should Spensor do today?";
   showWhatToDoButtons();
 };
 //What should Spensor Do Next --FOOD  ################################################################### WHAT TO DO2
 whatToDo2 = () =>{
   if(Spensor.searchCount <= 3){
-    displayAsideL();
+    displayRightCorner();
     asidePEl.textContent = "What should Spensor do now?";
     // createWarningPopUp();                           //need to create an if statemet for just the first time
     aButtonEl.setAttribute('id', 'keep-searching-button');
@@ -306,7 +312,7 @@ whatToDo2 = () =>{
     asidePEl.appendChild(returnToCampButton);
     returnToCampButton.addEventListener('click', clickedReturnToCamp);
     console.log("should wait till click return to camp")
-    // displayAsideL();
+    // displayright-corner();
   } else if (Spensor.searchCount > 3){
     displayAsideR();
     console.log("It's pitch black! I hope Spensor can make it back")
@@ -319,7 +325,7 @@ whatToDo2 = () =>{
 //What should Spensor Do Next --DRINK  ################################################################### WHAT TO DO3
 whatToDo3 = () =>{
   if(Spensor.searchCount <= 3){
-    displayAsideL();
+    displayRightCorner();
     asidePEl.textContent = "What should Spensor do now?";
 
     keepSearchingForDrink.setAttribute('id', 'keep-searching-for-drink-button');
@@ -333,7 +339,7 @@ whatToDo3 = () =>{
     asidePEl.appendChild(returnToCampButton2);
     returnToCampButton2.addEventListener('click', clickedReturnToCamp);
     console.log("wait to click return to camp(drink)")
-    // displayAsideL();
+    // displayright-corner();
   } else if (Spensor.searchCount > 3){
     displayAsideR();
     console.log("It's pitch black! I hope Spensor can make it back")          //maybe dont do this right away
@@ -347,18 +353,19 @@ whatToDo3 = () =>{
 searchForWater = () => {
           //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
           //text on screen "you found x coconuts" while page shows spensor next to the item celebrating
-  // document.querySelector("#water-button").disabled = true;
   hideWhatToDoButtons();
-  hideAsideL();
+  hideRightCorner();
   displayAsideR();
-  // walking.style.animationPlayState = 'running';
-  // walking.style.visibility = 'visible';
+  // background.style.animationPlayState = 'running';
+  openBubble();
 
   if(Spensor.searchCount <= 2){
     asideRPEl.textContent = "Great choice! Happy Coconuts!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
   } else if (Spensor.searchCount === 3){
     asideRPEl.textContent = "It's getting darker, but there's gotta be coconuts somewhere.";
+
   } else if (Spensor.searchCount === 4){
+    background.style.backgroundImage = "url(../images/beach-dusk.png)";
     asideRPEl.textContent = "This is the last time Spensor can search before it's pitch black.\nI hope this is worth it!"
   } else {
     console.log("spensor has searched too many times. i shouldnt see this. 298")
@@ -367,8 +374,8 @@ searchForWater = () => {
 };
 
 waterSeachActivity = () => {
-  walking.style.animationPlayState = 'paused';
-  walking.style.visibility = 'hidden';
+  pauseWalker();
+  // walking.style.visibility = 'hidden';
   let waterArrayChoice = `"${waterArray[Math.floor(Math.random() * waterArray.length)]}"`;
   // let waterArrayChoice = waterArray[0];
   console.log(waterArrayChoice);
@@ -395,9 +402,10 @@ waterSeachActivity = () => {
 }
 
 foundCoconuts = () => {
-    displayAsideL();
+    displayRightCorner();
     // asideRPEl.textContent = "";
-    asidePEl.textContent = "What would you like to do with the coconut?";
+    asidePEl.textContent = "What would you like to do\nwith the coconut?";
+
 
     drinkButtonEl.setAttribute('id', 'drink-button');
     drinkButtonEl.innerHTML = "Drink";
@@ -415,14 +423,16 @@ foundCoconuts = () => {
 //###################################################################################################  Food Functions
 searchForFood = () => {
   hideWhatToDoButtons();
-  hideAsideL();
+  hideRightCorner();
   displayAsideR();
+  openBubble();
 
   if(Spensor.searchCount <= 2){
     asideRPEl.textContent = "Great choice! Happy Hunting!"; //new scene of Spensor walking across beach/forest in search, takes maybe 5 seconds?
   } else if (Spensor.searchCount === 3){
     asideRPEl.textContent = "It's getting darker, but Spensor is hungry.";
   } else if (Spensor.searchCount > 3){
+    background.style.backgroundImage = "url(../images/beach-dusk.png)";
     asideRPEl.textContent = "This is the last time Spensor can search before it's pitch black.\nI hope this is worth it!"
   } else {
     console.log("spensor has searched too many times. i shouldnt see this. 298")
@@ -431,8 +441,9 @@ searchForFood = () => {
 };
 
 foodSeachActivity = () => {
-  walking.style.animationPlayState = 'paused';
-  walking.style.visibility = 'hidden';
+  pauseWalker();
+  // walking.style.animationPlayState = 'paused';
+  // walking.style.visibility = 'hidden';
   let foodArrayChoice = `"${foodArray[Math.floor(Math.random() * foodArray.length)]}"`;
   asideRPEl.textContent = foodArrayChoice;
 
@@ -470,6 +481,7 @@ bugProbability = (num) => {
 fishProbability = (num) => {
   if(num <= .50){
     asideRPEl.textContent = "Spensor caught a fish!\nThis provides a full serving of food!";
+    // fishEl.style.visibility ='visible';
     Spensor.eat(1);
   } else {
     asideRPEl.textContent = "Shucks. Didn't find anything.";
@@ -491,7 +503,7 @@ battleTroll = () => {
   const troll = (trollArray[Math.floor(Math.random() * trollArray.length)]);
 
   if(Spensor.coconuts < 1){
-    hideAsideL();
+    hideRightCorner();
     trollModalGuts.innerHTML = "Spensor has no coconuts to defend himself :("
     // toggleClass(rotatingModal, 'closed');
     trollModal.style.visibility = 'visible';
@@ -608,11 +620,11 @@ makeItBackProbability = (num) => {
 nightTimeScene = () => {
 closeButton.addEventListener("click", function() {
   rotatingModal.style.visibility = 'hidden';
-  hideAsideL();
+  hideRightCorner();
   hideAsideR();
   asideRElement2.textContent = "";
   // mainEl.style.zIndex = '6';
-  mainEl.style.backgroundImage = "url('../images/beachNight.jpg')";
+  // background.style.backgroundImage = "url('../images/beach-night.png')";
   newDayButton();
   });
 };
@@ -633,7 +645,8 @@ newDay = () => {
   // openButton.style.zIndex = '5';
   Spensor.timePasses(1);
   // document.querySelector("#water-button").disabled = false;
-  mainEl.style.backgroundImage = "url(../images/beach-day.png)";
+  background.style.backgroundImage = "url(../images/beach-day.png)";
+  resetWalker();
   whatToDoToday();
   console.log("should go to conteent whea to do today")
 };
@@ -644,18 +657,34 @@ newDay = () => {
 // }
 
 clickedDrink= () => {
+  drink = () => {
+  // walking.style.visibility = 'visible';
   displayAsideR();                            //this command doesnt work on the 4th search
   asideRPEl.textContent = "Mmmmmmm";          //this command doesnt work on the 4th search
-  hideAsideL();
+  hideRightCorner();
   Spensor.drink(1);
   whatToDo3();
+  }
+  setTimeout(drink, 2 * 1000);
 }
 
 clickedSaveForLater= () => {
-  hideAsideL();
+  // walking.style.visibility = 'visible';
+  // walking.style.marginLeft = '40px';
+  hideRightCorner();
   Spensor.coconutInventory(1);
   console.log("line523")
   whatToDo3();
+}
+
+openBubble = () => {
+  bubble.style.visibility = 'visible';
+  bubble.textContent = "";
+
+  closeBubble = () => {
+    bubble.style.visibility = 'hidden';
+  }
+  setTimeout(closeBubble, 2.5 * 1000);
 }
 
 /* =============================
@@ -663,21 +692,39 @@ EVENT LISTENERS
 ============================= */
 
 
-
-activateWalker = (e) => {
-  e.preventDefault;
-  walking.style.visibility = 'visible';
-  walking.style.animationPlayState = 'running';
+//This restarts the walker
+resetWalker = () => {
+  // e.preventDefault;
   walking.classList.remove("walking");
   walking.offsetWidth = walking.offsetWidth;
   walking.classList.add("walking");
+  walking.style.animationPlayState = 'paused';
+
+  background.classList.remove("back");
+  backgroundoffsetWidth = walking.offsetWidth;
+  background.classList.add("back");
+  background.style.animationPlayState = 'paused';
+
 };
+//this starts walker
+activateWalker = () => {
+  walking.style.visibility = 'visible';
+  walking.style.animationPlayState = 'running';
+  background.style.animationPlayState = 'running';
+};
+//this stops walker
+pauseWalker = () => {
+  walking.style.animationPlayState = 'paused';
+  background.style.animationPlayState = 'paused';
+
+};
+
 document.querySelector('#water-button').addEventListener('click', searchForWater);
 document.querySelector('#water-button').addEventListener('click', activateWalker);
 keepSearchingForDrink.addEventListener('click', activateWalker);
 document.querySelector('#food-button').addEventListener('click', searchForFood);
 document.querySelector('#food-button').addEventListener('click', activateWalker);
-keepSearchingButton.addEventListener('click', activateWalker);
+aButtonEl.addEventListener('click', activateWalker);
 
 // document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
 // document.querySelector('#supplies-button').addEventListener('click',activateWalker);

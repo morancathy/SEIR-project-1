@@ -12,13 +12,14 @@
   padding: 5px;
   display: grid;
   grid-template-areas:
-  "header header header header"
+  "header header back right-corner"
   "asideL sky sky asideR"
   "asideL main main asideR"
   "asideL path path asideR"
   "footer footer footer footer";
   grid-template-rows: .5fr 2fr 2fr 2fr .5fr;
   grid-template-columns: 25% 1fr 1fr 25%;
+
   }
 
 .grid-item{
@@ -26,9 +27,43 @@
   padding: 20px;
   }
 
+  .grid-container > div.back{
+    grid-area: back;
+    grid-area: 1 / 1 / 6 / 5;
+    background:  url(../images/beach-day.png) repeat-x;
+    background-position: center center;
+    /* background-position: fixed; */
+    background-position: 0px 0px;
+    /* background-size: cover; */
+    background-size: 100vw 100%;
+    width: 5833px;
+    animation: goRight 60s linear infinite;
+    animation-play-state: paused;
+  }
+
+
+.right-corner{
+  grid-area: right-corner;
+  border: solid purple;
+  max-height: 125px;
+  /* width: 250px; */
+  /* max-width: 500px; */
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+  text-align: center;
+  padding-right: 5%;
+}
+
+div.right-corner > aside.instructions > p{
+  overflow-wrap: break-word;
+  /* font-size: 20px; */
+  font-size: 1.5vw;
+  width: fit-content;
+  block-size: fit-content;
+}
 .header{
   grid-area: header;
   grid-area: 1 / 1 / 2 / 4;
+  border: solid red;
   }
 .stats-container{
   display: grid;
@@ -151,6 +186,11 @@ margin-left: -20px;
   grid-area: asideL;
   }
 
+  /* .asideL > aside.instructions > p{
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    text-align: center;
+    } */
+
   html {
     /* background:  url(../images/beach-day.png) no-repeat center center fixed; */
     -webkit-background-size: cover;
@@ -164,19 +204,33 @@ margin-left: -20px;
   grid-area: 1 / 1 / 6 / 5;
   z-index: 1;
   /* background-image: url(../images/beach-day.png) repeat-x top left;;  /*I want to squish his image! */
-  background:  url(../images/beach-day.png) no-repeat center center fixed;
-  /* background-size: 60%; */
-  background-repeat: no-repeat;
-  background-position: fixed;
-  background-size: cover;
+  /* background:  url(../images/beach-day.png) repeat-x; */
+
+  background-position: center center;
+  background-position: 0px 0px;
+  background-size: 100vw 100%;
   margin-top: -15%;
-  /* margin-bottom: 15%; */
-  margin-left: -10%;
-  /* margin-right: auto; */
-  /* margin-bottom:20px; */
-  /* background-size: contain; */
   padding-bottom: 40%;
+  width: 5833px;
+  height: auto;
+    /* background-position: fixed; */
+    /* background-size: cover; */
+  /* margin-left: -10%; */
+
+  /* animation: goRight 60s linear infinite;
+  animation-play-state: paused; */
+  /* animation: none; */
+}
+
+@keyframes goRight{
+  0%{
+    transform: translate3d(0, 0, 0);
   }
+  100%{
+    transform: translate3d(-1692px, 0, 0);
+  }
+}
+
 
 
   *{ margin: 0px; padding: 0px;}
@@ -191,8 +245,10 @@ div.path{
   margin: -100px;
   /* overflow-y: hidden; */
   padding-bottom: 100px;
-  /* margin-left: 50px; */
+  margin-left: -3px;
+  margin-right: -2000px;
   z-index: 40;
+
 
 
 }
@@ -204,7 +260,7 @@ div.path{
      height: 290px;
 
      animation: walk 1.2s steps(8) infinite,
-     forward 5s linear infinite;
+     forward 7s linear infinite;
      animation-play-state: paused;
      visibility: hidden;
 
@@ -240,10 +296,12 @@ div.path{
 
 .footer{
   grid-area: footer;
+  border: solid black;
   }
 
 div.modal{
   visibility: hidden;
+  z-index: 50;
   width: 50vw;
   max-width: 400px;
   position: fixed;
@@ -257,6 +315,7 @@ div.modal{
   padding: 35px;
   box-shadow: 5px 2.5px 10px 0px rgba(0,0,0,0.3);
   text-align: center;
+
   /* transition: opacity 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94); */
   /* opacity: 0; */
   } /* 0, 1, 1*/
@@ -277,7 +336,7 @@ div.modal{
     max-width: 60%;
     border-radius: 4px;
     padding: 35px;
-    margin: 9% 29% auto;
+    margin: 29% 29% auto;
     /* width: 75%; */
     height: auto;
     overflow: auto; /* Enable scroll if needed */
@@ -303,13 +362,11 @@ div.modal{
       justify-content: space-around;
     }
   }
-
   @media all and (max-width: 600px) {
     .stats {
       flex-flow: column wrap;
       padding: 0;
     }
-
     .stats li:last-of-type a {
       border-bottom: none;
     }
@@ -317,22 +374,45 @@ div.modal{
 
 #water-button{
   visibility: visible;
+  /* width: 50px; */
+  font-size: 15px;
   padding: 10px;
-  margin: 20px 0 0 0;
+  margin: 25px 0 0 0;
 }
 #food-button{
   visibility: visible;
+  font-size: 15px;
   padding: 10px;
-  margin: 20px 0 0 0;
+  margin: 15px 0 0 0;
 }
 #supplies-button{
   visibility: visible;
+  font-size: 15px;
   padding: 10px;
-  margin: 20px 0 0 0;
+  margin: 15px 0 0 0;
+}
+#keep-searching-for-drink-button{
+  font-size: 15px;
+  padding: 10px;
+  margin: 15px 0 0 0;
+}
+
+#return-to-camp-button2{
+  font-size: 15px;
+  padding: 10px;
+  margin: 15px 0 0 0;
 }
 
 #drink-button{
-  /* visibility: hidden; */
+  font-size: 15px;
+  padding: 10px;
+  margin: 15px 0 0 0;
+}
+
+#save-for-later-button{
+  font-size: 15px;
+  padding: 10px;
+  margin: 15px 0 0 0;
 }
 
 .popup-trigger {
@@ -504,6 +584,39 @@ div.sky > div.troll-modal > button.troll-modal-button{
   font-size: 1rem;
 }
 
+/* Bubble Text */
+.bubble {
+    position: relative;
+/*     background: #57d4d0; */
+  background: #d4cc57;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 20px;
+    line-height: 120px;
+    box-shadow: 13px -15px 7px -1px #A3A3A3;
+    text-align: center;
+    width: 350px;
+    height: 220px;
+    border-radius: 10px;
+    /* padding: 0px; */
+    margin-left: 150px;
+    margin-top: -190px;
+    visibility: hidden;
+}
+.bubble:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-width: 18px 17px 0 0;
+    border-color: #d4cc57 transparent transparent transparent;
+    bottom: -18px;
+    left: 10%;
+    margin-left: -8.5px;
+
+  }
 
 
 /* .popup .content {
