@@ -36,7 +36,7 @@
     background-position: 0px 0px;
     /* background-size: cover; */
     background-size: 100vw 100%;
-    width: 5833px;
+    width: 6833px;
     animation: goRight 60s linear infinite;
     animation-play-state: paused;
   }
@@ -279,7 +279,7 @@ div.path{
       background-position: -1472px;
      }
      }
-     @keyframes forward{
+     /* @keyframes forward{
      0%{
      transform: translateX(-100px);
      }
@@ -287,7 +287,7 @@ div.path{
      transform: translateX(1200px);
 
      }
-     }
+     } */
 
 /* #################################### */
 .asideR{
@@ -400,7 +400,39 @@ div.modal{
 #return-to-camp-button2{
   font-size: 15px;
   padding: 10px;
-  margin: 15px 0 0 0;
+  margin: 15px 0 0 0;/* Bubble Text */
+.bubble {
+    position: relative;
+/*     background: #57d4d0; */
+  background: #d4cc57;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 20px;
+    line-height: 120px;
+    box-shadow: 13px -15px 7px -1px #A3A3A3;
+    text-align: center;
+    width: 350px;
+    height: 220px;
+    border-radius: 10px;
+    /* padding: 0px; */
+    margin-left: 150px;
+    margin-top: -190px;
+    visibility: hidden;
+}
+.bubble:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-width: 18px 17px 0 0;
+    border-color: #d4cc57 transparent transparent transparent;
+    bottom: -18px;
+    left: 10%;
+    margin-left: -8.5px;
+
+  }
 }
 
 #drink-button{
@@ -508,12 +540,12 @@ div.sky > div.rotating-modal > button.close-button {
   z-index: 4;
   top: 5%;
   /* needs to look OK with or without scrollbar */
-  right: 15px;
+  left: 15px;
   border: 0;
   background: none;
   color: purple;
   padding: 5px 10px;
-  font-size: 1rem;
+  font-size: 3rem;
 }
 
 .open-button {
@@ -584,6 +616,17 @@ div.sky > div.troll-modal > button.troll-modal-button{
   font-size: 1rem;
 }
 
+/*sky text*/
+.sky > h3.h3{
+  margin-left: 290px;
+  margin-right: -250px;
+  margin-top: -150px;
+  text-align: center;
+  z-index: 70;
+}
+
+
+
 /* Bubble Text */
 .bubble {
     position: relative;
@@ -591,12 +634,13 @@ div.sky > div.troll-modal > button.troll-modal-button{
   background: #d4cc57;
     color: #FFFFFF;
     font-family: Arial;
-    font-size: 20px;
-    line-height: 120px;
+    font-size: 25px;
+    line-height: 46px;
     box-shadow: 13px -15px 7px -1px #A3A3A3;
     text-align: center;
-    width: 350px;
-    height: 220px;
+
+    width: 300px;
+    /* height: 150px; */
     border-radius: 10px;
     /* padding: 0px; */
     margin-left: 150px;
