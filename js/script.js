@@ -49,6 +49,7 @@ const background = document.querySelector('.grid-container > div.back')
 const bubble = document.querySelector('.bubble');
 const skyH3 = document.querySelector('.sky > h3.h3')
 console.log(skyH3)
+const deathText = document.querySelector("div.sky > div.troll-modal > div.troll-modal-guts > p.p2");
 /* ======================
 CREATE Spensor and Master Troll
 =========================*/
@@ -73,6 +74,12 @@ class Hero {
   drinkDecrease(){
     this.water -= 1;
     waterEl.innerHTML = this.water;
+    if(this.water <= 0){
+      trollModalGuts.textContent = "";
+      deathText.textContent = 'SPENSOR DIED OF THIRST!!!!'
+      trollModal.style.visibility = 'visible';
+      trollButton.style.visibility = 'hidden';
+    }
   }
 
   eat(num){
@@ -82,15 +89,27 @@ class Hero {
   eatDecrease(){
     this.food = this.food - 1;
     foodEl.textContent = this.food;
+    if(this.food <= 0){
+      trollModalGuts.textContent = "";
+      deathText.textContent = 'SPENSOR DIED OF HUNGER!!!!'
+      trollModal.style.visibility = 'visible';
+      trollButton.style.visibility = 'hidden';
+    }
   }
 
   saneness(num){
     this.sanity -= num;
     sanityEl.innerHTML = this.sanity;
+    if(this.sanity <= 0){
+      trollModalGuts.textContent = "";
+      deathText.textContent = 'SPENSOR DIED!! DARN TROLLS KILLED HIM'
+      trollModal.style.visibility = 'visible';
+      trollButton.style.visibility = 'hidden';
+    }
   }
 
   coconutInventory(num){
-    this.coconuts = this.coconuts + num;
+    this.coconuts += num;
     if(this.coconuts >= 0){
       coconutsEl.innerHTML = this.coconuts;
     } else{
@@ -106,11 +125,10 @@ class Hero {
 
   searchPerDayCount(num){
     this.searchCount += num;
-
   }
 
   timePasses(num){
-    this.day = this.day + num;
+    this.day += num;
     this.updateDayCount();
     this.searchCount = 1;
   }
@@ -122,52 +140,42 @@ class Hero {
     this.drinkDecrease();
   }
 
-
-  digForBugs(){
-
-  }
-
-  fish(){
-
-  }
-
-  setTrap(){
-
-  }
-
-  buildShelter() {
-
-  }
-}
+};
 const Spensor = new Hero("Spensor", 5, 5, 5, 0, 0, 0, 1, 1, 0);
-
+// Spensor.coconuts = 12;
 class Enemy {
   constructor(name, health){
     this.name = name;
     this.health = health;
   }
-
   healthy(){
-
   }
 }
-const Master = new Enemy("Master", 5)
+const Master = new Enemy("Arthur Bernier", 5)
 
 class Critter extends Enemy{
   constructor(name, health){
     super(name, health);
   }
   healthy(){
-
   }
 }
-const Critter1 = new Critter("Critter1", 1);
-const Critter2 = new Critter("Critter2", 1);
-const Critter3 = new Critter("Critter3", 1);
-const Critter4 = new Critter("Critter4", 1);
-const Critter5 = new Critter("Critter5", 1);
-const trollArray = [Critter1, Critter2, Critter3, Critter4, Critter5];
-
+const Critter1 = new Critter("Sarah Moe", 1);
+const Critter2 = new Critter("Jamie McMorran", 1);
+const Critter3 = new Critter("Jason Hargrove", 1);
+const Critter4 = new Critter("Christopher Traylor", 1);
+const Critter5 = new Critter("John Malhinha", 1);
+const Critter6 = new Critter("Sachiyo Sugaya", 1);
+const Critter7 = new Critter("Yulia Penyevskaya", 1);
+const Critter8 = new Critter("Brayan Santos", 1);
+const Critter9 = new Critter("Amit Nema", 1);
+const Critter10 = new Critter("Luke Stocker", 1);
+const Critter11 = new Critter("Jason Chartier", 1);
+const Critter12 = new Critter("Jason Tighe", 1);
+const Critter13 = new Critter("Lilia Salas", 1);
+const Critter14 = new Critter("Frank Garcia", 1);
+const Critter15 = new Critter("Neet Khangura", 1);
+const trollArray = [Critter1, Critter2, Critter3, Critter4, Critter5, Critter6, Critter7, Critter8, Critter9, Critter10, Critter11, Critter12, Critter13, Critter14, Critter15];
 /* ======================
 GLOBAL VARS
 =========================*/
@@ -206,11 +214,6 @@ showWhatToDoButtons = () => {
   document.querySelector('#food-button').style.visibility = 'visible';
   document.querySelector('#supplies-button').style.visibility = 'visible';
 }
-//When start button is clicked
-// modalButton.addEventListener('click', (e) =>{  //if i push this in event listeners, it doesnt work. why?
-//   toggleClass(modal, 'open');
-//   instructionsModal();
-// })
 // opens instructions modal
 const instructionsModal = () =>{
   toggleClass(modal2El, 'open');
@@ -264,30 +267,29 @@ whatToDoToday = () => {
   showWhatToDoButtons();
 };
 //What should Spensor Do Next --FOOD  ################################################################### WHAT TO DO2
-whatToDo2 = () =>{
-  if(Spensor.searchCount <= 3){
-    displayRightCorner();
-    asidePEl.textContent = "What should Spensor do now?";
-    aButtonEl.setAttribute('id', 'keep-searching-button');
-    aButtonEl.textContent = "Keep Searching";
-    asidePEl.appendChild(aButtonEl);
-    aButtonEl.onclick = clickedKeepSearchingForFood;
-    console.log("should wait till click keepsearching")
-
-    returnToCampButton.setAttribute('id', 'return-to-camp-button');
-    returnToCampButton.innerHTML = "Return to Camp";
-    asidePEl.appendChild(returnToCampButton);
-    returnToCampButton.onclick = clickedReturnToCamp;
-    console.log("should wait till click return to camp")
-
-  } else if (Spensor.searchCount > 3){
-    displayAsideR();
-    console.log("It's pitch black! I hope Spensor can make it back")
-    clickedReturnToCamp();
-  } else {
-    console.log("broke...what to do 2..288")
-  }
-}
+// whatToDo2 = () =>{
+//   if(Spensor.searchCount <= 3){
+//     displayRightCorner();
+//     asidePEl.textContent = "What should Spensor do now?";
+//     aButtonEl.setAttribute('id', 'keep-searching-button');
+//     aButtonEl.textContent = "Keep Searching for Food";
+//     asidePEl.appendChild(aButtonEl);
+//     aButtonEl.onclick = clickedKeepSearchingForFood;
+//     console.log("should wait till click keepsearching")
+//
+//     returnToCampButton.setAttribute('id', 'return-to-camp-button');
+//     returnToCampButton.innerHTML = "Return to Camp";
+//     asidePEl.appendChild(returnToCampButton);
+//     returnToCampButton.onclick = clickedReturnToCamp;
+//     console.log("should wait till click return to camp")
+//
+//   } else if (Spensor.searchCount > 3){
+//     console.log("It's pitch black! I hope Spensor can make it back")
+//     clickedReturnToCamp();
+//   } else {
+//     console.log("broke...what to do 2..288")
+//   }
+// }
 
 //What should Spensor Do Next --DRINK  ################################################################### WHAT TO DO3
 
@@ -295,23 +297,28 @@ whatToDo2 = () =>{
 whatToDo3 = () =>{
   if(Spensor.searchCount <= 3){
     displayRightCorner();
-    displayAsideR();   //will soon get rid of this, this is for food
     asidePEl.textContent = "What should Spensor do now?";
 
     keepSearchingForDrink.setAttribute('id', 'keep-searching-for-drink-button');
-    keepSearchingForDrink.innerHTML = "Keep searching for coconuts";
+    keepSearchingForDrink.innerHTML = "Search for coconuts";
     asidePEl.appendChild(keepSearchingForDrink);
+    keepSearchingForDrink.onclick = clickedKeepSearchingForWater;
     console.log("wait to click search again for drink")
+
+    aButtonEl.setAttribute('id', 'keep-searching-button');
+    aButtonEl.innerHTML= "Search for Food";
+    asidePEl.appendChild(aButtonEl);
+    aButtonEl.onclick = clickedKeepSearchingForFood;
+    console.log("should wait till click keepsearching")
 
     returnToCampButton2.setAttribute('id', 'return-to-camp-button2');
     returnToCampButton2.innerHTML = "Return to Camp";
     asidePEl.appendChild(returnToCampButton2);
+    returnToCampButton2.onclick = clickedReturnToCamp;
     console.log("wait to click return to camp(drink)")
     // displayright-corner();
   } else if (Spensor.searchCount > 3){
-    displayAsideR();
     console.log("It's pitch black! I hope Spensor can make it back")          //maybe dont do this right away
-    // asideRElement2.textContent = "It's pitch black! I hope Spensor can make it back";
     clickedReturnToCamp();
   } else {
     console.log("broke...what to do 3..314")
@@ -324,8 +331,6 @@ searchForWater = () => {
           //text on screen "you found x coconuts" while page shows spensor next to the item celebrating
   hideWhatToDoButtons();
   hideRightCorner();
-  displayAsideR();
-  // background.style.animationPlayState = 'running';
   openBubble();
 
   if(Spensor.searchCount <= 2){
@@ -352,7 +357,6 @@ waterSeachActivity = () => {
   trollModal.style.visibility = 'visible';
 
   trollButton.onclick = function(){
-    // e.preventDefault();
     trollModal.style.visibility = 'hidden';
     waterSearchResult();
   }
@@ -361,10 +365,10 @@ waterSeachActivity = () => {
       console.log("found coconuts")
       foundCoconuts();
     } else if (waterArrayChoice === `"${waterArray[1]}"`) {
-        console.log("didnt find antyhing, does asideRPEL work?")
+        console.log("didnt find antyhing")
         whatToDo3();
     } else if (waterArrayChoice === `"${waterArray[2]}"`) {
-        console.log("did i make it to 370");
+        console.log("battle troll");
         battleTroll();
         // whatToDo3();
     } else {
@@ -378,8 +382,6 @@ waterSeachActivity = () => {
 
 foundCoconuts = () => {
     displayRightCorner();
-    // trollModal.style.visibility = 'hidden';
-    // asideRPEl.textContent = "";
     asidePEl.textContent = "What would you like to do\nwith the coconut?";
 
     drinkButtonEl.setAttribute('id', 'drink-button');
@@ -388,7 +390,7 @@ foundCoconuts = () => {
     drinkButtonEl.onclick = clickedDrink;
   console.log("um")
     saveButtonEl.setAttribute('id', 'save-for-later-button');
-    saveButtonEl.innerHTML = "Save for later";
+    saveButtonEl.innerHTML = "Save as a weapon against trolls";
     asidePEl.appendChild(saveButtonEl);
     saveButtonEl.onclick = clickedSaveForLater;
 }
@@ -399,7 +401,6 @@ foundCoconuts = () => {
 searchForFood = () => {
   hideWhatToDoButtons();
   hideRightCorner();
-  displayAsideR();
   openBubble();
   skyH3.style.zIndex = '17';
 
@@ -436,10 +437,9 @@ foodSeachActivity = () => {
     } else if (foodArrayChoice === `"${foodArray[2]}"`) {
       trapProbability(Math.random());
     } else if (foodArrayChoice === `"${foodArray[3]}"`) {
-      whatToDo2();
+      whatToDo3();
     } else if (foodArrayChoice === `"${foodArray[4]}"`) {
       battleTroll();
-      // whatToDo2();
     } else {
       console.log("something is wrong with code")
     }
@@ -458,7 +458,7 @@ bugProbability = (num) => {
   trollButton.onclick = function(){
     trollModal.style.visibility = 'hidden';
     // displayRightCorner();
-    whatToDo2();
+    whatToDo3();
   }
   // closeSky =() =>{
   //   trollModal.style.visibility = 'hidden';
@@ -481,7 +481,7 @@ fishProbability = (num) => {
   trollButton.onclick = function(){
     trollModal.style.visibility = 'hidden';
     // displayRightCorner();
-    whatToDo2();
+    whatToDo3();
   }
   // closeSky =() =>{
   //   trollModal.style.visibility = 'hidden';
@@ -502,12 +502,11 @@ trapProbability = (num) => {
   trollButton.onclick = function(){
     trollModal.style.visibility = 'hidden';
     // displayRightCorner();
-    whatToDo2();
+    whatToDo3();
   }
-
-
 };
-//###################################################################################################  TROLL Functions
+//##############################################################################  TROLL Functions
+// Battle Troll
 battleTroll = () => {
   const troll = (trollArray[Math.floor(Math.random() * trollArray.length)]);
 
@@ -516,61 +515,145 @@ battleTroll = () => {
     bubble.innerHTML = "I have no coconuts to defend myself!"
     openBubble();
 
-    timePass =() =>{
-      bubble.textContent = `"${troll.name} kicked me!"`;
+    trollID =() =>{
+      trollModalGuts.textContent = `"It's island troll ${troll.name}!"`
+      trollModal.style.visibility = 'visible';
+      trollButton.onclick = function(){
+        trollModal.style.visibility = 'hidden';
+        kickedMe();
+        setTimeout(loseSanityTime, 4 * 1000);
+      }
+    }
+    setTimeout(trollID, 3 * 1000);
+
+    kickedMe = () => {
+      bubble.innerHTML = `"${troll.name} kicked me!"`;
       openBubble();
     }
-    setTimeout(timePass, 3 * 1000);
 
     loseSanityTime = () => {
       trollModal.style.visibility = 'visible';
       trollModalGuts.textContent ="Spensor loses a level of sanity.";
       console.log("525")
-    }
-    setTimeout(loseSanityTime, 5 * 1000);
-
-    trollButton.onclick = function(){
-      trollModal.style.visibility = 'hidden';
-      whatToDo2();
-      // displayRightCorner();
-    }
-
-    Spensor.saneness(1);
-
-  } else if(Spensor.coconuts >= 1){
-      trollModalGuts.textContent = `It's ${troll.name}! Attack!"`
-      openTrollModal();
-
-      trollButton.onclick = function() {
-        console.log("491")
+      trollButton.onclick = function(){
         trollModal.style.visibility = 'hidden';
-      };
+        Spensor.saneness(1);
+        if(Spensor.sanity > 1){
+          whatToDo3();
+        }
+      }
+    }
+  } else if(Spensor.coconuts >= 1){
+      hideRightCorner();
+      bubble.innerHTML = textContent = `It's island troll ${troll.name}! Time to attack um'!"`
+      openBubble();
 
-      trollModalGuts.textContent = `Spensor threw a coconut at ${troll.name} and scared him off.\nPhew, that was close.`;
-      openTrollModal();
+      timePass2 =() =>{
+        trollModalGuts.textContent = `Spensor threw a coconut at ${troll.name} and scared um' off.\nPhew, that was close.`;
+        openTrollModal();
+      }
+      setTimeout(timePass2, 3 * 1000);
 
       trollButton.onclick = function() {
         console.log("524")
         trollModal.style.visibility = 'hidden';
-        whatToDo2();
-        // displayRightCorner();
+        Spensor.coconutInventory(-1);
+        Spensor.trolls();
+        trollCheck();
       };
-
-      Spensor.coconutInventory(-1);
-      Spensor.trolls();
-
   }else{
     console.log("coconut function to attack trolls is broken");
   }
-
-  if(Spensor.crittersDefeated >= 5){
-    masterTrollAttacks();
+}
+// Check Number of Trolls Defeated
+trollCheck = () => {
+  if(Spensor.crittersDefeated % 5 === 0){
+    hideRightCorner();
+    trollModalGuts.textContent = 'Time to battle the Master Troll!';
+    trollModal.style.visibility = 'visible';
+    trollButton.onclick = function(){
+        trollModal.style.visibility = 'hidden';
+        masterTrollAttacks();
+    }
+  } else {
+    whatToDo3();
   }
 }
-
+// Master Troll Attacks
 masterTrollAttacks = () => {
-  alert("Time to battle the Master Troll")
+  hideRightCorner();
+  trollModalGuts.textContent = `"I am the Master Troll of this island. You defeated 5 of my top trolls."`
+  trollModal.style.visibility = 'visible';
+
+  trollButton.onclick = function(){
+    trollModal.style.visibility = 'hidden';
+    trollOffer();
+  }
+
+  trollOffer = () => {
+    trollModalGuts.textContent = `"If you can defeat me, I'll let you have my rum."`
+    trollModal.style.visibility = 'visible';
+    trollButton.onclick = function(){
+        trollModal.style.visibility = 'hidden';
+        bubble.textContent = "I'll fight you! I want a mojito!"
+        openBubble()
+        setTimeout(battleProbability, 2 * 1000);
+    }
+  }
 };
+// Battle Probability ...based on # of coconuts
+battleProbability = () => {
+  let num = 0;
+  if(Spensor.coconuts > 5){
+    trollModalGuts.textContent = `Spensor has ${Spensor.coconuts} coconuts! He's prepared!`
+    num = 1;
+  }else if (Spensor.coconuts === 4){
+    trollModalGuts.textContent = `Spensor has ${Spensor.coconuts} coconuts! His chances are good!`
+    num = .75;
+  }else if (Spensor.coconuts === 3){
+    trollModalGuts.textContent = `Spensor only has ${Spensor.coconuts} coconuts! His chances aren't very good!`
+    num = .5;
+  }else if (Spensor.coconuts === 2){
+    trollModalGuts.textContent = `Spensor only has ${Spensor.coconuts} coconuts! His chances aren't very good!`
+    num = .25;
+  } else {
+    trollModalGuts.textContent = `Spensor only has ${Spensor.coconuts} coconut! He's done-zo!`
+    num = .01;
+  }
+  trollModal.style.visibility = 'visible';
+  trollButton.onclick = function(){
+    trollModal.style.visibility = 'hidden';
+    battleSuccess(num);
+  }
+}
+// Battle Result
+battleSuccess = (num) => {
+  trollModal.style.visibility = 'visible';
+  if((Math.random()) <= num){
+    trollModalGuts.textContent = "Spensor defeated the Master Troll! Now he can live out the rest of his days on this island in the Master Troll's den. Unlimted water, food and sanity! :) ";
+    trollButton.onclick = function(){
+      trollModal.style.visibility = 'hidden';
+      easyliving();
+    }
+    easyliving = () => {
+    trollModal.style.visibility = 'visible';
+    trollModalGuts.textContent = "Oh, and don't forget about the rum! YUM!"
+    trollButton.style.visibility = 'hidden';
+
+    setTimeout(theEnd, 2 * 1000);
+    }
+  }
+  else {
+    trollModalGuts.textContent = "DoH! The Master Troll defeated Spensor";
+    trollButton.onclick = function(){
+      trollModal.style.visibility = 'hidden';
+      Spensor.coconuts = 0;
+      Spensor.saneness();
+      console.log("make it to 643")
+      whatToDo3();
+    }
+  }
+}
 
 closeTrollModal = () => {
   trollModal.style.visibility = 'hidden';
@@ -578,8 +661,13 @@ closeTrollModal = () => {
 openTrollModal = () => {
   trollModal.style.visibility = 'visible';
 }
-
-//#####################################################################################  CLICKING Functions
+// The End!
+theEnd = () => {
+  bubble.innerHTML = textContent = `The End!"`
+  openBubble();
+    //insert pic of celbrating
+}
+//##############################################################################  CLICKING Functions
 // Clicked Keep Searching For Food
 clickedKeepSearchingForFood = () => {
   Spensor.searchPerDayCount(1);
@@ -597,13 +685,13 @@ clickedReturnToCamp = () => {
   probFunction = () =>{
     if(Spensor.searchCount === 3){
       console.log("searchcount 3")
-      bubble.textContent = "Time to return to camp...I hope I can find my way...";
+      bubble.textContent = "Time to return to camp...I hope I can find my way back...";
       openBubble();
       setTimeout(makeItBackProbability, 5*1000, .50);
     } else if(Spensor.searchCount === 4){
       console.log("searchcount 4")
-      background.style.backgroundImage = "url('../images/beach-night.png')";
-      bubble.textContent = "Yikes! It's pitch black!...I hope I can find my way...";
+      // background.style.backgroundImage = "url('../images/beach-night.png')";
+      bubble.textContent = "Yikes! It's pitch black!...I hope I can find my way back...";
       openBubble();
       setTimeout(makeItBackProbability, 5*1000, .25);
     } else if (Spensor.searchCount < 3){
@@ -615,11 +703,10 @@ clickedReturnToCamp = () => {
       console.log("510 return to camp prob doesnt work")
     }
   }
-  setTimeout(probFunction, 2 * 1000);
+  setTimeout(probFunction, 1 * 1000);
 };
 // calcaulate prob of making it back and showing results
 makeItBackProbability = (num) => {
-    hideAsideR();
     if((Math.random()) <= num){
       rotatingModalGuts.textContent = "He made it back to camp!\n Time to chill.";
       rotatingModal.style.visibility = 'visible';
@@ -627,8 +714,17 @@ makeItBackProbability = (num) => {
     } else{
       rotatingModalGuts.textContent = "Spensor tried making his way back but got lost :( \n He has to sleep on the road! Spensor loses a level of sanity! Oh no!";
       rotatingModal.style.visibility = 'visible';
-      Spensor.saneness(1);
       nightTimeScene();
+      if(Spensor.sanity <=1){
+        trollModalGuts.textContent = "";
+        deathText.textContent = 'SPENSOR DIED!! Too many nights away from camp killed him!'
+        trollModal.style.visibility = 'visible';
+        trollButton.style.visibility = 'hidden';
+      } else if(Spensor.sanity > 1) {
+        Spensor.saneness(1);
+      } else {
+        console.log("650 doesn work")
+      }
     }
 };
 //Shows night time scence
@@ -636,10 +732,8 @@ nightTimeScene = () => {
   closeButton.onclick = function () {
   rotatingModal.style.visibility = 'hidden';
   hideRightCorner();
-  hideAsideR();
-  asideRElement2.textContent = "";
   // mainEl.style.zIndex = '6';
-  background.style.backgroundImage = "url('../images/beach-night.png')";
+  // background.style.backgroundImage = "url('../images/beach-night.png')";
   newDayButton();
   };
 };
@@ -647,23 +741,19 @@ nightTimeScene = () => {
 newDayButton  = () => {
   document.querySelector('#open-button').style.visibility = 'visible';
   openButton.style.zIndex = '7';
-  openButton.onclick = function() {mineFunction()};
-  function mineFunction() {
+  openButton.onclick = function () {
     document.querySelector('#open-button').style.visibility = 'hidden';
     newDay();
   }
 };
-
-
 // New day
 newDay = () => {
   // openButton.style.zIndex = '5';
-  Spensor.timePasses(1);
-  // document.querySelector("#water-button").disabled = false;
   background.style.backgroundImage = "url(../images/beach-day.png)";
   resetWalker();
-  whatToDoToday();
   console.log("should go to conteent whea to do today")
+  Spensor.timePasses(1);
+  whatToDoToday();
 };
 //####################################################
 
@@ -672,10 +762,9 @@ newDay = () => {
 // }
 
 clickedDrink= () => {
-  bubble.textContent = "Mmmmmmm";          //this command doesnt work on the 4th search
+  bubble.textContent = "Mmmmmmm";
   openBubble();
   hideRightCorner();
-  hideAsideR();
   drink = () => {
     Spensor.drink(1);
     whatToDo3();
@@ -684,16 +773,18 @@ clickedDrink= () => {
 }
 
 clickedSaveForLater= () => {
-  dontDrink = () => {
+  // dontDrink = () => {
     hideRightCorner();
-    hideAsideR();
-    bubble.textContent = "I'll save this for them nasty looking trolls.";
+    bubble.textContent = "I'm saving this coconut for the sneaky island trolls.";
     openBubble();
     Spensor.coconutInventory(1);
     console.log("line523")
-    whatToDo3();
-  }
-  setTimeout(dontDrink, 1 * 1000);
+    openRightCorn = () =>{
+      whatToDo3();
+    }
+    setTimeout(openRightCorn, 3 * 1000);
+  // }
+  // setTimeout(dontDrink, 1 * 1000);
 }
 
 openBubble = () => {
@@ -733,13 +824,16 @@ pauseWalker = () => {
   background.style.animationPlayState = 'paused';
 };
 
-document.querySelector('#water-button').addEventListener('click', searchForWater);
-document.querySelector('#water-button').addEventListener('click', activateWalker);
-keepSearchingForDrink.onclick = activateWalker;
-document.querySelector('#food-button').addEventListener('click', searchForFood);
-document.querySelector('#food-button').addEventListener('click', activateWalker);
+const waterButton = document.querySelector('#water-button');
+waterButton.onclick = searchForWater;
+waterButton.addEventListener('click', activateWalker);
+// waterButton.onclick = activateWalker;
+const foodButton = document.querySelector('#food-button');
+foodButton.onclick = searchForFood;0
+foodButton.addEventListener('click', activateWalker);
+// foodButton.onclick = activateWalker;
 aButtonEl.onclick = activateWalker;
-
+keepSearchingForDrink.onclick = activateWalker;
 // document.querySelector('#supplies-button').addEventListener('click',searchForSupplies);
 // document.querySelector('#supplies-button').addEventListener('click',activateWalker);
 ///need to make a keep searching for supplies button
@@ -753,8 +847,8 @@ trollButton.onclick = function() {
   trollModal.style.visibility = 'hidden';
 };
 
-keepSearchingForDrink.onclick = clickedKeepSearchingForWater;
-returnToCampButton2.onclick = clickedReturnToCamp;
+
+
 
 
 
