@@ -9,29 +9,21 @@ const asidePEl = document.querySelector('div.right-corner > aside.instructions >
 const modalButton = document.querySelector('div.modal > button.start-button');
 const modal = document.querySelector('div.modal');
 const mainEl = document.querySelector('.main');
-const imgEl = document.createElement('img');
 const modal2El = document.querySelector('div.modal2');
 const span = document.querySelector('span.close');
 const rightCorner = document.querySelector('.right-corner');
-// const asideR = document.querySelector('.asideR');
-// const asideRPEl = document.querySelector('.asideR > p.food-intro');
-// const asideRElement2 = document.querySelector('div.asideR > p.result');         //can prob delete
-const skyEl = document.querySelector('.sky');
-
+const asideR = document.querySelector('.asideR');
 const keepSearchingButton = document.querySelector('div.right-corner > aside.instructions > button')
-const drinkButtonEl = document.createElement('button');
-const saveButtonEl = document.createElement('button');
-//variables for rotating modal2
+const openButton = document.querySelector("#open-button");
+//variables for Rotating modal2 and Troll Modal
 const rotatingModal = document.querySelector("div.sky > div.rotating-modal");
 const closeButton = document.querySelector("#close-button");
 const trollModal = document.querySelector("div.sky > div.troll-modal");
 const trollButton = document.querySelector("div.sky > div.troll-modal > button.troll-modal-button");
 const trollModalGuts = document.querySelector("div.sky > div.troll-modal > div.troll-modal-guts > p.p1");
-
-const coconutThing = document.querySelector('div.footer > div.coconut');
-const openButton = document.querySelector("#open-button");
+const deathText = document.querySelector("div.sky > div.troll-modal > div.troll-modal-guts > p.p2");
 const rotatingModalGuts = document.querySelector('div.sky > div.rotating-modal > div.rotating-modal-guts > p');
-const trollWalking = document.querySelector('.footer > div.troll');
+// elements to set Spensor's Daily Stats
 const dayEl = document.querySelector('div.header > div.day');
 const waterEl = document.querySelector('div.header > div.water-level');
 const foodEl = document.querySelector('div.header > div.food-level');
@@ -40,13 +32,14 @@ const coconutsEl = document.querySelector('div.header > div.coconuts-level');
 const ropeEl = document.querySelector('div.header > div.rope-level');
 const bambooEl = document.querySelector('div.header > div.bamboo-level');
 const trollsEl = document.querySelector('div.header > div.trolls-level');
+
 const walking = document.querySelector('div.path > div.walking');
 const fishEl = document.querySelector('div.asideL > div.fish');
 const background = document.querySelector('.grid-container > div.back')
 const bubble = document.querySelector('.bubble');
 const bubble2 = document.querySelector('.bubble2');
-const skyH3 = document.querySelector('.sky > h3.h3')
-const deathText = document.querySelector("div.sky > div.troll-modal > div.troll-modal-guts > p.p2");
+const coconutThing = document.querySelector('div.footer > div.coconut');
+const trollWalking = document.querySelector('.footer > div.troll');
 /* ======================
 CREATE Spensor and Master Troll
 =========================*/
@@ -75,7 +68,9 @@ class Hero {
       trollModalGuts.textContent = "";
       deathText.textContent = 'SPENSOR DIED OF THIRST!!!!'
       trollModal.style.visibility = 'visible';
-      trollButton.style.visibility = 'hidden';
+      // trollButton.style.visibility = 'hidden';
+      rightCorner.style.visibility = 'hidden';
+      createRestartButton();
     }
   }
   eat(num){
@@ -89,7 +84,9 @@ class Hero {
       trollModalGuts.textContent = "";
       deathText.textContent = 'SPENSOR DIED OF HUNGER!!!!'
       trollModal.style.visibility = 'visible';
-      trollButton.style.visibility = 'hidden';
+      rightCorner.style.visibility = 'hidden';
+      // trollButton.style.visibility = 'hidden';
+      createRestartButton();
     }
   }
 
@@ -100,7 +97,9 @@ class Hero {
       trollModalGuts.textContent = "";
       deathText.textContent = 'SPENSOR DIED!! DARN TROLLS KILLED HIM'
       trollModal.style.visibility = 'visible';
-      trollButton.style.visibility = 'hidden';
+      rightCorner.style.visibility = 'hidden';
+      // trollButton.style.visibility = 'hidden';
+      createRestartButton();
     }
   }
 
@@ -179,12 +178,15 @@ let coconuts = 1;
 let foodArray = ["Spensor found a nice rock. Let's see what we have under here...", "Ooou, a watering hole. Let's try to fish!",
 "Spensor heard a couple mongrolls last night. He think's it's best he set a trap.", "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
 "OH NO! A nasty troll!"];
-let waterArray = [`Sweet!\nFound a delicious, refreshing coconuts!`, "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
-"OH NO! A nasty troll!"];
+let waterArray = [`Sweet!\nFound a delicious, refreshing coconut!`, "Awww maaann. Spensor's been walking for hours and he's come up empty handed.",
+"OH NO! A nasty troll!", `Sweet!\nFound a delicious, refreshing coconut!`];
 const aEl = document.createElement('A');
 const returnToCampButton = document.createElement('button');
 const aButtonEl = document.createElement('button');
 const keepSearchingForDrink = document.createElement('button');
+const restartButton = document.createElement('button');
+const drinkButtonEl = document.createElement('button');
+const saveButtonEl = document.createElement('button');
 /* =============================
 FUNCTIONS
 ============================= */
@@ -206,9 +208,11 @@ showWhatToDoButtons = () => {
 }
 // opens instructions modal
 const instructionsModal = () =>{
-  toggleClass(modal2El, 'open');
+  modal2El.style.visibility = 'visible';
   span.onclick = function(){
-  modal2El.style.display = 'none';
+    modal2El.style.visibility = 'hidden';
+    modal.style.visibility = 'hidden';
+    modalButton.style.visibility = 'hidden';
   document.querySelector('.stats-container').style.visibility = 'visible';
   whatToDoToday();
   walking.style.visibility = 'visible';
@@ -281,6 +285,7 @@ whatToDo3 = () =>{
     console.log("wait to click return to camp(drink)")
   } else if (Spensor.searchCount > 3){
     console.log("It's pitch black! I hope Spensor can make it back")
+
     clickedReturnToCamp();
   } else {
     console.log("broke...what to do 3..314")
@@ -363,7 +368,7 @@ searchForFood = () => {
   hideWhatToDoButtons();
   hideRightCorner();
   openBubble();
-  skyH3.style.zIndex = '17';
+  // skyH3.style.zIndex = '17';
 
   if(Spensor.searchCount <= 2){
     bubble.textContent = "Great choice! A hunting I will go!";
@@ -624,6 +629,7 @@ openTrollModal = () => {
 theEnd = () => {
   bubble.innerHTML = textContent = `The End!"`
   openBubble();
+  createRestartButton();
     //insert pic of celbrating
 }
 // Clicking Function ################################################################################################  CLICKING Functions
@@ -681,7 +687,7 @@ clickedReturnToCamp = () => {
       setTimeout(makeItBackProbability, 5*1000, .50);
     } else if(Spensor.searchCount === 4){
       console.log("searchcount 4")
-      // background.style.backgroundImage = "url('../images/beach-night.png')";
+      background.style.backgroundImage = "url('../images/Game_Background_Dark.png')";
       bubble.textContent = "I have to head back to camp! I can't see a thing!...I hope I can find my way back...";
       openBubble();
       setTimeout(makeItBackProbability, 5*1000, .25);
@@ -715,6 +721,7 @@ makeItBackProbability = (num) => {
       deathText.textContent = 'SPENSOR DIED!! Too many nights away from camp killed him!'
       trollModal.style.visibility = 'visible';
       trollButton.style.visibility = 'hidden';
+      createRestartButton();
     } else if(Spensor.sanity > 1) {
       Spensor.saneness(1);
     } else {
@@ -727,7 +734,7 @@ nightTimeScene = () => {
   closeButton.onclick = function () {
   rotatingModal.style.visibility = 'hidden';
   hideRightCorner();
-  background.style.backgroundImage = "url('../images/Game_Background_Dark.png')";
+  // background.style.backgroundImage = "url('../images/Game_Background_Dark.png')";
   newDayButton();
   };
 };
@@ -824,14 +831,53 @@ trollButton.onclick = function() {
   trollModal.style.visibility = 'hidden';
 };
 
-
-//starts the game
-modalButton.addEventListener('click', (e) =>{
+// starts the game
+modalButton.onclick = function() {
   toggleClass(modal, 'open');
   instructionsModal();
-})
+}
 
+//restarts game
+restartStory = () => {
+  rotatingModal.style.visibility = 'hidden';
+  deathText.textContent = "";
+  trollModal.style.visibility = 'hidden';
+  modalButton.style.visibility = 'visible';
+  modal.style.visibility = 'visible';
+  waterEl.innerHTML = 5;
+  Spensor.water = 5;
+  foodEl.innerHTML = 5;
+  Spensor.food = 5;
+  sanityEl.innerHTML = 5;
+  Spensor.sanity = 5;
+  coconutsEl.innerHTML = 0;
+  Spensor.coconuts = 0;
+  trollsEl.innerHTML = 0;
+  Spensor.crittersDefeated = 0;
+  dayEl.innerHTML = 1;
+  Spensor.day = 1;
+  Spensor.searchCount = 1;
+  resetWalker();
+  background.style.backgroundImage = "url(../images/Game_Background_43.png)";
+  modalButton.onclick = function() {
+    modalButton.style.visibility = 'hidden';
+    modal.style.visibility = 'hidden';
+    instructionsModal();
+  }
+};
 
+//create restart button and what happens when you click it
+createRestartButton = () => {
+  restartButton.setAttribute('id', 'restart-button');
+  restartButton.innerHTML = "Restart Spensor's Story";
+  asideR.appendChild(restartButton);
+  restartButton.style.visibility = 'visible';
+  document.querySelector('.stats-container').style.visibility = 'hidden';
+  restartButton.onclick = function() {
+    restartButton.style.visibility = 'hidden';
+    restartStory();
+  }
+}
 
 
 

@@ -428,23 +428,24 @@ div.modal.open{
 
 /* Modal2 (instructions */
 .modal2 {
-  visibility: visible;
+  visibility: hidden;
   position: fixed; /* Stay in place */
   z-index: 2;
-  width: 50vw;
+  width: 60vw;
   max-width: 60%;
   border-radius: 4px;
   padding: 35px;
-  margin: 29% 29% auto;
+  margin: 19% 29% auto;
   height: auto;
+
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color*/
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-div.modal2.open{
+/* div.modal2.open{
   visibility: hidden;
-}
+} */
 
 div.modal2 > .model2-content{
   background-color: #fefefe;
@@ -454,7 +455,7 @@ div.modal2 > .model2-content{
 }
 
 span{
-  margin-left: 830px;
+  margin-left: 1000px;
   font-size: 40px;
   color: purple;
 }
@@ -508,6 +509,13 @@ span{
   font-size: 15px;
   padding: 10px;
   margin: 15px 0 0 0;
+}
+
+#restart-button{
+  font-size: 15px;
+  padding: 10px;
+  margin: 15px 0 0 0;
+  visibility: 'hidden';
 }
 
 /* Rotating Modal */
@@ -665,6 +673,14 @@ div.sky > div.troll-modal > button.troll-modal-button{
     left: 10%;
     margin-left: -8.5px;
   }
+
+.asideR {
+  grid-area: asideR;
+  grid-area: 4 / 4 / 5 / 5;
+  margin-top: 300px;
+  margin-left: 300px;
+  position: absolute;
+}
 
 
   /* @media all and (max-width: 800px) {
