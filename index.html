@@ -10,10 +10,10 @@
   </head>
       <!-- Grid Container -->
   <body class="grid-container">
+    <!-- Back - Background -->
     <div class="grid item back">
     </div>
-
-      <!-- Header - Spensor Stats -->
+    <!-- Header - Spensor Stats -->
     <div class="grid-item header stats-container">
         <div class="stats">Spensor's Daily Stats</div>
         <div class="day">Day: 1</div>
@@ -24,118 +24,110 @@
         <div class="food-level">5</div>
         <div class="sanity-level">5</div>
         <div class="coconuts">Coconuts:</div>
-        <div class="bamboo">Bamboo:</div>
-        <div class="rope">Rope:</div>
+        <div class="bamboo"></div>
+        <div class="rope"></div>
         <div class="coconuts-level">0</div>
-        <div class="rope-level">0</div>
-        <div class="bamboo-level">0</div>
+        <div class="rope-level"></div>
+        <div class="bamboo-level"></div>
         <div class="trolls">Trolls Defeated:</div>
         <div class="trolls-level">0</div>
-      </div>
-      <!-- Nav section -->                        <!-- where will I/will I need this -->
-      <button id="open-button" class="open-button" onclick="event.stopPropagation()">New Day</button>
-
-      <div class="grid-item right-corner">
-        <aside class="instructions">
-          <p class"asideP2"></p>
-          <p></p>
-          <div class="what-to-do-menu2"></div>
-          <div class="what-to-do-menu"></div>
-
+    </div>
+    <!-- Open Button for New Day -->
+    <button id="open-button" class="open-button" onclick="event.stopPropagation()">New Day</button>
+    <!-- Right Corner ..What to Do Options -->
+    <div class="grid-item right-corner">
+      <aside class="instructions">
+        <p class"asideP2"></p>
+        <p></p>
+        <div class="what-to-do-menu2"></div>
+        <div class="what-to-do-menu"></div>
         </aside>
-      </div>
-
-      <!-- AsideL - Instructions Section-->
-      <div class="grid-item asideL">
-        <!-- <aside class="instructions">
-          <p class"asideP2"></p>
-          <div
-          class="what-to-do-menu2"></div>
-          <div class="what-to-do-menu"></div>
-
-        </aside> -->
-      </div>
-      <!-- Sky -->
-      <div class="grid-item sky">
-        <!-- 1st warning popup -->
-        <h3 class="h3">Today is the day of the reconing. Like people always though.</h3>
-        <!-- Rotating Modal New-Day-->
-        <div class="rotating-modal">
-          <button class="close-button rotating-button" id="close-button" onclick="event.stopPropagation()">x
-          </button>
-          <div class="rotating-modal-guts">
-            <p></p>
-          </div>
+    </div>
+    <!-- AsideL Fish Image-->
+    <div class="grid-item asideL">
+        <div class="fish">
         </div>
-        <!-- Troll Modal-->
-        <div class="troll-modal">
-          <button class="troll-modal-button">x
-          </button>
-          <div class="troll-modal-guts">
-            <p class='p1'></p>
-            <p class='p2'></p>
-          </div>
+    </div>
+    <!-- Sky -->
+    <div class="grid-item sky">
+      <!-- 1st warning popup -->
+      <h3 class="h3"></h3>
+      <!-- Rotating Modal New-Day-->
+      <div class="rotating-modal">
+        <button class="close-button rotating-button" id="close-button" onclick="event.stopPropagation()">x
+        </button>
+      <div class="rotating-modal-guts">
+          <p></p>
+      </div>
+      </div>
+      <!-- Troll Modal-->
+      <div class="troll-modal">
+        <button class="troll-modal-button">x
+        </button>
+        <div class="troll-modal-guts">
+          <p class='p1'></p>
+          <p class='p2'></p>
         </div>
       </div>
-      <!-- Main - Main Scene and animation-->
-      <div class="grid-item main">
-        <main class="welcome-page">
-          <!-- Modal - Welcome Page -->
-          <div class="modal open">
-            <h2>Welcome to</h2>
-            <h2>Man on an Island</h2>
-            <button class="start-button">Start</button>
-          </div>
-          <div class="modal2 open">
-            <div class="model2-content">
-              <span class="close">X</span>
-              <h2>Instructions</h2>
-              <p>Spensor is trapped on an island for the next 27 days.</p>
-              <!-- <p>Let's follow Spensor as he tries to survive.</p> -->
-              <p>If his water, food or sanity levels reach 0...he dies!</p>
+    </div>
+    <!-- Main Modals-->
+    <div class="grid-item main">
+      <main class="welcome-page">
+        <!-- Modal - Welcome Page -->
+        <div class="modal open">
+          <h2>Welcome to</h2>
+          <h2>Man on an Island</h2>
+          <button class="start-button">Start</button>
+        </div>
+        <!-- Modal - Instructions -->
+        <div class="modal2 open">
+          <div class="model2-content">
+            <span class="close">X</span>
+            <h2>Spensor is trapped on an island for 21 days.</h2>
+              <p>If his water, food or sanity levels reach 0...Spensor dies!</p>
               <p>Each passing day, he looses a water and food level.</p>
-              <p>Each night Spensor sleeps away from camp, he looses a sanity level.</p>
-              <p>Spensor is allowed 4 searches per day. The more he searches, the farther he gets away from camp.</p>
-              <p>Each search can result in finding food, coconuts, nothing, or nasty island trolls!</p>
-              <p>A coconut can be used to replenish a water level or used to defend against island trolls.</p>
-              <p>If Spensor has no coconuts when attacked, he starts loosing his sanity.</p>
-              <p>If Spensor defeats 5 trolls, the Master Troll gets angry and attacks!</p>
-              <p>5 coconuts are needed to defeat the Master Troll. Spensor can attempt with less, but the chances are slim.</p>
-            </div>
+            <h3>Daily Searches</h3>
+              <p>Spensor is allowed 4 searches per day.</p>
+              <p>Each search results in finding food, coconuts, nothing, or nasty island trolls!</p>
+              <p>The more he searches, the farther he gets away from camp.</p>
+              <p>If Spensor can't find his way back to camp, he looses a sanity level.</p>
+            <h3>Trolls</h3>
+              <p>Beware of trolls, they can take your sanity!</p>
+              <p>If Spensor defeats 5 trolls, the Master Troll appears and Spensor has a chance to take his riches!</p>
+              <p>5 coconuts are needed to defeat the Master Troll. Spensor can attempt with less, but chances are slim.</p>
           </div>
-
+        </div>
           <div class="beachwalk">
             <p></p>
             <p></p>
           </div>
-
-
-
-
-
         </main>
-      </div>
-      <div class=" grid-item path">
+    </div>
+    <!-- Path-->
+      <div class="grid-item path">
         <div class="walking">
           <div class="bubble">
             <p>
             </p>
           </div>
+          <div class="bubble2">
+            <p></p>
         </div>
-
-        <!-- <div></div> -->
       </div>
+      <!-- AsideR -->
       <div class="grid-item asideR">
-        <p class="food-intro"></p>
         <p class="result"></p>
       </div>
-
-      <div class="grid-item footer">Footer
-        <!-- Footer Section-->
-        <footer class="footer2">                 <!-- will I need this -->
+      <!-- Footer Section-->
+      <div class="grid-item footer">
+        <div class="coconut">
+        </div>
+        <div class="troll">
+        </div>
+        <footer class="footer2">
+                   <!-- will I need this -->
           <div class="footer-item"></div>
         </footer>
       </div>
-
   </body>
 </html>
