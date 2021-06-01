@@ -294,6 +294,23 @@ div.path > div.walking{
   grid-area: 5 / 4 / 6 / 5;
 }
 
+.footer > div.bugs{
+  background: url("../images/Bugs.png") no-repeat;
+  padding: 100px;
+  margin-top: -310px;
+  margin-left: 350px;
+  width: 400px;
+  height: 250px;
+  visibility: hidden;
+}
+
+.footer > div.dead{
+  background: url("../images/SpensorDown.png") no-repeat;
+  width: 400px;
+  height: 130px;
+  visibility: hidden;
+}
+
 .footer > div.coconut {
   /* grid-area: footer;
   grid-area: 5 / 4 / 6 / 5; */
@@ -351,7 +368,7 @@ div.path > div.walking{
     /* position: relative; */
     position: absolute;
     background: #d4cc57;
-
+    padding: 10px;
     color: black;
     font-family: Arial;
     font-size: 30px;

@@ -40,6 +40,8 @@ const bubble = document.querySelector('.bubble');
 const bubble2 = document.querySelector('.bubble2');
 const coconutThing = document.querySelector('div.footer > div.coconut');
 const trollWalking = document.querySelector('.footer > div.troll');
+const bugs = document.querySelector('.footer > div.bugs');
+const dead = document.querySelector('.footer > div.dead');
 /* ======================
 CREATE Spensor and Master Troll
 =========================*/
@@ -67,8 +69,9 @@ class Hero {
     if(this.water <= 0){
       trollModalGuts.textContent = "";
       deathText.textContent = 'SPENSOR DIED OF THIRST!!!!'
+      walking.style.visibility = 'hidden';
+      dead.style.visibility = 'visible';
       trollModal.style.visibility = 'visible';
-      // trollButton.style.visibility = 'hidden';
       rightCorner.style.visibility = 'hidden';
       createRestartButton();
     }
@@ -83,8 +86,11 @@ class Hero {
     if(this.food <= 0){
       trollModalGuts.textContent = "";
       deathText.textContent = 'SPENSOR DIED OF HUNGER!!!!'
-      trollModal.style.visibility = 'visible';
       rightCorner.style.visibility = 'hidden';
+      walking.style.visibility = 'hidden';
+      dead.style.visibility = 'visible';
+      trollModal.style.visibility = 'visible';
+
       // trollButton.style.visibility = 'hidden';
       createRestartButton();
     }
@@ -96,6 +102,8 @@ class Hero {
     if(this.sanity <= 0){
       trollModalGuts.textContent = "";
       deathText.textContent = 'SPENSOR DIED!! DARN TROLLS KILLED HIM'
+      walking.style.visibility = 'hidden';
+      dead.style.visibility = 'visible';
       trollModal.style.visibility = 'visible';
       rightCorner.style.visibility = 'hidden';
       // trollButton.style.visibility = 'hidden';
@@ -136,7 +144,7 @@ class Hero {
   }
 
 };
-const Spensor = new Hero("Spensor", 5, 5, 5, 0, 0, 0, 1, 1, 0);
+const Spensor = new Hero("Spensor", 5, 5, 5, 0, 0, 0, 1, 1, 4);
 
 class Enemy {
   constructor(name, health){
@@ -417,12 +425,14 @@ bugProbability = (num) => {
   trollModal.style.visibility = 'visible';
   if(num <= .75){
     trollModalGuts.textContent = "Score!\nThis handfull of bugs and worms provides a half serving of food!";
+    bugs.style.visibility = 'visible';
     Spensor.eat(.5);
   } else {
     trollModalGuts.textContent = "Shucks. Didn't find anything.";
   }
   trollButton.onclick = function(){
     trollModal.style.visibility = 'hidden';
+    bugs.style.visibility = 'hidden';
     whatToDo3();
   }
 };
@@ -719,8 +729,10 @@ makeItBackProbability = (num) => {
     if(Spensor.sanity <=1){
       trollModalGuts.textContent = "";
       deathText.textContent = 'SPENSOR DIED!! Too many nights away from camp killed him!'
+      walking.style.visibility = 'hidden';
+      dead.style.visibility = 'visible';
       trollModal.style.visibility = 'visible';
-      trollButton.style.visibility = 'hidden';
+      // trollButton.style.visibility = 'hidden';
       createRestartButton();
     } else if(Spensor.sanity > 1) {
       Spensor.saneness(1);
@@ -840,6 +852,7 @@ modalButton.onclick = function() {
 //restarts game
 restartStory = () => {
   rotatingModal.style.visibility = 'hidden';
+  dead.style.visibility = 'hidden';
   deathText.textContent = "";
   trollModal.style.visibility = 'hidden';
   modalButton.style.visibility = 'visible';
