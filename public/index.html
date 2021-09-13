@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Man on an Island</title>
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
+
+  </head>
+      <!-- Grid Container -->
+  <body class="grid-container">
+    <!-- Back - Background -->
+    <div class="grid item back">
+    </div>
+    <!-- Header - Spencer Stats -->
+    <div class="grid-item header stats-container">
+        <div class="stats">Spencer's Daily Stats</div>
+        <div class="day"></div>
+        <div class="water">Water:</div>
+        <div class="food">Food:</div>
+        <div class="sanity">Sanity:</div>
+        <div class="water-level">5</div>
+        <div class="food-level">5</div>
+        <div class="sanity-level">5</div>
+        <div class="coconuts">Coconuts:</div>
+        <div class="bamboo"></div>
+        <div class="rope"></div>
+        <div class="coconuts-level">0</div>
+        <div class="rope-level"></div>
+        <div class="bamboo-level"></div>
+        <div class="trolls">Trolls Defeated:</div>
+        <div class="trolls-level">0</div>
+    </div>
+    <!-- Open Button for New Day -->
+    <button id="open-button" class="open-button" onclick="event.stopPropagation()">New Day</button>
+    <!-- Right Corner ..What to Do Options -->
+    <div class="grid-item right-corner">
+      <aside class="instructions">
+        <p class"asideP2"></p>
+        <p></p>
+        <div class="what-to-do-menu2"></div>
+        <div class="what-to-do-menu"></div>
+        </aside>
+    </div>
+    <!-- AsideL Fish Image-->
+    <div class="grid-item asideL">
+        <div class="fish">
+        </div>
+    </div>
+    <!-- Sky -->
+    <div class="grid-item sky">
+      <!-- 1st warning popup -->
+      <h3 class="h3"></h3>
+      <!-- Rotating Modal New-Day-->
+      <div class="rotating-modal">
+        <button class="close-button rotating-button" id="close-button" onclick="event.stopPropagation()">x
+        </button>
+      <div class="rotating-modal-guts">
+          <p></p>
+      </div>
+      </div>
+      <!-- Troll Modal-->
+      <div class="troll-modal">
+        <button class="troll-modal-button">x
+        </button>
+        <div class="troll-modal-guts">
+          <p class='p1'></p>
+          <p class='p2'></p>
+        </div>
+      </div>
+    </div>
+    <!-- Main Modals-->
+    <div class="grid-item main">
+      <main class="welcome-page">
+        <!-- Modal - Welcome Page -->
+        <div class="modal open">
+          <h2>Welcome to</h2>
+          <h2>Man on an Island</h2>
+          <button class="start-button">Start</button>
+        </div>
+        <!-- Modal - Instructions -->
+        <div class="modal2">
+        <!-- <div class="modal2 open"> -->
+          <div class="model2-content">
+            <span class="close">X</span>
+            <h2>Spencer is trapped on an island for 21 days.</h2>
+              <p class="top1">If his water, food or sanity levels reach 0...Spencer dies!</p>
+              <p class="top2">Each passing day, he looses a water and food level.</p>
+            <h3 class="trolls"></h3>
+              <p class="p1"></p>
+              <p class="p2"></p>
+              <p class="p3"></p>
+              <p class="p4"></p>
+          </div>
+        </div>
+          <div class="beachwalk">
+            <p></p>
+            <p></p>
+          </div>
+        </main>
+    </div>
+    <!-- Path-->
+      <div class="grid-item path">      <!--I relize this has no closing tab. When I noticed inserted one, it disrupted my background. So I will leave it off for now :)  -->
+        <div class="walking">
+          <div class="bubble">
+            <p>
+            </p>
+          </div>
+          <div class="bubble2">
+            <p></p>
+        </div>
+      </div>
+      <!-- AsideR -->
+      <div class="grid-item asideR">
+        <p class="result"></p>
+      </div>
+      <!-- Footer Section-->
+      <div class="grid-item footer">
+        <div class="coconut">
+        </div>
+        <div class="troll">
+        </div>
+        <div class="bugs">
+        </div>
+        <div class="dead">
+        </div>
+      </div>
+
+      <script defer charset=""src="./js/script.js"></script>
+  </body>
+</html>
