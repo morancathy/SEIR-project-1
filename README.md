@@ -1,6 +1,6 @@
 # Man on an Island    
 
-####Items to improve upon/ to do's:####
+#### Items to improve upon/ to do's:
 - ~~include images~~
 - ~~update README to include user stories, developer stories, technologies used, brief overview~~
 - change all functions to const
@@ -17,12 +17,12 @@
   - do I call this project a story or a game? or a story-game?
 - deploy to Heroku
 
-####Brief overview of project to place inside my portfolio:####
+#### Brief overview of project to place inside my portfolio:
 Man on an Island is a choose your own adventure story-game in which the user helps Spensor, who is stuck on an island, survive for 21 days.
 The user interactively decides what Spensor does each day to maintain his levels of food, water and sanity, in order to survive. (insert link to game)
 (Since I have a whole instruction/rules portion user must read before game starts, I feel writing more here would be redundant)
 
-####Why I included this in my portfolio####
+#### Why I included this in my portfolio:
 As my very first project in the coding world and being introduced to JavaScript just 4 weeks prior to starting this project, this was an important piece of my learning journey in software development.
 
 Though the visuals aren't my strong point, the logic I used behind it was. This project demonstrates my ability to include vast amounts of logic in numerous ways to manipulate the DOM. This includes ability to pause, start, continue and end a user's interaction with the site. Hiding modals, button events, timing text bubbles, etc. all played a part.
@@ -38,7 +38,7 @@ I deliberately refrained from updating the overall code, as viewing this project
 Man on an Island is a choose your own adventure story-game in which the user helps Spensor, who is stuck on an island, survive for 21 days.
 The user interactively decides what Spensor does each day to maintain his levels of food, water and sanity, in order to survive.
 
-###As a user I can###
+### As a user I can
 - interact with the game by choosing what Spensor does each day.
 - win by helping Spensor survive on the island for 21 days (by maintaining food, water and sanity levels).
 - loose if the choices I make results in Sensor dying (by not maintaining food, water and sanity levels).
@@ -46,7 +46,7 @@ The user interactively decides what Spensor does each day to maintain his levels
 - always view food, water, sanity and coconut levels.
 - play again if Spensor dies.
 
-###As a developer I###
+### As a developer I
 - built an interactive browser story/game that manipulates the DOM.
 - manipulate the DOM by providing buttons and modals that must be interacted with in order for the story to continue.
 - implemented a lot of logic to determine outcomes based on the user's choices. This provides a non-random experience and no option to 'cheat' the game.
@@ -57,7 +57,7 @@ The user interactively decides what Spensor does each day to maintain his levels
 - include animations to help stimulate user experience.
 - manipulate modals, text bubbles and buttons. These items must be interacted with in order for game to continue. Results of such interactions will determine story's outcomes.
 
-##Instructions##
+## Instructions
 Spensor is stuck on the Island of Turbull. Similar to Naked and Afraid, spensor will wonder the island trying to survive for 21 days.
 
 Spensor will have 4 levels to maintain: food, water, sanity and coconuts.
@@ -83,7 +83,7 @@ Daily Searches
 -Spensor is allowed 4 searched per day. The farther he searches, the greater chance he has of getting lost. If he sleeps away from camp, he looses a level of sanity.
 -Each day that passes, Spensor looses a food and water level.
 
-###Technologies Used###
-JavaScript/
-CSS/
+### Technologies Used
+JavaScript\
+CSS\
 HTML
