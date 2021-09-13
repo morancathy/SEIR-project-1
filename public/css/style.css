@@ -494,12 +494,7 @@ div.modal2 > div.model2-content > h3.trolls{
   padding: 10px;
   margin: 15px 0 0 0;
 }
-/* #supplies-button{
-  visibility: visible;
-  font-size: 15px;
-  padding: 10px;
-  margin: 15px 0 0 0;
-} */
+
 #keep-searching-for-drink-button{
   font-size: 15px;
   padding: 10px;
@@ -678,6 +673,7 @@ div.sky > div.troll-modal > button.troll-modal-button{
     /* padding: 0px; */
     margin-left: 150px;
     margin-top: -90px;
+
     visibility: hidden;
 }
 .bubble:after {

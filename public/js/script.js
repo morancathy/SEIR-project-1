@@ -8,12 +8,10 @@ const menuEl = document.querySelector('div.right-corner > aside.instructions > d
 const asidePEl = document.querySelector('div.right-corner > aside.instructions > p');
 const modalButton = document.querySelector('div.modal > button.start-button');
 const modal = document.querySelector('div.modal');
-const mainEl = document.querySelector('.main');
 const modal2El = document.querySelector('div.modal2');
 const span = document.querySelector('span.close');
 const rightCorner = document.querySelector('.right-corner');
 const asideR = document.querySelector('.asideR');
-const keepSearchingButton = document.querySelector('div.right-corner > aside.instructions > button')
 const openButton = document.querySelector("#open-button");
 //variables for Rotating modal2 and Troll Modal
 const rotatingModal = document.querySelector("div.sky > div.rotating-modal");
@@ -29,8 +27,6 @@ const waterEl = document.querySelector('div.header > div.water-level');
 const foodEl = document.querySelector('div.header > div.food-level');
 const sanityEl = document.querySelector('div.header > div.sanity-level');
 const coconutsEl = document.querySelector('div.header > div.coconuts-level');
-const ropeEl = document.querySelector('div.header > div.rope-level');
-const bambooEl = document.querySelector('div.header > div.bamboo-level');
 const trollsEl = document.querySelector('div.header > div.trolls-level');
 
 const walking = document.querySelector('div.path > div.walking');
@@ -191,13 +187,13 @@ const toggleClass = (node, className) => {
   node.classList.toggle(className)
 }
 //hides buttons
-hideWhatToDoButtons = () => {
+const hideWhatToDoButtons = () => {
   document.querySelector('#water-button').style.visibility = 'hidden';
   document.querySelector('#food-button').style.visibility = 'hidden';
   // document.querySelector('#supplies-button').style.visibility = 'hidden';
 }
 //show buttons
-showWhatToDoButtons = () => {
+const showWhatToDoButtons = () => {
   document.querySelector('#water-button').style.visibility = 'visible';
   document.querySelector('#food-button').style.visibility = 'visible';
   // document.querySelector('#supplies-button').style.visibility = 'visible';
@@ -221,14 +217,14 @@ const instructionsModal = () =>{
   }
 }
 //sets text
-setModal2Text = () =>{
+const setModal2Text = () =>{
   document.querySelector('div.modal2 > div.model2-content > h3.trolls').textContent = "Daily Searches";
   document.querySelector('div.modal2 > div.model2-content > p.p1').textContent = "- Spencer is allowed 4 searches per day.";
   document.querySelector('div.modal2 > div.model2-content > p.p2').textContent = "- Each search results in finding food, coconuts, nothing, or nasty island trolls!";
   document.querySelector('div.modal2 > div.model2-content > p.p3').textContent = "- But Beware. The more he searches, the farther he gets from camp.";
   document.querySelector('div.modal2 > div.model2-content > p.p4').textContent = "- If Spencer doesn't find his way back each night, he looses a sanity level.";
 }
-setModal2TextPart2 = () =>{
+const setModal2TextPart2 = () =>{
   document.querySelector('div.modal2 > div.model2-content > h2').textContent = "";
   document.querySelector('div.modal2 > div.model2-content > p.top1').textContent = "";
   document.querySelector('div.modal2 > div.model2-content > p.top2').textContent = "";
@@ -253,7 +249,7 @@ const hideRightCorner = () => {
 }
 
 //creates main button contents of right-corner ("What should Spencer do today")
-contentWhatToDoToday = () => {
+const contentWhatToDoToday = () => {
   let toDoButtons = [
     {text: 'Search for water', id: 'water-button'},
     {text: 'Search for food', id: 'food-button'},
@@ -268,13 +264,13 @@ contentWhatToDoToday = () => {
 }
 contentWhatToDoToday();
 // displays content What Should Spencer Do Today -gets called each day
-whatToDoToday = () => {
+const whatToDoToday = () => {
   displayRightCorner();
   asidePEl.textContent = "What should Spencer do today?";
   showWhatToDoButtons();
 };
 // What TO DO NEXT ################################################################################################## WHAT TO DO NEXT
-whatToDo3 = () =>{
+const whatToDo3 = () =>{
   if(Spencer.searchCount <= 3){
     displayRightCorner();
     asidePEl.textContent = "What should Spencer do now?";
@@ -305,7 +301,7 @@ whatToDo3 = () =>{
   }
 }
 // Water Functions ##################################################################################################  Water Functions
-searchForWater = () => {
+const searchForWater = () => {
   hideWhatToDoButtons();
   hideRightCorner();
   openBubble();
@@ -323,7 +319,7 @@ searchForWater = () => {
   setTimeout(waterSeachActivity, 4 * 1000);
 };
 
-waterSeachActivity = () => {
+const waterSeachActivity = () => {
   pauseWalker();
 
   let waterArrayChoice = `${waterArray[Math.floor(Math.random() * waterArray.length)]}`;
@@ -355,7 +351,7 @@ waterSeachActivity = () => {
 };
 
 var count = 1;
-foundCoconuts = () => {
+const foundCoconuts = () => {
   if(count <= 1){
     bubble2.style.visibility = 'visible';
     bubble2.textContent = "A coconut can be used to replenish a water level or defend against island trolls. If Spencer has no coconuts when attacked, he loses a level of sanity."
@@ -377,7 +373,7 @@ console.log("um")
 }
 
 // Food Functions ###################################################################################################  Food Functions
-searchForFood = () => {
+const searchForFood = () => {
   hideWhatToDoButtons();
   hideRightCorner();
   openBubble();
@@ -396,7 +392,7 @@ searchForFood = () => {
   setTimeout(foodSeachActivity, 3 * 1000);
 };
 
-foodSeachActivity = () => {
+const foodSeachActivity = () => {
   pauseWalker();
 
   let foodArrayChoice = `${foodArray[Math.floor(Math.random() * foodArray.length)]}`;
@@ -408,7 +404,7 @@ foodSeachActivity = () => {
       foodSearchResult();
     }
 
-  foodSearchResult = () =>{
+  const foodSearchResult = () =>{
     if(foodArrayChoice === `${foodArray[0]}`){
       bugProbability(Math.random());
     }else if (foodArrayChoice === `${foodArray[1]}`) {
@@ -426,7 +422,7 @@ foodSeachActivity = () => {
   // setTimeout(foodSearchResult, 2 * 1000);
 };
 
-bugProbability = (num) => {
+const bugProbability = (num) => {
   trollModal.style.visibility = 'visible';
   if(num <= .75){
     trollModalGuts.textContent = "Score!\nThis handful of bugs and worms provides a half serving of food!";
@@ -442,7 +438,7 @@ bugProbability = (num) => {
   }
 };
 
-fishProbability = (num) => {
+const fishProbability = (num) => {
   trollModal.style.visibility = 'visible';
   // trollButton.onclick = function(){
   //     trollModal.style.visibility = 'hidden';
@@ -461,7 +457,7 @@ fishProbability = (num) => {
   }
 };
 
-trapProbability = (num) => {
+const trapProbability = (num) => {
   trollModal.style.visibility = 'visible';
   if(num <= .30){
     trollModalGuts.textContent = "Hard work pays off.\nSpencer caught an island critter!\nThis provides 2 servings of food!";
@@ -477,7 +473,7 @@ trapProbability = (num) => {
 };
 //  Troll Functions #################################################################################################  Troll Functions
 // Battle Troll
-battleTroll = () => {
+const battleTroll = () => {
   const troll = (trollArray[Math.floor(Math.random() * trollArray.length)]);
   resetTroll();
   if(Spencer.coconuts < 1){
@@ -486,7 +482,7 @@ battleTroll = () => {
     bubble.innerHTML = `"I have no coconuts to defend myself!"`;
     openBubble();
 
-    trollID =() =>{
+    const trollID = () => {
       trollModalGuts.textContent = `"It's island troll ${troll.name}!"`
       trollModal.style.visibility = 'visible';
       trollButton.onclick = function(){
@@ -497,13 +493,13 @@ battleTroll = () => {
     }
     setTimeout(trollID, 3 * 1000);
 
-    kickedMe = () => {
+    const kickedMe = () => {
       bubble.innerHTML = `"Troll ${troll.name} kicked me!"`;
       walking.style.background = "url(./img/SpensorKicked.png)";
       openBubble();
     }
 
-    loseSanityTime = () => {
+    const loseSanityTime = () => {
       trollModal.style.visibility = 'visible';
       trollModalGuts.textContent ="Spencer loses a level of sanity.";
       console.log("525")
@@ -542,7 +538,7 @@ battleTroll = () => {
   }
 }
 // Check Number of Trolls Defeated
-trollCheck = () => {
+const trollCheck = () => {
   if(Spencer.crittersDefeated % 5 === 0){
     hideRightCorner();
     trollModalGuts.textContent = 'Time to battle the Master Troll!';
@@ -556,7 +552,7 @@ trollCheck = () => {
   }
 }
 // Master Troll Attacks
-masterTrollAttacks = () => {
+const masterTrollAttacks = () => {
   hideRightCorner();
   resetTroll();
   startTroll();
@@ -568,7 +564,7 @@ masterTrollAttacks = () => {
     trollOffer();
   }
 
-  trollOffer = () => {
+  const trollOffer = () => {
     trollModalGuts.textContent = `"If you can defeat me, I'll let you have my rum."`
     trollModal.style.visibility = 'visible';
     trollButton.onclick = function(){
@@ -580,7 +576,7 @@ masterTrollAttacks = () => {
   }
 };
 // Battle Probability ...based on # of coconuts
-battleProbability = () => {
+const battleProbability = () => {
   let num = 0;
   if(Spencer.coconuts > 5){
     trollModalGuts.textContent = `Spencer has ${Spencer.coconuts} coconuts! He's prepared!`
@@ -605,7 +601,7 @@ battleProbability = () => {
   }
 }
 // Battle Result
-battleSuccess = (num) => {
+const battleSuccess = (num) => {
   stopTroll();
   trollModal.style.visibility = 'visible';
   if((Math.random()) <= num){
@@ -633,21 +629,21 @@ battleSuccess = (num) => {
   }
 }
 
-closeTrollModal = () => {
+const closeTrollModal = () => {
   trollModal.style.visibility = 'hidden';
 }
-openTrollModal = () => {
+const openTrollModal = () => {
   trollModal.style.visibility = 'visible';
 }
 // The End!
-theEnd = () => {
+const theEnd = () => {
   bubble.innerHTML = textContent = `"The End!"`
   openBubble();
   createRestartButton();
 }
 // Clicking Function ################################################################################################  CLICKING Functions
 // Clicked Drink Coconut
-clickedDrink= () => {
+const clickedDrink= () => {
   coconutThing.style.visibility ='hidden';
   bubble2.style.visibility = 'hidden';
   bubble.textContent = `"Mmmmmmm"`;
@@ -660,7 +656,7 @@ clickedDrink= () => {
   setTimeout(drink, 1 * 1000);
 }
 // Clicked Save Coconut for later
-clickedSaveForLater= () => {
+const clickedSaveForLater= () => {
     coconutThing.style.visibility ='hidden';
     bubble2.style.visibility = 'hidden';
   // dontDrink = () => {
@@ -677,19 +673,19 @@ clickedSaveForLater= () => {
   // setTimeout(dontDrink, 1 * 1000);
 }
 // Clicked Keep Searching For Food
-clickedKeepSearchingForFood = () => {
+const clickedKeepSearchingForFood = () => {
   Spencer.searchPerDayCount(1);
   activateWalker();
   searchForFood();
 };
 // Clicked Keep Searching For Water
-clickedKeepSearchingForWater = () => {
+const clickedKeepSearchingForWater = () => {
   Spencer.searchPerDayCount(1);
   activateWalker();
   searchForWater();
 };
 // Clicking on Return to Camp...set prob of making it back
-clickedReturnToCamp = () => {
+const clickedReturnToCamp = () => {
   activateWalker();
   hideRightCorner();
   probFunction = () =>{
@@ -716,7 +712,7 @@ clickedReturnToCamp = () => {
   setTimeout(probFunction, 1 * 1000);
 };
 // calcaulate prob of making it back and showing results
-makeItBackProbability = (num) => {
+const makeItBackProbability = (num) => {
   if((Math.random()) <= num){
     pauseWalker();
     walking.style.visibility = 'hidden';
@@ -741,7 +737,7 @@ makeItBackProbability = (num) => {
   }
 };
 //Shows night time scence
-nightTimeScene = () => {
+const nightTimeScene = () => {
   closeButton.onclick = function () {
   rotatingModal.style.visibility = 'hidden';
   hideRightCorner();
@@ -749,7 +745,7 @@ nightTimeScene = () => {
   };
 };
 // new day button displays
-newDayButton  = () => {
+const newDayButton  = () => {
   background.style.backgroundImage = "url(./img/Game_Background_Dark.png)";
   document.querySelector('#open-button').style.visibility = 'visible';
   openButton.style.zIndex = '7';
@@ -759,7 +755,7 @@ newDayButton  = () => {
   }
 };
 // New day
-newDay = () => {
+const newDay = () => {
   background.style.backgroundImage = "url(./img/Game_Background_43.png)";
   resetWalker();
   console.log("should go to conteent whea to do today")
@@ -768,7 +764,7 @@ newDay = () => {
 };
 //####################################################
 // Open's Spencer Bubble
-openBubble = () => {
+const openBubble = () => {
   bubble.style.visibility = 'visible';
   closeBubble = () => {
     bubble.style.visibility = 'hidden';
@@ -784,7 +780,7 @@ openBubble = () => {
 // }
 
 //This resets the walker
-resetWalker = () => {
+const resetWalker = () => {
   walking.classList.remove("walking");
   walking.offsetWidth = walking.offsetWidth;
   walking.classList.add("walking");
@@ -796,30 +792,30 @@ resetWalker = () => {
   background.style.animationPlayState = 'paused';
 };
 //this starts walker
-activateWalker = () => {
+const activateWalker = () => {
   walking.style.visibility = 'visible';
   walking.style.animationPlayState = 'running';
   background.style.animationPlayState = 'running';
 };
 //this stops walker
-pauseWalker = () => {
+const pauseWalker = () => {
   walking.style.animationPlayState = 'paused';
   background.style.animationPlayState = 'paused';
 };
 //reset troll
-resetTroll = () => {
+const resetTroll = () => {
   trollWalking.classList.remove("troll");
   trollWalking.offsetWidth = walking.offsetWidth;
   trollWalking.classList.add("troll");
   trollWalking.style.animationPlayState = 'paused';
 };
 //this starts troll
-startTroll = () => {
+const startTroll = () => {
   trollWalking.style.animationPlayState = 'running';
   trollWalking.style.visibility = 'visible';
 }
 //this stops troll
-stopTroll = () => {
+const stopTroll = () => {
   trollWalking.style.animationPlayState = 'paused';
   trollWalking.style.visibility = 'hidden';
 }
@@ -849,7 +845,7 @@ modalButton.onclick = function() {
 }
 
 //restarts game
-restartStory = () => {
+const restartStory = () => {
   rotatingModal.style.visibility = 'hidden';
   dead.style.visibility = 'hidden';
   deathText.textContent = "";
@@ -880,7 +876,7 @@ restartStory = () => {
 };
 
 //create restart button and what happens when you click it
-createRestartButton = () => {
+const createRestartButton = () => {
   restartButton.setAttribute('id', 'restart-button');
   restartButton.innerHTML = "Restart Spencer's Story";
   asideR.appendChild(restartButton);
@@ -893,7 +889,7 @@ createRestartButton = () => {
 }
 
 //when Spencer dies
-died = () =>{
+const died = () =>{
   trollModalGuts.textContent = "";
   walking.style.visibility = 'hidden';
   dead.style.visibility = 'visible';
