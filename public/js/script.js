@@ -892,21 +892,6 @@ const createRestartButton = () => {
     restartButton.style.visibility = 'hidden';
     restartStory();
   }
-
-   // restartButton.setAttribute('id', 'restart-button');
-   // restartButton.innerHTML = "Restart Spencer's Story";
-   // trollModal.appendChild(restartButton);
-   // restartButton.style.visibility = 'visible';
-   // document.querySelector('.stats-container').style.visibility = 'hidden';
-   // restartButton.onclick = function() {
-   //   console.log('clicked restart')
-   //   restartButton.style.visibility = 'hidden';
-   //   restartStory();
-   // }
-
-
-
-
 }
 
 //when Spencer dies
