@@ -128,7 +128,7 @@ class Hero {
   }
 
 };
-const Spencer = new Hero("Spencer", 5, 5, 5, 0, 0, 0, 1, 1, 0);
+const Spencer = new Hero("Spencer", 5, 5, 1, 0, 0, 0, 1, 1, 0);
 
 class Enemy {
   constructor(name, health){
@@ -849,6 +849,7 @@ modalButton.onclick = function() {
 
 //restarts game
 const restartStory = () => {
+    console.log("in restart story")
   rotatingModal.style.visibility = 'hidden';
   dead.style.visibility = 'hidden';
   deathText.textContent = "";
@@ -880,15 +881,32 @@ const restartStory = () => {
 
 //create restart button and what happens when you click it
 const createRestartButton = () => {
+  console.log("in create restart button")
   restartButton.setAttribute('id', 'restart-button');
   restartButton.innerHTML = "Restart Spencer's Story";
   asideR.appendChild(restartButton);
   restartButton.style.visibility = 'visible';
   document.querySelector('.stats-container').style.visibility = 'hidden';
   restartButton.onclick = function() {
+    console.log('clicked restart')
     restartButton.style.visibility = 'hidden';
     restartStory();
   }
+
+   // restartButton.setAttribute('id', 'restart-button');
+   // restartButton.innerHTML = "Restart Spencer's Story";
+   // trollModal.appendChild(restartButton);
+   // restartButton.style.visibility = 'visible';
+   // document.querySelector('.stats-container').style.visibility = 'hidden';
+   // restartButton.onclick = function() {
+   //   console.log('clicked restart')
+   //   restartButton.style.visibility = 'hidden';
+   //   restartStory();
+   // }
+
+
+
+
 }
 
 //when Spencer dies

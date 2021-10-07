@@ -306,6 +306,9 @@ div.path > div.walking{
   width: 400px;
   height: 130px;
   visibility: hidden;
+  position: fixed;
+  bottom: 7%;
+  right: 35%;
 }
 
 .footer > div.coconut {
@@ -552,6 +555,10 @@ div.modal2 > div.model2-content > h3.trolls{
   padding: 10px;
   margin: 15px 0 0 0;
   visibility: 'hidden';
+  position: fixed;
+  bottom: 30%;
+  right: 45%;
+  z-index: 200;
 }
 
 /* Rotating Modal */

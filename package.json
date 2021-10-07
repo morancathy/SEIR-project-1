@@ -1,10 +1,11 @@
 {
   "name": "project1",
   "version": "1.0.0",
-  "description": "",
+  "description": "#### Items to improve upon/ to do's: - ~~include images~~ - ~~update README to include user stories, developer stories, technologies used, brief overview~~ - ~~change all functions to const~~ - ~~check for unused variables~~ - Ask Arthur:   - can I delete the main branch with the random README?   - do I call this project a story or a game? or a story-game? - check for dead CSS, HTML - Create a 'you win' function - Is 21 days appropriate?  Change to 10? 15? - mobile responsive - images:     - update fish img     - find mongrel img?     - others? - ~~fix text in text box? no~~ - ~~change time off text box after getting kicked?  no.~~ - deploy to Heroku",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,6 @@
   "homepage": "https://github.com/morancathy/SEIR-project-1#readme",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {}
 }
