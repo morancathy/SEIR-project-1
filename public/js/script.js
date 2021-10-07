@@ -221,9 +221,9 @@ const instructionsModal = () =>{
 const setModal2Text = () =>{
   document.querySelector('div.modal2 > div.model2-content > h3.trolls').textContent = "Daily Searches";
   document.querySelector('div.modal2 > div.model2-content > p.p1').textContent = "- Spencer is allowed 4 searches per day.";
-  document.querySelector('div.modal2 > div.model2-content > p.p2').textContent = "- Each search results in finding food, coconuts, nothing, or nasty island trolls!";
+  document.querySelector('div.modal2 > div.model2-content > p.p2').textContent = "- Each search leads to food, coconuts, nothing, or nasty island trolls!";
   document.querySelector('div.modal2 > div.model2-content > p.p3').textContent = "- But Beware. The more he searches, the farther he gets from camp.";
-  document.querySelector('div.modal2 > div.model2-content > p.p4').textContent = "- If Spencer doesn't find his way back each night, he looses a sanity level.";
+  document.querySelector('div.modal2 > div.model2-content > p.p4').textContent = "- If he doesn't find his way back each night, he looses a sanity level.";
 }
 const setModal2TextPart2 = () =>{
   document.querySelector('div.modal2 > div.model2-content > h2').textContent = "";
@@ -234,7 +234,7 @@ const setModal2TextPart2 = () =>{
   document.querySelector('div.modal2 > div.model2-content > p.p1').textContent = "- Beware of trolls, they can take your sanity!";
   document.querySelector('div.modal2 > div.model2-content > p.p2').textContent = "- Coconuts are needed to defend Spencer.";
   document.querySelector('div.modal2 > div.model2-content > p.p3').textContent = "- If Spencer defeats 5 trolls, the Master Troll appears and Spencer has a chance to take his riches!";
-  document.querySelector('div.modal2 > div.model2-content > p.p4').textContent = "- 5 coconuts are needed to defeat the Master Troll. Spencer can attempt with less, but chances are slim.";
+  document.querySelector('div.modal2 > div.model2-content > p.p4').textContent = "- 5 coconuts are needed to defeat the Master Troll. He can attempt with less, but chances are slim.";
 
 }
 //Displays right-corner ("what should Spencer do today")

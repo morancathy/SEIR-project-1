@@ -1,6 +1,4 @@
 *{
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-size: 30px;
  }
@@ -14,7 +12,6 @@
 
 .grid-container{
   height: 100vh;
-  border: 5px solid blue;
   margin: 5px;
   padding: 5px;
   display: grid;
@@ -41,6 +38,8 @@
   background-position: 0px 0px;
   background-size: 95vw 98%;
   width: 6833px;
+  width: 100%;
+  height: auto;
   height: 100vh;
   animation: goRight 60s linear infinite;
   animation-play-state: paused;
@@ -58,7 +57,7 @@
 /* Right Corner....What To Do Options */
 .right-corner{
   grid-area: right-corner;
-  padding-bottom: 155px;
+  /* padding-bottom: 155px; */
   max-height: 225px;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
   text-align: center;
@@ -91,8 +90,8 @@ div.right-corner > aside.instructions > p{
   grid-template-rows: 20% 15% 15% 15%;
   grid-template-areas:
     "stats stats stats stats stats day"
-    "water  water-level  coconuts coconuts-level trolls trolls-level"
-    "food   food-level   rope     rope-level     . ."
+    "water  water-level  coconuts coconuts-level . ."
+    "food   food-level   trolls   trolls-level   . ."
     "sanity sanity-level bamboo   bamboo-level   . .";
     /* background: salmon; */
   grid-gap: 2px 2px;
@@ -126,14 +125,14 @@ div.right-corner > aside.instructions > p{
 
 .stats-container > div.day {
  grid-area: 1 / 6 / 2 / 7;
- margin-top: -15px;
  margin-left: -94px;
- margin-bottom: 15px;
  border: solid green;
  font-weight: bold;
  background: #00FFFF;
  color: black;
  font-style: italic;
+ width: 11vw;
+ text-align: center;
 }
 
 .stats-container > div.water {
@@ -165,12 +164,36 @@ div.right-corner > aside.instructions > p{
   margin-left: -23px;
 }
 .stats-container > div.trolls {
-  grid-area: 2 / 5 / 3 / 6;
+  grid-area: 3 / 3 / 4 / 5;
+  margin-top: 1px;
+  width: 185px;
 }
 .stats-container > div.trolls-level {
-  grid-area: 3 / 6 / 4 / 7;
-  margin-left: -20px;
+  grid-area: 3 / 3 / 4 / 5;
+  margin-left: 150px;
 }
+@media screen and (min-width: 1500px) {
+  .stats-container > div.trolls {
+    width: 225px;
+  }
+  .stats-container > div.trolls-level {
+      margin-left: 185px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .stats-container{
+    width: 50vw;
+  }
+  .stats-container > div.trolls-level {
+    margin-left: 100px;
+  }
+  .grid-container > .stats-container > div {
+      font-size: 13px;
+      margin-bottom: -5px;
+      font-weight: bold;
+  }
+}
+
 
 /* Sky Div */
 .sky{
@@ -260,16 +283,6 @@ div.path > div.walking{
     background-position: -668px;
    }
 }
-     /* @keyframes forward{
-     0%{
-     transform: translateX(-100px);
-     }
-     100%{
-     transform: translateX(1200px);
-
-     }
-     } */
-
 /* #################################### */
 /* Footer  */
 .footer {
@@ -411,10 +424,7 @@ div.modal{
   box-shadow: 5px 2.5px 10px 0px rgba(0,0,0,0.3);
   text-align: center;
   margin-top: -120px;
-
-  /* transition: opacity 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94); */
-  /* opacity: 0; */
-} /* 0, 1, 1*/
+}
 
 div.modal.open{
     visibility: visible;
@@ -423,15 +433,13 @@ div.modal.open{
 /* Modal2 (instructions */
 .modal2 {
   visibility: hidden;
-/*  position: fixed; /* Stay in place */
+  position: fixed; /* Stay in place*/
   z-index: 50;
-  width: 51vw;
-  max-width: 50%;
+  width: fit-content;
+  max-height: 80%;
   border-radius: 4px;
   padding: 35px;
-  margin: 19% 7% auto;
-  height: auto;
-  background-color: rgb(0,0,0); /* Fallback color*/
+  margin: 900px 25% auto;
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
@@ -441,12 +449,40 @@ div.modal2 > .model2-content{
   font-size: 10px;
   font-style: oblique;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-height: 60%;
 }
 
-span{
-  margin-left: 800px;
-  font-size: 40px;
-  color: purple;
+span {
+  text-align: right;
+  font-size: calc(20px + 1vw);
+  margin: 0px 0px 8px 5px;
+  z-index: 51;
+}
+
+#p {
+  font-size: calc(8px + 1vw);
+  justify-content: space-between;
+}
+@media screen and (max-width: 900px) {
+  div.modal{
+    margin-top: 1%;
+  }
+  .modal2 {
+    width: 70vw;
+    margin-left: 12%;
+  }
+}
+
+#heading1{
+  margin-top: -40px;
+  font-size: calc(10px + 1vw);
+  margin-right: 20px;
+}
+.trolls {
+  margin-top: -20px;
+  font-size: calc(10px + 1vw);
 }
 
 div.modal2 > div.model2-content > h3.trolls{
@@ -461,6 +497,7 @@ div.modal2 > div.model2-content > h3.trolls{
   font-size: 15px;
   padding: 10px;
   margin: 25px 0 0 0;
+
 }
 #food-button{
   visibility: hidden;
@@ -468,7 +505,17 @@ div.modal2 > div.model2-content > h3.trolls{
   padding: 10px;
   margin: 15px 0 0 0;
 }
-
+@media screen and (max-width: 900px) {
+  #water-button, #food-button{
+      font-size: 9px;
+  }
+  .right-corner{
+    width: 40vw;
+  }
+  div.right-corner > aside.instructions > p{
+    font-size: 15px;
+  }
+}
 #keep-searching-for-drink-button{
   font-size: 15px;
   padding: 10px;
@@ -599,10 +646,8 @@ div.sky > div.troll-modal > div.troll-modal-guts {
   left: 0;
   width: 100%;
   height: 100%;
-  /* spacing as needed */
   padding: 20px 50px 20px 20px;
-  /* let it scroll */
-  overflow: auto;
+  overflow: auto; /* let it scroll */
 }
 div.sky > div.troll-modal > button.troll-modal-button{
   position: absolute;
@@ -671,27 +716,3 @@ div.sky > div.troll-modal > button.troll-modal-button{
   margin-left: 300px;
   position: absolute;
 }
-
-
-  /* @media all and (max-width: 800px) {
-   .stats {
-     justify-content: space-around;
-   }
- }
- @media all and (max-width: 600px) {
-   .stats {
-     flex-flow: column wrap;
-     padding: 0;
-   }
-   .stats li:last-of-type a {
-     border-bottom: none;
-   }
- }  */
-/* @media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
-} */
