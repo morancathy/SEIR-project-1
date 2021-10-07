@@ -14,7 +14,7 @@
 
 .grid-container{
   height: 100vh;
-  border: 5px solid blue; /*#14a76c;*/
+  border: 5px solid blue;
   margin: 5px;
   padding: 5px;
   display: grid;
@@ -31,20 +31,17 @@
 .grid-item{
   border: 4px;
   padding: 20px;
-  /* border: solid pink; */
 }
 
 .grid-container > div.back{
   grid-area: back;
   grid-area: 1 / 1 / 6 / 5;
-  /* background:  url(../img/beach-day.png) repeat-x; */
   background:  url("../img/Game_Background_43.png") repeat-x;
   background-position: center center;
-  /* background-position: fixed; */
   background-position: 0px 0px;
-  /* background-size: cover; */
-  background-size: 100vw 100%;
+  background-size: 95vw 98%;
   width: 6833px;
+  height: 100vh;
   animation: goRight 60s linear infinite;
   animation-play-state: paused;
 }
@@ -62,21 +59,24 @@
 .right-corner{
   grid-area: right-corner;
   padding-bottom: 155px;
-  border: solid purple;
-  max-height: 125px;
+  max-height: 225px;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
   text-align: center;
   padding-right: 5%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 27vw;
+  visibility: hidden;
 }
-
 div.right-corner > aside.instructions > p{
   overflow-wrap: break-word;
-  /* font-size: 20px; */
   font-size: 1.5vw;
   font-weight: bold;
   width: fit-content;
   color: white;
   block-size: fit-content;
+  margin: 0 auto;
 }
 
 /* Left Corner.... Spencer Stats*/
@@ -97,7 +97,7 @@ div.right-corner > aside.instructions > p{
     /* background: salmon; */
   grid-gap: 2px 2px;
   box-shadow: 0 0 60px 20px rgba(0, 0, 0, 0.9);
-  border: solid lightgreen;
+  /* border: solid lightgreen; */
   margin-right: 65%;
   z-index: 20;
   font-weight: 500;
@@ -106,6 +106,7 @@ div.right-corner > aside.instructions > p{
   color: white;
   visibility: hidden;
   /* background: deepskyblue; */
+  width: 35vw;
 }
 
 .stats-container > div {
@@ -147,12 +148,6 @@ div.right-corner > aside.instructions > p{
 .stats-container > div.coconuts {
   grid-area: 2 / 3 / 3 / 4;
 }
-/* .stats-container > div.rope {
-grid-area: 3 / 3 / 4 / 4;
-}
-.stats-container > div.bamboo {
-grid-area: 4 / 3 / 5 / 4;
-} */
 .stats-container > div.water-level {
   grid-area: 2 / 1 / 3 / 2;
   margin-left: 85px;
@@ -169,14 +164,6 @@ grid-area: 4 / 3 / 5 / 4;
   grid-area: 2 / 4 / 3 / 5;
   margin-left: -23px;
 }
-/* .stats-container > div.rope-level {
-grid-area: 3 / 4 / 4 / 5;
-margin-left: -23px;
-}
-.stats-container > div.bamboo-level {
-grid-area: 4 / 4 / 5 / 5;
-margin-left: -23px;
-} */
 .stats-container > div.trolls {
   grid-area: 2 / 5 / 3 / 6;
 }
@@ -237,7 +224,7 @@ margin-left: -23px;
 }
 
 div.path{
-  margin: -100px;
+  /* margin: -10px; */
   /* overflow-y: hidden; */
   padding-bottom: 60px;
   margin-left: -3px;
@@ -246,17 +233,9 @@ div.path{
 }
 
 div.path > div.walking{
-  /* background: url("https://phpcoder.tech/wp-content/uploads/2021/04/Cartoon.png")
-  no-repeat; */
    background: url("../img/css_sprites.png")
    no-repeat;
-   /* width: 185px;
-   height: 290px;
-   animation: walk 1.2s steps(8) infinite,
-   forward 5s linear infinite;
-   animation-play-state: paused;
-   visibility: hidden; */
-   z-index: 40;
+   z-index: 100;
    width: 180px;
    height: 357px;
    margin-top: 50px;
@@ -266,6 +245,10 @@ div.path > div.walking{
    forward 4s linear infinite;
    animation-play-state: paused;
    visibility: hidden;
+   margin-top: -900px;
+   position: fixed;
+   bottom: 7%;
+   left: 30%;
 }
 
 @keyframes walk{
@@ -288,20 +271,21 @@ div.path > div.walking{
      } */
 
 /* #################################### */
-/* Footer  Coconut */
+/* Footer  */
 .footer {
   grid-area: footer;
   grid-area: 5 / 4 / 6 / 5;
+  border: solid red;
 }
 
 .footer > div.bugs{
   background: url("../img/Bugs.png") no-repeat;
-  padding: 100px;
-  margin-top: -310px;
-  margin-left: 350px;
   width: 400px;
   height: 250px;
   visibility: hidden;
+  position: fixed;
+  bottom: 10%;
+  right: 35%;
 }
 
 .footer > div.dead{
@@ -312,29 +296,19 @@ div.path > div.walking{
 }
 
 .footer > div.coconut {
-  /* grid-area: footer;
-  grid-area: 5 / 4 / 6 / 5; */
-  /* border: solid yellow; */
   z-index: 700;
-/* position: absolute; */
-/* position: relative; */
   background: url("../img/coconut.png") no-repeat;
   padding: 100px;
-  margin-top: -250px;
-  margin-left: 450px;
-  margin-right: 200px;
   width: 220px;
-  /* margin-bottom: 300px; */
   visibility: hidden;
+  position: fixed;
+  bottom: 7%;
+  right: 29%;
 }
 /* Footer  Troll */
 .footer > div.troll {
-  /* border: solid yellow; */
   background: url("../img/zombiesprite.png") no-repeat;
   z-index: 700;
-  /* padding: 100px; */
-  margin-top: -250px;
-  margin-left: 480px;
   margin-right: 200px;
   width:168px;
   height: 270px;
@@ -342,6 +316,10 @@ div.path > div.walking{
   forward1 4s linear 1;
   animation-play-state: paused;
   visibility: hidden;
+  position: fixed;
+  bottom: 7%;
+  right: 20%;
+  margin-right: 300px;
 }
 @keyframes walk1{
   0%{
@@ -410,9 +388,8 @@ div.asideL > div.fish {
   padding-bottom: 80px;
   width: 150px;
   height: 150px;
-  /* height: auto; */
-  margin-left: 515px;
-  margin-top: 300px;
+  margin-left: 556px;
+  margin-top: 400px;
   visibility: hidden;
 }
 
@@ -446,21 +423,17 @@ div.modal.open{
 /* Modal2 (instructions */
 .modal2 {
   visibility: hidden;
-  position: fixed; /* Stay in place */
-  z-index: 2;
-  width: 60vw;
+/*  position: fixed; /* Stay in place */
+  z-index: 50;
+  width: 51vw;
   max-width: 50%;
   border-radius: 4px;
   padding: 35px;
-  margin: 19% 29% auto;
+  margin: 19% 7% auto;
   height: auto;
   background-color: rgb(0,0,0); /* Fallback color*/
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
-/* div.modal2.open{
-  visibility: hidden;
-} */
 
 div.modal2 > .model2-content{
   background-color: #fefefe;
@@ -478,18 +451,19 @@ span{
 
 div.modal2 > div.model2-content > h3.trolls{
   padding-top: 30px;
+  padding-left: 10px;
 }
 
 /* Buttons */
 #water-button{
-  visibility: visible;
+  visibility: hidden;
   /* width: 50px; */
   font-size: 15px;
   padding: 10px;
   margin: 25px 0 0 0;
 }
 #food-button{
-  visibility: visible;
+  visibility: hidden;
   font-size: 15px;
   padding: 10px;
   margin: 15px 0 0 0;
@@ -591,7 +565,7 @@ div.sky > div.rotating-modal > button.close-button {
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 21px;
-  z-index: 10;
+  z-index: 16;
 }
 
 .open-button.closed {

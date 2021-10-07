@@ -200,6 +200,7 @@ const showWhatToDoButtons = () => {
 }
 // opens instructions modal
 const instructionsModal = () =>{
+  console.log('line 203, instructionsModal')
   modal2El.style.visibility = 'visible';
   setModal2Text();
 
@@ -240,6 +241,7 @@ const setModal2TextPart2 = () =>{
 const displayRightCorner = () => {
   rightCorner.style.zIndex = '15';
   rightCorner.style.visibility = 'visible';
+  console.log('244 display right corner')
 }
 //Hides right-corner ("what should Spencer do today")
 const hideRightCorner = () => {
@@ -302,6 +304,7 @@ const whatToDo3 = () =>{
 }
 // Water Functions ##################################################################################################  Water Functions
 const searchForWater = () => {
+  console.log('serachforwawater')
   hideWhatToDoButtons();
   hideRightCorner();
   openBubble();
