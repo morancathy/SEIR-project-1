@@ -1,45 +1,7 @@
-# Man on an Island    
-
-#### Items to improve upon/ to do's:
-- ~~include images~~
-- ~~update README to include user stories, developer stories, technologies used, brief overview~~
-- ~~change all functions to const~~
-- ~~check for unused variables~~
-- Ask Arthur:
-  - can I delete the main branch with the random README?
-  - do I call this project a story or a game? or a story-game?
-- check for dead CSS, HTML
-- Create a 'you win' function
-- Is 21 days appropriate?  Change to 10? 15?
-- mobile responsive
-- images:
-    - update fish img
-    - find mongrel img?
-    - others?
-- ~~fix text in text box? no~~
-- ~~change time off text box after getting kicked?  no.~~
-- deploy to Heroku
-
-#### Brief overview of project to place inside my portfolio:
-Man on an Island is a choose your own adventure story-game in which the user helps Spensor, who is stuck on an island, survive for 21 days.
-The user interactively decides what Spensor does each day to maintain his levels of food, water and sanity, in order to survive. (insert link to game)\
-(User must read instruction/rules before game begins, so I feel writing more here would be redundant)
-
-#### Why I included this in my portfolio:
-As my very first project in the coding world and being introduced to JavaScript just 4 weeks prior to starting this project, this was an important piece of my learning journey in software development.
-
-Though the visuals aren't my strong point, the logic I used behind it was. This project demonstrates my ability to include vast amounts of logic in numerous ways to manipulate the DOM. This includes ability to pause, start, continue and end a user's interaction with the site. Hiding modals, button events, timing text bubbles, etc. all played a part.
-
-Much more logic was used when determining the outcome of a user's choice. Including a logical percentage of success for each item a user clicked on, makes the game not arbitrary.
-
-One of the most challenging aspects of this project was including various animations, which I taught myself how to implement into the project. It is very much beginner animation, however to me, it demonstrates something I never thought I was capable of doing.
-
-I deliberately refrained from updating the overall code, as viewing this project from time to time provides a meaningful reference point of where I started, no only because 1) this demonstrates my abilities with only 4 weeks of introduction to software development and 2) to visualize how much I have grown since then.
-
 # Man on an Island  
 
-Man on an Island is a choose your own adventure story-game in which the user helps Spensor, who is stuck on an island, survive for 21 days.
-The user interactively decides what Spensor does each day to maintain his levels of food, water and sanity, in order to survive.
+An interactive browser story-game made with vanilla JavaScript, CSS and HTML that manipulates the DOM.
+Man on an Island is a choose your own adventure story-game in which the user helps Spensor, who is stuck on an island, survive for 21 days. App allows users to choose-their-own-adventure to decide what the character does each day to maintain his levels of food, water and sanity, in order to survive.
 
 ### As a user I can
 - interact with the game by choosing what Spensor does each day.
@@ -91,3 +53,14 @@ At random times Spensor will come across nasty trolls. Spensor's options:
 Daily Searches
 -Spensor is allowed 4 searched per day. The farther he searches, the greater chance he has of getting lost. If he sleeps away from camp, he looses a level of sanity.
 -Each day that passes, Spensor looses a food and water level.
+
+#### Why I included this in my portfolio:
+As my very first project in the coding world and being introduced to JavaScript just 4 weeks prior to starting this project, this was an important piece of my learning journey in software development.
+
+Though the visuals aren't my strong point, the logic I used behind it was. This project demonstrates my ability to include vast amounts of logic in numerous ways to manipulate the DOM. This includes ability to pause, start, continue and end a user's interaction with the site. Hiding modals, button events, timing text bubbles, etc. all played a part.
+
+Much more logic was used when determining the outcome of a user's choice. Including a logical percentage of success for each item a user clicked on, makes the game not arbitrary.
+
+One of the most challenging aspects of this project was including various animations, which I taught myself how to implement into the project. It is very much beginner animation, however to me, it demonstrates something I never thought I was capable of doing.
+
+I deliberately refrained from updating the overall code, as viewing this project from time to time provides a meaningful reference point of where I started, no only because 1) this demonstrates my abilities with only 4 weeks of introduction to software development and 2) to visualize how much I have grown since then.

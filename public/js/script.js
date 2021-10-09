@@ -128,7 +128,7 @@ class Hero {
   }
 
 };
-const Spencer = new Hero("Spencer", 5, 5, 1, 0, 0, 0, 1, 1, 0);
+const Spencer = new Hero("Spencer", 5, 5, 5, 0, 0, 0, 1, 1, 0);
 
 class Enemy {
   constructor(name, health){
