@@ -1,11 +1,11 @@
 # Man on an Island  
 
 An interactive browser story-game made with vanilla JavaScript, CSS and HTML that manipulates the DOM.
-Man on an Island is a choose your own adventure story-game in which the user helps Spensor, who is stuck on an island, survive for 21 days. App allows users to choose-their-own-adventure to decide what the character does each day to maintain his levels of food, water and sanity, in order to survive.
+Man on an Island is a choose your own adventure story-game in which the user helps Spensor, who is stuck on an island, survive for 10 days. App allows users to choose-their-own-adventure to decide what the character does each day to maintain his levels of food, water and sanity, in order to survive.
 
 ### As a user I can
 - interact with the game by choosing what Spensor does each day.
-- win by helping Spensor survive on the island for 21 days (by maintaining food, water and sanity levels).
+- win by helping Spensor survive on the island for 10 days (by maintaining food, water and sanity levels).
 - loose if the choices I make results in Sensor dying (by not maintaining food, water and sanity levels).
 - know what is needed in order to survive by reading prompts/instructions.
 - always view food, water, sanity and coconut levels.
@@ -29,7 +29,7 @@ CSS\
 HTML
 
 ## Instructions
-Spensor is stuck on the Island of Turbull. Similar to Naked and Afraid, spensor will wonder the island trying to survive for 21 days.
+Spensor is stuck on the Island of Turbull. Similar to Naked and Afraid, spensor will wonder the island trying to survive for 10 days.
 
 Spensor will have 4 levels to maintain: food, water, sanity and coconuts.
 

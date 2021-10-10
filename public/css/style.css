@@ -242,31 +242,28 @@ div.right-corner > aside.instructions > p{
 }
 
 div.path{
-  /* margin: -10px; */
-  /* overflow-y: hidden; */
   padding-bottom: 60px;
   margin-left: -3px;
   margin-right: -2000px;
   z-index: 40;
+  width: 100%;
 }
 
 div.path > div.walking{
-   background: url("../img/css_sprites.png")
-   no-repeat;
-   z-index: 100;
-   width: 180px;
-   height: 357px;
-   margin-top: 50px;
-   margin-left: -85px;
-   display: inline-block;
-   animation: walk 1s steps(4) infinite,
-   forward 4s linear infinite;
-   animation-play-state: paused;
-   visibility: hidden;
-   margin-top: -900px;
-   position: fixed;
-   bottom: 7%;
-   left: 30%;
+  background: url("../img/css_sprites.png")
+  no-repeat;
+  z-index: 100;
+  width: 180px;
+  height: 357px;
+  display: inline-block;
+  animation: walk 1s steps(4) infinite,
+  forward 4s linear infinite;
+  animation-play-state: paused;
+  visibility: hidden;
+  margin-top: -900px;
+  position: fixed;
+  bottom: 7%;
+  left: 30%;
 }
 
 @keyframes walk{
@@ -320,7 +317,6 @@ div.path > div.walking{
 .footer > div.troll {
   background: url("../img/zombiesprite.png") no-repeat;
   z-index: 700;
-  margin-right: 200px;
   width:168px;
   height: 270px;
   animation: walk1 3.8s steps(12) 1,
@@ -330,8 +326,9 @@ div.path > div.walking{
   position: fixed;
   bottom: 7%;
   right: 20%;
-  margin-right: 300px;
+  margin-right: 100px;
 }
+
 @keyframes walk1{
   0%{
   background-position: -1944px;
@@ -351,41 +348,40 @@ div.path > div.walking{
 }
 
 /* Bubble */
-  .bubble2{
-    border: solid pink;
-    z-index: 60;
-    /* position: relative; */
-    position: absolute;
-    background: #d4cc57;
-    padding: 10px;
-    color: black;
-    font-family: Arial;
-    font-size: 30px;
-    font-style: italic;
-    line-height: 46px;
-    box-shadow: 13px -15px 7px -1px #A3A3A3;
-    text-align: center;
-    font-weight: 700;
-    width: 400px;
-    border-radius: 10px;
-    margin-left: 775px;
-    margin-top: -100px;
-      z-index: 100;
-    visibility: hidden;
+.bubble2{
+  border: solid pink;
+  z-index: 60;
+  background: #d4cc57;
+  padding: 10px;
+  color: black;
+  font-family: Arial;
+  font-size: 30px;
+  font-style: italic;
+  line-height: 46px;
+  box-shadow: 13px -15px 7px -1px #A3A3A3;
+  text-align: center;
+  font-weight: 700;
+  width: 400px;
+  border-radius: 10px;
+  z-index: 100;
+  visibility: hidden;
+  position: fixed;
+  bottom: 30%;
+  right: 8%;
 }
 .bubble2:after {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 0;
-    z-index: 1;
-    border-style: solid;
-    border-width: 18px 17px 0 0;
-    border-color: #d4cc57 transparent transparent transparent;
-    bottom: -18px;
-    left: 10%;
-    margin-left: -8.5px;
-  }
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  z-index: 1;
+  border-style: solid;
+  border-width: 18px 17px 0 0;
+  border-color: #d4cc57 transparent transparent transparent;
+  bottom: -18px;
+  left: 10%;
+  margin-left: -8.5px;
+}
 
 /* Aside L  Fishy*/
 .asideL {
@@ -491,7 +487,6 @@ div.modal2 > div.model2-content > h3.trolls{
 /* Buttons */
 #water-button{
   visibility: hidden;
-  /* width: 50px; */
   font-size: 15px;
   padding: 10px;
   margin: 25px 0 0 0;
@@ -676,39 +671,34 @@ div.sky > div.troll-modal > button.troll-modal-button{
 
 /* Bubble Text */
 .bubble {
-    position: relative;
-/*     background: #57d4d0; */
+  position: relative;
   background: #d4cc57;
-    /* color: #FFFFFF; */
-    color: black;
-    font-family: Arial;
-    font-size: 30px;
-    font-style: italic;
-    line-height: 46px;
-    box-shadow: 13px -15px 7px -1px #A3A3A3;
-    text-align: center;
-    font-weight: 700;
-    width: 300px;
-    /* height: 150px; */
-    border-radius: 10px;
-    /* padding: 0px; */
-    margin-left: 150px;
-    margin-top: -90px;
-
-    visibility: hidden;
+  color: black;
+  font-family: Arial;
+  font-size: 30px;
+  font-style: italic;
+  line-height: 46px;
+  box-shadow: 13px -15px 7px -1px #A3A3A3;
+  text-align: center;
+  font-weight: 700;
+  width: 300px;
+  border-radius: 10px;
+  margin-left: 150px;
+  margin-top: -90px;
+  visibility: hidden;
 }
 .bubble:after {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 0;
-    z-index: 1;
-    border-style: solid;
-    border-width: 18px 17px 0 0;
-    border-color: #d4cc57 transparent transparent transparent;
-    bottom: -18px;
-    left: 10%;
-    margin-left: -8.5px;
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  z-index: 1;
+  border-style: solid;
+  border-width: 18px 17px 0 0;
+  border-color: #d4cc57 transparent transparent transparent;
+  bottom: -18px;
+  left: 10%;
+  margin-left: -8.5px;
   }
 
 .asideR {

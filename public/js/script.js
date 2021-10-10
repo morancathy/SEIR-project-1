@@ -125,6 +125,11 @@ class Hero {
     dayEl.innerHTML = `Day: ${this.day}`;
     this.eatDecrease();
     this.drinkDecrease();
+    if(this.day >= 10){
+      console.log('in 130')
+      deathText.textContent = 'You win! Spensor survived 10 days on the island!'
+      win();
+    }
   }
 
 };
@@ -763,7 +768,10 @@ const newDay = () => {
   resetWalker();
   console.log("should go to conteent whea to do today")
   Spencer.timePasses(1);
-  whatToDoToday();
+  if(Spencer.day < 10) {
+    whatToDoToday();
+  }
+
 };
 //####################################################
 // Open's Spencer Bubble
@@ -905,6 +913,14 @@ const died = () =>{
   createRestartButton();
 }
 
+// you win
+const win = () => {
+  trollModalGuts.textContent = "";
+  walking.style.visibility = 'hidden';
+  trollModal.style.visibility = 'visible';
+  trollButton.style.color = 'transparent';
+  createRestartButton();
+}
 
 
 
