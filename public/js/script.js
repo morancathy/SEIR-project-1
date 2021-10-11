@@ -319,7 +319,6 @@ const searchForWater = () => {
   } else if (Spencer.searchCount === 3){
     bubble.textContent = `"It's getting darker, but there's gotta be coconuts somewhere."`;
   } else if (Spencer.searchCount === 4){
-    // background.style.backgroundImage = "url(../images/beach-dusk.png)";
     bubble.textContent = `"This is the last time I can search before it's pitch black.\nI hope this is worth it!"`
   } else {
     console.log("Spencer has searched too many times. i shouldnt see this. 298")
@@ -354,8 +353,6 @@ const waterSeachActivity = () => {
       console.log("something is wrong with code")
     }
   }
-  // waterSearchResult();
-  // setTimeout(waterSearchResult, 3 * 1000);
 };
 
 var count = 1;
@@ -385,14 +382,12 @@ const searchForFood = () => {
   hideWhatToDoButtons();
   hideRightCorner();
   openBubble();
-  // skyH3.style.zIndex = '17';
 
   if(Spencer.searchCount <= 2){
     bubble.textContent = `"Great choice! A hunting I will go!"`;
   } else if (Spencer.searchCount === 3){
     bubble.textContent = `"It's getting darker, but I'm hungry."`;
   } else if (Spencer.searchCount > 3){
-    // background.style.backgroundImage = "url(../images/beach-dusk.png)";
     bubble.textContent = `"Yikes! This is the last time I can search before it's pitch black.\nI hope this is worth it!"`
   } else {
     console.log("Spencer has searched too many times. i shouldnt see this. 298")
@@ -427,7 +422,6 @@ const foodSeachActivity = () => {
       console.log("something is wrong with code")
     }
   }
-  // setTimeout(foodSearchResult, 2 * 1000);
 };
 
 const bugProbability = (num) => {
@@ -448,9 +442,6 @@ const bugProbability = (num) => {
 
 const fishProbability = (num) => {
   trollModal.style.visibility = 'visible';
-  // trollButton.onclick = function(){
-  //     trollModal.style.visibility = 'hidden';
-  //   }
   if(num <= .50){
     trollModalGuts.textContent= "Spencer caught a fish!\nThis provides a full serving of food!";
     fishEl.style.visibility ='visible';
@@ -667,7 +658,6 @@ const clickedDrink= () => {
 const clickedSaveForLater= () => {
     coconutThing.style.visibility ='hidden';
     bubble2.style.visibility = 'hidden';
-  // dontDrink = () => {
     hideRightCorner();
     bubble.textContent = `"I'm saving this coconut for the sneaky island trolls."`;
     openBubble();
@@ -677,8 +667,6 @@ const clickedSaveForLater= () => {
       whatToDo3();
     }
     setTimeout(openRightCorn, 3 * 1000);
-  // }
-  // setTimeout(dontDrink, 1 * 1000);
 }
 // Clicked Keep Searching For Food
 const clickedKeepSearchingForFood = () => {
@@ -726,7 +714,6 @@ const makeItBackProbability = (num) => {
     walking.style.visibility = 'hidden';
     rotatingModalGuts.textContent = "He made it back to camp!\n Time to chill.";
     rotatingModal.style.visibility = 'visible';
-    // background.style.backgroundImage = "url('../images/Game_Background_Dark.png')";
     nightTimeScene();
   } else{
     pauseWalker();
@@ -782,13 +769,6 @@ const openBubble = () => {
   }
   setTimeout(closeBubble, 3 * 1000);
 }
-// openBubble2 = () => {
-//   bubble2.style.visibility = 'visible';
-//   closeBubble = () => {
-//     bubble2.style.visibility = 'hidden';
-//   }
-//   setTimeout(closeBubble, 3 * 1000);
-// }
 
 //This resets the walker
 const resetWalker = () => {

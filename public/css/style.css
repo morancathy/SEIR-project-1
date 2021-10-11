@@ -8,6 +8,8 @@
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
+   /* min-width: 1440px; */
+   /* @media print{@page {size: landscape}} */
  }
 
 .grid-container{
@@ -57,7 +59,6 @@
 /* Right Corner....What To Do Options */
 .right-corner{
   grid-area: right-corner;
-  /* padding-bottom: 155px; */
   max-height: 225px;
   box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
   text-align: center;
